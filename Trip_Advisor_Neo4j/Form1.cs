@@ -25,6 +25,7 @@ namespace Trip_Advisor_Neo4j
         }
 
         public string defaultUserPicture = "/Content/Images/User-Default.jpg";
+        List<string> pBubanj = new List<string>() { "/Content/Images/Bubanj/1.jpg", "/Content/Images/Bubanj/2.jpg", "/Content/Images/Bubanj/3.jpg", };
 
         private void create_data_Click(object sender, EventArgs e)
         {
@@ -84,6 +85,7 @@ namespace Trip_Advisor_Neo4j
 
             Place p = new Place();
             p.Name = "Đavolja Varoš";
+            //p.Pictures = this.CreatePlacePictureList("DjavoljaVaros", 4);
             p.CityCenterDistance = 90;
             p.Rating = 0.0f;
             p.Description = "Đavolja Varoš je vrlo atraktivan prirodni fenomen koji se nalazi na jugu Srbije, oko 90 km jugozapadno od Niša. Čine je 202 kamene figure koje su nastale dugotrajnim i strpljivim radom prirode";
@@ -92,12 +94,14 @@ namespace Trip_Advisor_Neo4j
 
             p.Name = "Spomen-park „Kragujevački oktobar“";
             p.CityCenterDistance = 14;
+            //p.Pictures = this.CreatePlacePictureList("Sumarice", 4);
             p.Rating = 0.0f;
             p.Description = "Spomen-park „Kragujevački oktobar“, predstavlja spomen kompleks podignut u znak sećanja na nedužne žrtve Kragujevačkog masakra koji su počinili pripadnici Vermahta 21. oktobra 1941. godine. Tog dana nemački okupatori su u Šumaricama streljali oko 3.000 stanovnika Kragujevca i okolnih mesta, a među njima je bilo i 300 učenika kragujevačkih srednjih škola i šegrta koji su već radili, kao i 15 dečaka, čistača obuće, od 12 do 15 godina starosti.";
             DataProviderCreate.CreatePlace(p);
             int sumarice = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
             p.Name = "Ćele-kula";
+            //p.Pictures = this.CreatePlacePictureList("CeleKula", 4);
             p.CityCenterDistance = 4;
             p.Rating = 0.0f;
             p.Description = "Ćele-kula (tur. kelle kulesi, \"kula od lobanja\") je spomenik iz Prvog srpskog ustanka koji je u znak odmazde tadašnja Turska vlast u Srbiji izgradila od lobanja, poginulih srpskih ratnika, predvođenih Stevanom Sinđelićem, u bici na Čegru. Nalazi se na 4 km od centra Niša, na putu ka Niškoj Banji. Svrstana je u spomenike kulture od izuzetnog značaja za Republiku Srbiju i danas predstavlja muzejski objekat.";
@@ -105,6 +109,7 @@ namespace Trip_Advisor_Neo4j
             int cele_kula = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
             p.Name = "Medijana";
+            //p.Pictures = this.CreatePlacePictureList("Medijana", 4);
             p.CityCenterDistance = 12;
             p.Rating = 0.0f;
             p.Description = "Medijana, rimska Medijana (lat. Mediana) danas arheološki park u istočnom delu Niša, na pola puta za Nišku Banju, u vreme vladavine cara Konstantina Velikog, rimsko naselje ili kompleks letnjih rezidencija tipa urbanih vila i veliko poljoprivredno gazdinstvo, otvorenog tipa, pokraj puta, koji je od Naisa vodio ka istoku, prema Serdici i dalje prema Konstantinopolisu. Naselje je nastalo na samom kraju 3. ili početkom 4. veka.";
@@ -112,6 +117,7 @@ namespace Trip_Advisor_Neo4j
             int medijana = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
             p.Name = "Hram Svetog cara Konstantina i carice Jelene";
+            //p.Pictures = this.CreatePlacePictureList("HKC", 4);
             p.CityCenterDistance = 13;
             p.Rating = 0.0f;
             p.Description = "Hram Svetog cara Konstantina i carice Jelene je hram Srpske pravoslavne crkve koji se nalazi u novom delu grada Niša, a koji je grad Niš posvetio znamenitom Nišliji Konstantinu Velikom i njegovoj majci Jeleni.Hram se nalazi u jednom od najvećih niških parkova, parku Svetog Save. Projektant hrama je Jovan Mandić. Hram je izgrađen u vizantijskom stilu sa dodatkom dva zvonika.";
@@ -119,6 +125,7 @@ namespace Trip_Advisor_Neo4j
             int hramSCK = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
             p.Name = "Spomen-park Bubanj";
+            //p.Pictures = this.CreatePlacePictureList("Bubanj", 4);
             p.CityCenterDistance = 19;
             p.Rating = 0.0f;
             p.Description = "Spomen park Bubanj predstavlja spomen kompleks, sagrađen u sećanje na streljane građane Niša i južne Srbije u Drugom svetskom ratu i nalazi se jugozapadno od Niša, u niškoj opštini Palilula.[1] Spomen park Bubanj je kao autentično mesto masovnog fašističkog terora, stavljen pod zaštitu države u maju 1973 godine. Dok je aprila 1979. godine odlukom Skupštine Srbije spomen park Bubanj proglašen kulturnim dobrom od izuzetnog značaja";
@@ -265,6 +272,13 @@ namespace Trip_Advisor_Neo4j
             //System.Threading.Thread.Sleep(200);
             //DataProviderUpdate.UpdateCountryRating(serbia);
 
+            this.CreatePlacePictureList("Bubanj", 4, bubanj);
+            this.CreatePlacePictureList("CeleKula", 4, cele_kula);
+            this.CreatePlacePictureList("SCK", 4, hramSCK);
+            this.CreatePlacePictureList("Medijana", 4, medijana);
+            this.CreatePlacePictureList("Sumarice", 4, sumarice);
+            this.CreatePlacePictureList("DjavoljaVaros", 4, djavolja_varos);
+
         }
 
         private void add_place_pic_Click(object sender, EventArgs e)
@@ -280,6 +294,15 @@ namespace Trip_Advisor_Neo4j
                 int id = 0;
                 if (Int32.TryParse(this.placeId.Text, out id))
                     DataProviderUpdate.AddPictureOfPlace(path, id);
+            }
+        }
+
+        public void CreatePlacePictureList(string placeFolderName, int number, int placeId)  // imena slika u folderu mora da krece od 1
+        {
+          
+            for(int i = 1; i < number + 1; i++)
+            {
+                DataProviderUpdate.AddPictureOfPlace("/Content/Images/" + placeFolderName + "/" + i + ".jpg", placeId);
             }
         }
     }
