@@ -1,0 +1,133 @@
+﻿#container{
+    background-color:rgba(119, 158, 203, 0.56);
+    background-color:rgba(68, 157, 68, 0.54);
+    border-radius:5px;
+    font-family:Tahoma;
+    
+    }
+
+#nazivPredmeta{
+    position:relative;
+    left:5%;
+    font-family:
+}
+
+#opisPredmeta{
+    margin:5px;
+    padding:5px;
+    position:relative;
+    left:10%;
+    width:80%;
+}
+
+#nazivOblasti{
+    position:relative;
+    left:30%;
+    padding:5px;
+}
+
+.kartica{
+    width:30%;
+    min-height:140px;
+    background-color:#ffe4e1;
+    border-radius:7px;
+    border:1px solid white;
+    position:relative;
+    left:0%;
+}
+
+#opisOblasti{
+    position:relative;
+    width:80%;
+    left:10%;
+    vertical-align:middle;
+  
+}
+
+#karticaOblast{
+    min-width:300px;
+    max-width:400px;
+    min-height:80px;
+    clear:left;
+     background-color:rgba(191, 190, 190, 0.14);
+    border-radius:7px;
+   position:relative;
+   left:30%;
+   font-family:Tahoma;
+}
+
+@media screen and (max-width:767px) {
+    #karticaOblast {
+        left: 15%;
+    }
+
+    #opisPredmeta {
+        margin-top: 20px;
+    }
+
+    #container {
+        margin-bottom: 50px;
+        position: relative;
+        left: 7%;
+    }
+}
+
+
+#dodajOblast{
+    position:relative;
+    left:45%;
+    margin-bottom:20px;
+}
+
+#sadrzaj,#sadrzaj2{
+    margin:5px;
+    position:relative;
+    left:35%;
+}
+
+#dodajBtn{
+    position:relative;
+    left:10%;
+}
+
+#naslovOblasti{
+    position:relative;
+    left:9%;
+    width:78%;
+}
+
+
+
+#dugmeDodaj{
+    margin-bottom:30px;
+    margin-top:10px;
+    position:relative;
+    left:40%;
+
+}
+
+
+.kontrole, .lbl{
+    margin-left:20px;
+    margin-right:20px;
+    max-width:80%;
+    position:relative;
+    left:3%;
+
+}
+
+
+.modal-content{
+    width:120%;
+}
+
+#upl{
+    align-content:center;
+    text-align:center;
+   
+}
+
+.nnt{
+    font-family:'Adobe Garamond Pro'; 
+}
+

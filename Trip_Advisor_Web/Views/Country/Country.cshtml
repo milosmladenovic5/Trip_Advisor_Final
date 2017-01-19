@@ -1,0 +1,56 @@
+﻿@model Trip_Advisor_Web.Models.CountryModel
+
+@{
+    ViewBag.Title = "Country";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <h1>@Model.Name</h1>
+    <img class="thumbnail" src="@Model.NationalFlag" />
+</div>
+
+<div class="container">
+</div>
+<br />
+
+@*treba da se promeni u kdu za kreiranje modela da se sve ove stvari novoodate popune*@
+<div class="jumbotron col-lg-6">
+    <h4>The most vistied places of: @Model.Name</h4>
+
+    <div class="container">
+        @for (int i = 0; i < Model.TheMostVisitedPlaces.Count; i++)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-info">
+                    @Html.ActionLink(@Model.TheMostVisitedPlaces[i].Name, "GetPlace", "Place", new { placeId = Model.TheMostVisitedPlaces[i].PlaceId }, new { @class = "link" })
+                </div>
+                <div class="panel-body">
+                    @Model.TheMostVisitedPlaces[i].Rating
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+&nbsp;     &nbsp;
+
+<div class="jumbotron col-lg-5">
+    <h4>The top rated places of: @Model.Name</h4>
+
+    <div class="container">
+        @for (int i = 0; i < Model.TopRatedPlaces.Count; i++)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-info">
+                    @Html.ActionLink(@Model.TopRatedPlaces[i].Name, "GetPlace", "Place", new { placeId = Model.TopRatedPlaces[i].PlaceId }, new { @class = "link" })
+                </div>
+                <div class="panel-body">
+                    @Model.TopRatedPlaces[i].Rating
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

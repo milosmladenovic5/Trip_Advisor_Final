@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trip_Advisor_Neo4j", "Trip_Advisor_Neo4j\Trip_Advisor_Neo4j.csproj", "{FE289EB3-27B6-422D-8A18-9DF9DE0CE202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trip_Advisor_Web", "Trip_Advisor_Web\Trip_Advisor_Web.csproj", "{C032B0B5-EC4D-4DDE-B04B-7E8D7CA0C800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trip_Advisor_Redis", "Trip_Advisor_Redis\Trip_Advisor_Redis.csproj", "{69ECF0E2-848F-4EA1-B0EB-6B0E34007330}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE289EB3-27B6-422D-8A18-9DF9DE0CE202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE289EB3-27B6-422D-8A18-9DF9DE0CE202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE289EB3-27B6-422D-8A18-9DF9DE0CE202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE289EB3-27B6-422D-8A18-9DF9DE0CE202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C032B0B5-EC4D-4DDE-B04B-7E8D7CA0C800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C032B0B5-EC4D-4DDE-B04B-7E8D7CA0C800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C032B0B5-EC4D-4DDE-B04B-7E8D7CA0C800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C032B0B5-EC4D-4DDE-B04B-7E8D7CA0C800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69ECF0E2-848F-4EA1-B0EB-6B0E34007330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69ECF0E2-848F-4EA1-B0EB-6B0E34007330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69ECF0E2-848F-4EA1-B0EB-6B0E34007330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69ECF0E2-848F-4EA1-B0EB-6B0E34007330}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

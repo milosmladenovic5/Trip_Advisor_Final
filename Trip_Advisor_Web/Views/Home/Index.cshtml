@@ -1,0 +1,55 @@
+﻿
+@model Trip_Advisor_Web.Models.LogInModel
+   
+ @{
+        ViewBag.Title = "Home page";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+        <form method="post" action="@Url.Action("LogIn", "Home")">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-horizontal formaPrijavaPocetna">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username, new { @class = "col-md-4 col-sm-6 control-label", @id = "usernameLbl" })
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @name = "username", })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 col-sm-6 control-label", @id = "passwordLbl" })
+                        <div class="col-md-4 col-sm-6">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @name = "password", @id = "password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <input type="checkbox" id="potvrdiLozinku" />
+                            <label id="ll1">Remember password</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <button id="Button1" title="Prijava" class="btn btn-default btn-validate"><span class="glyphicon glyphicon-user"></span> Login</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <label id="lblError" class="text-danger">
+                                @if (ViewBag.BadLogin != null && ViewBag.BadLogin)
+                                {
+                                    <p>Username does not exist or password is wrong.</p>
+                                }
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+

@@ -1,0 +1,46 @@
+﻿#upl{
+    align-content:center;
+    text-align:center;
+   
+}
+
+.nnt{
+    font-family:'Adobe Garamond Pro'; 
+}
+
+
+#dugmeDodaj{
+    margin-bottom:30px;
+    margin-top:10px;
+    position:relative;
+    left:30%;
+
+}
+
+
+.kontrole, .lbl{
+    margin-left:20px;
+    margin-right:20px;
+    max-width:80%;
+    position:relative;
+    left:5%;
+}
+
+
+.modal-content{
+    width:120%;
+}
+
+#listaLiterature{
+    padding-left:0px;
+}
+
+
+body {
+    margin-top:50px;
+}
+
+
+.postaviPitanje{
+    text-align:center;
+}

@@ -1,0 +1,517 @@
+﻿#informacijeOpredmetima
+{
+    position:relative;
+    left:60px;
+    padding-top:5px;
+}
+
+
+.smerovi
+{
+    border-right: 1px ridge #9a8f8f;
+}
+
+.exams
+{
+    border-radius: 25px;
+    border: 2px solid rgba(194, 14, 14, 0.20);
+    position:relative;
+    top:10px;
+    left:10%;
+    font-size:20px;
+   
+}
+
+#rcorners2 {
+    
+}
+
+.elementiListe
+{
+   // border-radius: 50px;
+   // border: 2px solid rgba(194, 14, 14, 0.20);
+    padding-bottom:2px;
+    margin-bottom:10px;
+    position:relative;
+    color:#000a7a;
+   padding-top:5px;
+}
+
+
+.forma
+{
+    margin-top:80px;
+
+}
+
+#naslovOpredmetima
+{
+   
+    color:#319022;
+    
+    font-family:'Pacifico';
+    font-size:25px;
+    font-style:initial;
+}
+
+.panel1
+{   
+    position:relative;
+    left:25%;
+}
+
+
+
+
+
+
+
+ /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: transparent;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 700px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+  #wrap > .container {
+    padding-top: 60px;
+
+  }
+    
+  
+    .container .credit {
+        margin: 20px 0;
+      }
+
+
+      code {
+        font-size: 80%;
+      }
+      
+
+      
+#paragrafAbout
+{
+    font-family:'Pacifico';
+    font-size:20px;
+}
+
+
+.imePortala
+{
+    font-family:'Pacifico';
+    font-size:35px;
+    font-style;
+    
+}
+
+.navigacija
+{
+    margin-left:60px;
+    font-size:16px;
+}
+
+#naslovOpredmetima
+{
+    position:relative;
+    left:1%;
+    color:#319022;
+}
+
+
+.exams
+{
+ 
+
+}
+
+.odabir-predmeta-cont
+{
+    padding-left:20px;
+    padding-right:20px;
+    margin-top:40px;
+    min-height:200px;
+    width:30%;
+    margin-left:20px;
+}
+
+.dropdown-menu {
+    float:right;
+}
+
+#registrujSe
+{
+    position:relative;
+    left:90px;
+}
+#infoButton1
+{
+    position:relative;
+    left:70px;
+    bottom:5%;
+}
+
+.forma
+{
+    margin-top:50px;
+}
+
+
+
+
+#ll1
+{
+    position:relative;
+    left:125px;
+}
+#Button1
+{
+    position:relative;
+    left:120px;
+}
+#potvrdiLozinku
+{
+    position:relative;
+    left:123px;
+    margin-right:5px;
+    top:2px;
+}
+
+
+.j1
+{
+    float:right;
+}
+
+
+
+#heder
+{
+    font-family:'Pacifico';
+    font-size:45px;
+    color:#69020b;
+}
+
+#inf
+{
+    position:relative;
+    left:40px;
+    color:#69020F;
+}
+
+#slika12
+{
+    height:170px;
+    width:170px;
+    position:inherit;
+    top:10px;
+    left:57px; 
+    margin-bottom:30px;
+    border-bottom:20px hidden;
+    
+}
+
+#par1
+{
+    font-family:'Pacifico';
+    font-size:18px;
+}
+
+ @media (max-width: 750px) {
+        #slika12 {
+         /* margin: 0 auto -60px;*/
+        /* height:50px;
+         width:50px;
+        */
+            }
+      }
+
+ .jumbot1{
+     margin:0 auto -60px;
+ }
+
+ .formaRegistracija{
+     position:relative;
+     left:30%;
+     
+ }
+
+  @media (max-width: 700px) {
+        .formaRegistracija {
+          left:20%;
+        }
+      }
+
+@media(max-width:700px) {
+    .jumbotronPocetna {
+        margin-bottom: 100px;
+       
+    }
+}
+
+.jumbotron{
+      min-height: 300px;
+}
+
+.formaPrijavaPocetna{
+    padding-top:30px;
+}
+
+.dugme1{
+    position:relative;
+    bottom:0.5%;
+}
+
+
+.jumbotron {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  margin-right:10px;
+  color: inherit;
+  border:1px solid transparent;
+  background:rgba(34,100,233,0.2);
+  min-height:250px;
+  max-height:800px;
+}
+
+.jumbotronPocetna{
+      height:300px;
+}
+
+
+@media(max-width:600px)
+{
+    .jumbotronPocetna{
+        height:400px;
+    }
+}
+
+@media(max-width:210px)
+{
+    .jumbotron{
+        margin-right:0px;
+    }
+}
+
+body {
+    background-image: url(Images/textbooks.png);
+}
+
+
+.marginaLayout{
+    margin-top:20px;
+    padding-top:5px;
+}
+
+.skloniMarginuZaRegistraciju{
+    margin-top:-20px;
+}
+
+.navbar{
+}
+
+
+/*.panel-heading{
+    padding-left:30px;
+    font-size:30px;
+}*/
+
+@media(max-width:517px) {
+    .container .jumbotron,
+    .container-fluid .jumbotron {
+        padding-right: 0px;
+    }
+}
+
+
+@media(max-width:767px){
+   
+    #infoButton1{
+        left:20%;
+    }
+
+    #slika12{
+        left:17%;
+    }
+    
+    .jumbotronPocetna{
+        height:600px;
+       
+    }
+}
+
+
+
+#slika1PanelKorisnika
+{
+    position:relative;
+    left:50px;
+    top:5px;
+    width: 150px;
+    height:150px;
+}
+
+.trakaPanelKorisnika
+{
+    width:inherit;
+    background-color:aquamarine;
+}
+
+.nav1
+{
+    height:2px;
+    top: 50px;
+    width:100px;
+}
+
+
+#btn1{
+   
+}
+
+/*#traziNavbar{
+    margin-top:10px;
+    margin-right:20px;
+    padding-right:20px;
+    position:relative;
+    right:5%;
+}
+
+#lupa{
+    position:relative;
+    float:left;
+}*/
+
+
+#trazenjeGrupa{
+    position:relative;
+    top:10px;
+    right:10px;
+}
+
+
+#cke_1_top{
+    background:white;
+}
+
+.cke_top{
+    background:white;
+}
+
+#cke_1_bottom{
+    background:white;
+}
+
+#dodaj{
+    text-align:center;
+    font-family:'Adobe Garamond Pro';
+    margin-top:-10px;
+}
+
+#naslovPit{
+    display:grid;
+    margin-bottom:10px;
+   font-family:'Adobe Garamond Pro';
+}
+
+h3{
+    display:inline-block;
+
+}
+
+#forma1{
+    text-align:center;
+    align-content:center;
+  
+    width:100%;
+}
+
+#cke_textarea{
+
+}
+
+#upload{
+    margin:10px;
+}
+
+
+#dugmeItagovi{
+    display:inline-block;
+}
+
+#tg{
+    display:inline-block;
+    font-family:'Adobe Garamond Pro';   
+}
+
+
+.kontrola{
+    width:78%;
+    margin-top:9px;
+    display: inline;
+}
+
+.inp{
+    display:block;
+}
+
+
+.naslovOblasti{
+
+}
+
+.naz{
+    align-content:center;
+    text-align:center;
+}
+
+
+.panel{
+    align-content:center;
+    text-align:center;
+
+}
+
+
+
+
+.postaviPitanje{
+    text-align:center;
+}

@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Trip advisor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @if (Session["Id"] != null)
+                        {
+                            <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="selectSearch">
+                                Select search item
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" id="dropdownSelect" onclick="" style="right: 0; left: auto;">
+                                <li><a href="#">User</a></li>
+                                <li><a href="#">Place</a></li>
+                                <li><a href="#">City</a></li>
+                                <li><a href="#">Country</a></li>
+                            </ul>
+                          </div> 
+                        }                       
+                    </li>
+                    <li>
+                     
+
+                        <form action="@Url.Action("ReturnEntity","Search")" method="post">
+                            @if (Session["Id"] != null)
+                            {
+                                @Html.Hidden("entityType", "Search", new { id = "entityType" });
+                                <div class="inp">
+                                    <input list="nameList" id="searchInput" name="searchInput" type="text" size="18" class="kontrola form-control" onkeyup="if (event.keyCode!=13) ajaxCallFillOptions()" placeholder="Search" />
+                                    <datalist id="nameList"></datalist>
+                                    <button class="btn btn-default" id="btnsrch" style="display:none;"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+
+                            }
+                        </form>
+                    </li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+      
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/AjajCalls")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+    <script type="text/javascript">
+      {
+        $('#dropdownSelect li a').on('click', function () {
+            var selected = $(this).html();
+            $('#searchInput').attr("placeholder", "Search " + selected);
+            $('#entityType').val(selected);
+        });
+
+    if ($('#searchInput').length <= 2) {
+        function ajaxCallFillOptions() {
+            var selectedItem = $('#searchInput').attr("placeholder");
+            var afterBlanko = selectedItem.substr(selectedItem.indexOf(" ") + 1);
+
+            if (afterBlanko == "User") {
+                if (($('#searchInput').val().length == 1)) {
+                    var firstLetter = $('#searchInput').val()[0];
+
+                    $.post("/Search/ReturnAllUsersByFirstLetter", { firstLetter: firstLetter }, function (data) {
+                        // $('#nameList').empty();
+                        $.each(data, function (index) {
+                            var option = document.createElement("option");
+                            option.value = data[index];
+
+                            var parent = document.getElementById("nameList");
+                            parent.appendChild(option);
+                        });
+                    });
+                }
+            }
+            else if (afterBlanko == "Place") {
+                if (($('#searchInput').val().length == 1)) {
+                    var firstLetter = $('#searchInput').val()[0];
+
+                    $.post("/Search/ReturnAllPlacesByName", { firstLetter: firstLetter }, function (data) {
+                        // $('#nameList').empty();
+                        $.each(data, function (index) {
+                            var option = document.createElement("option");
+                            option.value = data[index];
+
+                            var parent = document.getElementById("nameList");
+                            parent.appendChild(option);
+                        });
+                    });
+                }
+            }
+            else if (afterBlanko == "Country") {
+                if (($('#searchInput').val().length == 1)) {
+                    var firstLetter = $('#searchInput').val()[0];
+
+                    $.post("/Search/ReturnAllCountriesByName", { firstLetter: firstLetter }, function (data) {
+                        // $('#nameList').empty();
+                        $.each(data, function (index) {
+                            var option = document.createElement("option");
+                            option.value = data[index];
+
+                            var parent = document.getElementById("nameList");
+                            parent.appendChild(option);
+                        });
+                    });
+                }
+            }
+            else if (afterBlanko == "City") {
+                if (($('#searchInput').val().length == 1)) {
+                    var firstLetter = $('#searchInput').val()[0];
+
+                    $.post("/Search/ReturnAllCitiesByName", { firstLetter: firstLetter }, function (data) {
+                        // $('#nameList').empty();
+                        $.each(data, function (index) {
+                            var option = document.createElement("option");
+                            option.value = data[index];
+
+                            var parent = document.getElementById("nameList");
+                            parent.appendChild(option);
+                        });
+                    });
+                }
+            }
+
+        }
+    }
+
+
+    function inputFocus(i) {
+        if (i.value == i.defaultValue) { i.value = ""; i.style.color = "#000"; }
+    }
+    function inputBlur(i) {
+        if (i.value == "") { i.value = i.defaultValue; i.style.color = "#888"; }
+    }
+}
+</script>

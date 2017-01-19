@@ -1,0 +1,27 @@
+﻿@model  Trip_Advisor_Web.Models.CityModel
+@{
+    ViewBag.Title = "City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+
+<div class="jumbotron col-lg-6">
+    <h4>All the places in:  @Model.Name</h4>
+
+    <div class="container">
+        @for (int i = 0; i < Model.Places.Count; i++)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-info">
+                    @Html.ActionLink(@Model.Places[i].Name, "GetPlace", "Place", new { placeId = Model.Places[i].PlaceId }, new { @class = "link" })
+                </div>
+                <div class="panel-body">
+                    @Model.Places[i].Rating
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

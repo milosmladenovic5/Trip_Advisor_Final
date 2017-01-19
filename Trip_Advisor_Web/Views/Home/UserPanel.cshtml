@@ -1,0 +1,162 @@
+﻿@model Trip_Advisor_Web.Models.UserModel
+@{
+    ViewBag.Title = "UserPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div id="user" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    @*ovaj div ce da sluzi za smestanje profilne slike*@
+    <form method="post" action="@Url.Action("ChangeDataRequest", "Home")">
+        <div id="profilePicture" class="col-lg-6 col-md-3 col-sm-3 col-xs-6">
+            @{
+                    var test = Model.ProfilePicture;
+             
+                      <img src="@Model.ProfilePicture" class="img-thumbnail" />
+            }
+            @Html.HiddenFor(m => m.ProfilePicture, new { })
+            @if (ViewBag.Change != true && (int)Session["Id"] == @Model.UserId)
+            {
+                <button id="changeInfoButton" type="submit" class="btn btn-danger">Change user info</button>
+            }
+            else
+            {
+
+            }
+        </div>
+    </form>
+
+
+    @if (ViewBag.Change != true)
+    {
+        <div id="description" class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+            <label>Username: &nbsp; </label>@Html.DisplayTextFor(m => m.Username)<br />
+            <label>E-mail adresa:&nbsp; </label>@Html.DisplayTextFor(m => m.Email)<br />
+        </div>
+
+    }
+    else if (ViewBag.Change == true)
+    {    <form method="post" action="@Url.Action("ChangeData", "Home")" enctype="multipart/form-data">
+         <div id="user" class="col-lg-6 col-md-7 col-sm-4 col-xs-4">
+               <label>Username: &nbsp; </label>@Html.TextBoxFor(m => m.Username, new { @class = "form-control", @name = "Username" }) <br />
+               <label>E-mail address:&nbsp; </label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @name = "E-mail" })<br />
+               <label>Add profile picture: &nbsp;</label>@Html.TextBoxFor(m => m.PictureFile, new { @type = "file", @name = "PictureFile", @class = "form-control" })
+
+
+             <br />
+             <br />
+             <br />
+            @*@Html.TextBoxFor(m => m.Korisnik.Slika, new { @class = "form-control", @name = "Slika" })*@
+            <button id="change" type="submit" class="btn btn-danger">Change user info</button>
+            @Html.ActionLink("ChangeInfo", "ChangeInfo", "Home", new { user = @Model }, null)
+            <br />
+        </div>
+
+    </form>
+    }
+
+</div>
+
+@*<div class="col-lg-5 col-md-5" id="additionalInfo">
+    <div class="followersFollowing">
+        @Html.ActionLink("Followers (" + Model.Followers.Count + ") -NOT IMPLEMENTED", "ShowFollowers", "User", new { userId = Model.UserId }, null)
+    </div>
+
+    <br />
+    <div class="followersFollowing">
+        @Html.ActionLink("Following (" + Model.Following.Count + ") -NOT IMPLEMENTED", "ShowFollowing", "User", new { userId = Model.UserId }, null)
+    </div>
+ 
+ </div>*@
+
+<div class="container col-lg-5 col-md-5">
+
+
+    <div class="" id="additionalInfo">
+        <div class="followersFollowing">
+            @Html.ActionLink("Followers (" + Model.Followers.Count + ")", "ShowFollowers", "User", new { userId = Model.UserId }, null)
+        </div>
+
+        <br />
+        <div class="followersFollowing">
+            @Html.ActionLink("Following (" + Model.Following.Count + ")", "ShowFollowing", "User", new { userId = Model.UserId }, null)
+        </div>
+         
+        <br />
+
+        <div class="places">
+            @Html.ActionLink("Test place", "GetPlaceById", "Place", new { placeId = 1 }, null)
+        </div>
+
+        <br />
+
+        <span>
+        @if (Model.UserId == (int)Session["Id"])
+        {
+
+            @Html.ActionLink("View popular places", "GetTopVisitedPlaces", "Place", null, new { @class = "btn btn-info" })
+            string strSpacer = "&nbsp;&nbsp;";
+            @Html.Raw(strSpacer);
+
+            @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info" })
+        }
+        @if (Model.UserId != (int)Session["Id"])
+        {
+            if (!Model.FollowingHim)
+            {
+
+                <button type="button" name="Follow" id="followBtn" class="btn btn-primary">Follow</button>
+
+            }
+            else
+            {
+
+
+                <button type="button" name="Unfollow" id="followBtn" class="btn btn-primary">Unfollow</button>
+
+
+            }
+        }
+        </span>
+
+        <br />
+
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+
+
+
+    </div>
+</div>
+
+
+@Styles.Render("~/Content/UserPanelStyles.css")
+
+<script type="text/javascript">
+    {
+        $('#followBtn').on('click', function () {
+            var action = $('#followBtn').attr("name");
+
+            if (action == "Follow")
+            {
+                $.post("/User/Follow", { userId: @Model.UserId }, function (data) {
+                    $('#followBtn').attr("name", "Unfollow");
+                    $('#followBtn').text("Unfollow");
+                });
+            }
+            else
+            {
+                $.post("/User/Unfollow", { userId: @Model.UserId }, function (data) {
+                    $('#followBtn').attr("name", "Follow");
+                    $('#followBtn').text("Follow");
+                });
+            }
+
+        });
+    }
+</script>

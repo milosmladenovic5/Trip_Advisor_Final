@@ -1,0 +1,202 @@
+﻿@model Trip_Advisor_Web.Models.PlaceModel
+
+@{
+    ViewBag.Title = "Place";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="jumbotron">
+    <h1>@Model.Name</h1>
+    <p>@Model.Description</p>
+    <p>@Model.PlaceId</p>
+
+    @*<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>*@
+</div>
+
+<div class="container action-group">
+    <div class="btn-group">      
+        @Html.ActionLink("I  plan to visit", "UserPlansToVisitPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+      
+        @Html.ActionLink("I visited", "UserVisitedPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Currently at", "UserCurrentlyAtPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<br />
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        @for (int i = 1; i < Model.Pictures.Count; i++)
+        {
+            <li data-target="#myCarousel" data-slide-to="@i"></li>
+        }
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="@Url.Content(Model.Pictures.Last())" alt="Image" />
+        </div>
+        @if (Model.Pictures.Count != 0)
+        {
+            for (int i = 1; i < Model.Pictures.Count; i++)
+            {
+                <div class="item">
+                    <img src="@Url.Content(Model.Pictures[i])">
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading panel-info">
+            Additional info
+        </div>
+        <div class="panel-body">
+            <p><b>Location: </b>@Model.PlaceLocation.Name </p>
+            <p><b>Distance from the city:</b> @Model.CityCenterDistance</p>
+            <p><b>Rating:</b> @Model.Rating</p>
+            @*<p><b>Interest tag:</b> @Html.ActionLink(Model.Tags[0].Name, "GetPlacesByTag", "InterestTag", new { interestTagId = Model.Tags[0].InterestTagId }, null) </p>*@
+        </div>
+    </div>
+</div>
+
+
+
+<br />
+<div class="container">
+    <div class="jumbotron" id="recommendations">
+        <h1>Recommendations</h1>
+        <p>
+            @for (int i = 0; i < Model.Recommendations.Count; i++)
+            {
+                <div class="panel panel-primary ">
+                    <div class="panel-heading panel-info recommendation-panel">
+                        @Html.ActionLink(@Model.Recommendations[i].RefferedBy.Username, "ReturnUserPanel", "User", new { userId = Model.Recommendations[i].RefferedBy.UserId }, new { @class = "link" })
+                    </div>
+                    <div class="panel-body ">
+                        @Model.Recommendations[i].Comment
+                    </div>
+                    <div class="panel-footer panel-primary">
+                        <b>Rating: </b>@Model.Recommendations[i].Rating
+                    </div>
+                </div>
+            }
+        </p>
+
+        @*<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>*@
+
+        @*//<input type="text" id="ratingValue"/>*@
+
+        @using (Html.BeginForm("RecommendPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm" }))
+        {
+            <div id="recommendationAdd">
+                @Html.Hidden("recommendationComment", "", new { id = "recommendationComment" })
+                @Html.Hidden("recommendationRating", "", new { id = "recommendationRating" })
+                <label>Your comment:                      &nbsp               &nbsp</label><textarea id="recommendationText"></textarea>
+                <br />
+                <br />
+                <label>Your rating (on a scale from 1 to 10):       &nbsp          &nbsp </label><input type="number" id="ratingValue" />
+                <br />
+                <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger" onclick="SomeFunction()" />
+
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    {
+        function SomeFunction() {
+
+            if ($("#recommendationText").length == 0) {
+                var recommendations = $('#recommendationAdd');
+
+                var labelText = $(document.createElement('label'));
+                labelText.text('Recommendation text: ');
+
+                var labelRating = $(document.createElement('label'));
+                labelRating.text('Enter your numeric rating of place, enter numbers in range of 1 to 10: ');
+
+
+                var textBox = $(document.createElement('textarea'));
+                var ratingText = $("<input type='text'>");
+                
+                textBox.attr('id', 'recommendationText');
+                textBox.attr('class', 'submits');
+
+
+                ratingText.attr('id', 'ratingValue');
+                ratingText.attr('name', 'ratingValue');
+                ratingText.attr('class', 'submits');
+
+               // recommendations.append(labelText);
+               // recommendations.append(textBox)
+               // recommendations.append('<input type="text" id="ratingValue"/>');
+               // recommendations.append(labelRating);
+                //recommendations.append(ratingText);
+
+                //var recommendButton = $(document.createElement('input'));
+                //recommendButton.attr("type", "submit");
+                //recommendButton.attr("id", "sendRecommendation");
+                //recommendButton.val("Submit recommendation");
+
+                //recommendations.append(recommendButton);
+            }
+
+        };
+
+
+
+        $('#recommendationText').change(function () {
+
+            $('#recommendationComment').val($('#recommendationText').text);
+            $('#recommendationTe').val($('#ratingValue').text);
+
+        });
+
+
+        $(document).on('input propertychange', "textarea[id='recommendationText']", function () {
+            var text = $('#recommendationText').text;
+            $('#recommendationComment').val($('#recommendationText').val());
+        });
+
+        $('#ratingValue').on('input', function () {
+            // Code here
+            var text = 5;
+            $('#recommendationRating').val($('#ratingValue').val());
+
+        });
+
+
+        $("#ratingValue").on('change keydown paste input', function () {
+            var text = 5;
+
+            $('#recommendationRating').val($('#ratingValue').val());
+        });
+
+
+    }
+</script>

@@ -1,0 +1,150 @@
+
+﻿#description{
+    font-family:Tahoma;
+    background-size:300px;
+    background-image:none;
+
+}
+
+#changeInfoButton{
+    position:relative;
+    left:18%;
+    margin-top:5px;
+}
+
+
+#labela{
+    float:left;
+}
+
+
+#pretrazi{
+    float:right;
+    display:none;
+}
+
+
+#grupa{
+    align-content:center;
+}
+
+/*#traziInput{
+    max-width:300px;
+    float:right;
+    position:relative;
+    left:0px;
+}*/
+
+.forma-za-pretrazivanje-i-navigaciju{
+    padding-top:40px;
+}
+
+#dugmePredmet{
+    position:relative;
+    left:28%;
+    margin:20px;
+}
+
+#user{
+    background-color:rgba(119, 158, 203, 0.56);
+    /*background-color:#aec6cf;*/
+    border-radius:8px;
+    padding:8px;
+
+}
+
+#profilePicture{
+    margin-top:10px;
+
+}
+
+#change{
+    margin:8px;
+    position:relative;
+    left:22%;
+
+}
+
+.opisKorisnika{
+    background-color:rgba(255, 105, 97, 0.20);
+    border-radius:8px;
+    padding:5px;
+}
+
+
+
+
+#tekstPitanja{
+    /*display:table-header-group;
+    border-bottom:double;*/
+
+}
+
+#tagoviKontejner{
+    /*display:table-footer-group;*/
+     
+
+}
+
+
+fieldset{
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    min-width: -webkit-min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+}
+
+
+
+legend{
+    display: block;
+    -webkit-padding-start: 2px;
+    -webkit-padding-end: 2px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    width:auto;
+}
+
+#postavljenaPitanja{
+    background: rgba(153, 228, 121, 0.72);
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    border-radius:2px;
+    text-align:center;
+    align-content:center;
+}
+
+
+#slikaKorisnikaa{
+    width:100%;
+    height:100%;
+}
+
+
+#grupa{
+    text-align:center;
+}
+
+#postaviPanel{
+    position:relative;
+    left:7%;
+}
