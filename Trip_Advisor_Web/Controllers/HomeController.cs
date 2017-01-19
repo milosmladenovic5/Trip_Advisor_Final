@@ -28,10 +28,11 @@ namespace Trip_Advisor_Web.Controllers
                 if (!checks)
                 {
                     Trip_Advisor_Neo4j.DataLayer.Connect();
-                    //
                     RedisDataLayer.InitializeCounters();
-                    RedisDataLayer.SaveTopCountries();
-                    RedisDataLayer.SaveTopPlaces();
+                    RedisDataLayer.SaveTopRatedCountries();
+                    RedisDataLayer.SaveTopRatedPlaces();
+                    RedisDataLayer.SaveTopVisitedCountries();
+                    RedisDataLayer.SaveTopVisitedPlaces();
 
                     //  this.topRatedCountries = redis.GetTopCountriesByRating();
                     //this.topRatedPlaces = redis.GetTopPlacesByRating();

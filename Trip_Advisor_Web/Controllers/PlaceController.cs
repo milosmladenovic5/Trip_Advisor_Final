@@ -67,6 +67,7 @@ namespace Trip_Advisor_Web.Controllers
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "VISITED"))
                 DataRelationships.VisitedPlace(userId, placeId,DateTime.Now);
 
+            RedisDataLayer.RefreshPlaceVCache();
             List<Place> plansToVisit = DataProviderGet.GetPlaces(userId, "VISITED");
             return View("ListOfPlaces", DataMapper.CreateListOfPlacesModel(plansToVisit));
         }
@@ -94,6 +95,7 @@ namespace Trip_Advisor_Web.Controllers
             int rating = recommendationRating % 10;
             DataRelationships.Recommend(userId, placeId, recommendationComment, rating);
             DataProviderUpdate.UpdatePlaceRating(placeId);
+            RedisDataLayer.RefreshPlaceRCache();
            // RedisDataLayer.UpdateCountryRating()
             return View("Place", DataMapper.CreatePlaceModel(placeId));
         }

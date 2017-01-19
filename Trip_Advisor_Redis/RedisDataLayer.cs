@@ -32,35 +32,58 @@ namespace Trip_Advisor_Redis
 
         public static readonly RedisClient redis = new RedisClient(Config.SingleHost);
 
+        //public static System.Timers.Timer timer;            //TopVisitedCountries resenje No.1
+
         private static readonly string hashCountriesByRating = "topCountriesByRating";
-        private static readonly string hashPlacesByRating = "topPlacesByRating12";
+        private static readonly string hashPlacesByRating = "topPlacesByRating";
         private static readonly string hashAllCountries = "allWorldCountries";
 
         private static readonly string hashCountriesByVisitors = "topCountriesByVisitors";
         private static readonly string hashPlacesByVisitors = "topPlacesByVisitors1";
 
-        private static readonly string hashPlaceCounter = "placeRating";
-        //private static readonly string hashCountryCounter = "countryCounter";
+        private static readonly string hashPlaceRCounter = "placeRating";
+        private static readonly string hashPlaceGlobalVCounter = "placeVisitors";
+        private static readonly string hashCountryGlobalVCounter = "countryVisitorCounter";     //TopVisitedCountries resenje No.2
+                                                                                                //inkrementira se u isto vreme kao i 
+                                                                                                //place visitor counter, samo ima 3x vecu vrednost(npr.)
 
 
 
         public static void InitializeCounters()
         {
-            if (!CheckNextUrlGlobalCounterExists(hashPlaceCounter))
+            if (!CheckNextUrlGlobalCounterExists(hashPlaceRCounter))
             {
                 var redisPlaceCounterSetup = redis.As<long>();
                 //redisCounterSetup.SetEntry(hashPlaceRatingCounter, 0);
-                redisPlaceCounterSetup.SetValue(hashPlaceCounter, 0);
+                redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
             }
 
-            //if (!CheckNextUrlGlobalCounterExists(hashCountryCounter))
-            //{
-            //    var redisPlaceCounterSetup = redis.As<long>();
-            //    redisPlaceCounterSetup.SetValue(hashCountryCounter, 0);
-            //}
+            if (!CheckNextUrlGlobalCounterExists(hashPlaceGlobalVCounter))
+            {
+                var redisPlaceCounterSetup = redis.As<long>();
+                redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+            }
+
+            if (!CheckNextUrlGlobalCounterExists(hashCountryGlobalVCounter))
+            {
+                var redisPlaceCounterSetup = redis.As<long>();
+                redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
+            }
+
+            //timer = new System.Timers.Timer();
+            //timer.Elapsed += Timer_Elapsed;
+            //timer.Interval = 60000;
+            //timer.Enabled = true;
+
         }
 
-
+        //private static void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        //{
+        //    timer.Stop();
+        //    SaveTopVisitedCountries();
+        //    timer.Start();
+           
+        //}
 
         public static bool CheckNextUrlGlobalCounterExists(string hash)
         {
@@ -68,41 +91,33 @@ namespace Trip_Advisor_Redis
             return (test != null) ? true : false;
         }
 
-        public static void SaveTopPlaces()
+        public static void SaveTopRatedPlaces()
         {
-            //redis.DeleteById<List<Place>>(hashPlacesByRating);
-            //redis.DeleteById<List<Place>>(hashPlacesByVisitors);
-
             redis.RemoveAllFromList(hashPlacesByRating);
-            redis.RemoveAllFromList(hashPlacesByVisitors);
-
-          
-
             List<Place> topRatedPlaces = DataProviderGet.GetTopNRatedPlaces(10);
-            //List < string > l = new List<string>();
-            //for (int i = 0; i < topRatedPlaces.Count; i++)
-            //    l.Add(topRatedPlaces[i].Name);
-            //redis.PushItemToList(hashPlacesByRating, JsonSerializer.SerializeToString<List<string>>(l));
-            redis.PushItemToList(hashPlacesByRating, JsonSerializer.SerializeToString<List<Place>>(topRatedPlaces));
-            
-
-            List<Place> topVisitedPlaces = DataProviderGet.GetTopNVisitedPlaces(10);
-            redis.PushItemToList(hashPlacesByVisitors, JsonSerializer.SerializeToString<List<Place>>(topVisitedPlaces));
-            
-            
+            redis.PushItemToList(hashPlacesByRating, JsonSerializer.SerializeToString<List<Place>>(topRatedPlaces));    
         }
 
-        public static void SaveTopCountries()
+        public static void SaveTopVisitedPlaces()
+        {
+            redis.RemoveAllFromList(hashPlacesByVisitors);
+            List<Place> topVisitedPlaces = DataProviderGet.GetTopNVisitedPlaces(10);
+            redis.PushItemToList(hashPlacesByVisitors, JsonSerializer.SerializeToString<List<Place>>(topVisitedPlaces));
+        }
+
+        public static void SaveTopRatedCountries()
         {
             redis.RemoveAllFromList(hashCountriesByRating);
-            redis.RemoveAllFromList(hashCountriesByVisitors);
-
-            List<Country> topVisitedCountries = DataProviderGet.GetTopNVisitedCountries(10);
-            redis.PushItemToList(hashCountriesByVisitors, JsonSerializer.SerializeToString<List<Country>>(topVisitedCountries));
-
             List<Country> topRatedCountries = DataProviderGet.GetTopNRatedCountries(10);
             redis.PushItemToList(hashCountriesByRating, JsonSerializer.SerializeToString<List<Country>>(topRatedCountries));
 
+        }
+
+        public static void SaveTopVisitedCountries()
+        {
+            redis.RemoveAllFromList(hashCountriesByVisitors);
+            List<Country> topVisitedCountries = DataProviderGet.GetTopNVisitedCountries(10);
+            redis.PushItemToList(hashCountriesByVisitors, JsonSerializer.SerializeToString<List<Country>>(topVisitedCountries));
         }
 
         public static List<Country> GetTopCountriesByRating()
@@ -142,20 +157,46 @@ namespace Trip_Advisor_Redis
 
        //------------------------------------------------------------------------------------------------------------
 
-        public static void RefreshPlaceCache()
+        public static void RefreshPlaceRCache()
         {
-            long placeRatingChangeCounter = redis.Incr(hashPlaceCounter);
+            long placeRatingChangeCounter = redis.Incr(hashPlaceRCounter);
             //MessageBox.Show(nextCounterKey.ToString());
             if(placeRatingChangeCounter == 15)                          // kada 15 mesta promeni rejting kes se osvezava
             {
                 var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashPlaceCounter, 0);
+                redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
 
                // redis.Del()
-                SaveTopPlaces(); 
+                SaveTopRatedPlaces(); 
             }
         }
-     
+
+        public static void RefreshPlaceVCache()
+        {
+            long placeGlobalVisitorCounter = redis.Incr(hashPlaceGlobalVCounter);
+    
+            if (placeGlobalVisitorCounter == 30)                          
+            {
+                var redisPlaceCounterSetup = redis.As<long>();
+                redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+
+       
+                SaveTopVisitedPlaces();
+            }
+
+            long countryGlobalVisitorCounter = redis.Incr(hashCountryGlobalVCounter);
+
+            if (countryGlobalVisitorCounter == 100)
+            {
+                var redisPlaceCounterSetup = redis.As<long>();
+                redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
+
+
+                SaveTopVisitedCountries();
+            }
+
+        }
+
         public static void UpdateCountryRating(int countryId)
         {
             string hash = "CountryId: " + countryId;
@@ -163,10 +204,10 @@ namespace Trip_Advisor_Redis
             if(countryRatingUpdaterCounter == 5)                       // broj mesta kojima je apdejtovan rejting 
             {                                                          // zemlja mora imati barem 5 turistickih mesta kako bi dobila privilegiju da bude dodata u nas sistem (tbh. broj promeniti po potrebi ili parametrizovati)
                 DataProviderUpdate.UpdateCountryRating(countryId);     // apdejtujemo rejting zemlje u glavnoj bazi
-                SaveTopCountries();                                    // osvezavamo kes (osvezava i topVisited - korisnik mora prvo da poseti neku zemlju da bi je ocenio
+                SaveTopRatedCountries();                                    // osvezavamo kes (osvezava i topVisited - korisnik mora prvo da poseti neku zemlju da bi je ocenio
                 var redisPlaceCounterSetup = redis.As<long>();         
-                redisPlaceCounterSetup.SetValue(hashPlaceCounter, 0);   // resetovanje brojaca
+                redisPlaceCounterSetup.SetValue(hash, 0);   // resetovanje brojaca
             }
-        }
+        }       //i osvezi redis kes
     }
 }

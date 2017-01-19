@@ -36,6 +36,7 @@ namespace Trip_Advisor_Neo4j
 
             User u1 = new User();
             u1.Username = "Perica";
+            u1.Email = u1.Username + "@gmail.com";
             u1.Password = "123";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -43,18 +44,21 @@ namespace Trip_Advisor_Neo4j
        
             u1.Username = "Mitar";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int mitar = Int32.Parse(DataProviderGet.GetMaxId("User"));
 
             u1.Username = "Pujo";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int pujo = Int32.Parse(DataProviderGet.GetMaxId("User"));
 
             u1.Username = "Stojan";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int stojan = Int32.Parse(DataProviderGet.GetMaxId("User"));
@@ -62,6 +66,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "TonusHleb";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int tonushleb = Int32.Parse(DataProviderGet.GetMaxId("User"));
@@ -69,6 +74,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Vojislav";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int voja = Int32.Parse(DataProviderGet.GetMaxId("User"));
@@ -242,8 +248,13 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.Recommend(mitar, medijana, "Mitar voz hir!", 6);
             DataRelationships.Recommend(pujo, medijana, "Pujan je lud!", 6);
             DataRelationships.Recommend(voja, medijana, "Moja ideovogija je besmvtna!", 10);
-            DataRelationships.Recommend(mitar, hramSCK, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!.", 6);
-            DataRelationships.Recommend(mitar, bubanj, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!.", 8);
+            DataRelationships.Recommend(mitar, hramSCK, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!", 6);
+            DataRelationships.Recommend(mitar, bubanj, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!", 8);
+            DataRelationships.Recommend(voja, djavolja_varos, "Ovaj \"gvad\" bi bio pvavo mesto za onu vesticu Kavlu del Ponte", 10);
+            DataRelationships.Recommend(pujo, djavolja_varos, "Tromo se vreme vuče!", 9);
+            DataRelationships.Recommend(mitar, djavolja_varos, "I ničeg novog nema,", 8);
+            DataRelationships.Recommend(perica, djavolja_varos, "Danas sve ko juče", 7);
+            DataRelationships.Recommend(vucko, djavolja_varos, "Sutra se isto sprema.", 6);
 
             DataRelationships.HasStatus(mitar, "User");
             DataRelationships.HasStatus(stojan, "Admin");
@@ -269,15 +280,24 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.HasInterestTag(bubanj, "historical");
 
 
-            //System.Threading.Thread.Sleep(200);
-            //DataProviderUpdate.UpdateCountryRating(serbia);
-
             this.CreatePlacePictureList("Bubanj", 4, bubanj);
             this.CreatePlacePictureList("CeleKula", 4, cele_kula);
             this.CreatePlacePictureList("SCK", 4, hramSCK);
             this.CreatePlacePictureList("Medijana", 4, medijana);
             this.CreatePlacePictureList("Sumarice", 4, sumarice);
             this.CreatePlacePictureList("DjavoljaVaros", 4, djavolja_varos);
+
+
+            DataProviderUpdate.UpdatePlaceRating(medijana);
+            DataProviderUpdate.UpdatePlaceRating(bubanj);
+            DataProviderUpdate.UpdatePlaceRating(djavolja_varos);
+            DataProviderUpdate.UpdatePlaceRating(sumarice);
+            DataProviderUpdate.UpdatePlaceRating(cele_kula);
+            DataProviderUpdate.UpdatePlaceRating(hramSCK);
+
+            System.Threading.Thread.Sleep(50);
+
+            DataProviderUpdate.UpdateCountryRating(serbia);
 
         }
 
