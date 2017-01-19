@@ -15,7 +15,7 @@ namespace Trip_Advisor_Neo4j
 
         public static void Connect()
         {
-            Client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "novabaza");
+            Client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "newbase");
             try
             {
                 Client.Connect();
