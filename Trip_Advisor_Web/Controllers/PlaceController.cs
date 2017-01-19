@@ -94,9 +94,7 @@ namespace Trip_Advisor_Web.Controllers
         {
             int rating = recommendationRating % 10;
             DataRelationships.Recommend(userId, placeId, recommendationComment, rating);
-            DataProviderUpdate.UpdatePlaceRating(placeId);
-            RedisDataLayer.RefreshPlaceRCache();
-           // RedisDataLayer.UpdateCountryRating()
+            RedisDataLayer.UpdateRatings(placeId);
             return View("Place", DataMapper.CreatePlaceModel(placeId));
         }
 

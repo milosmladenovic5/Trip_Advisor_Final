@@ -51,20 +51,20 @@ namespace Trip_Advisor_Redis
 
         public static void InitializeCounters()
         {
-            if (!CheckNextUrlGlobalCounterExists(hashPlaceRCounter))
+            if (!CheckKeyExists(hashPlaceRCounter))
             {
                 var redisPlaceCounterSetup = redis.As<long>();
                 //redisCounterSetup.SetEntry(hashPlaceRatingCounter, 0);
                 redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
             }
 
-            if (!CheckNextUrlGlobalCounterExists(hashPlaceGlobalVCounter))
+            if (!CheckKeyExists(hashPlaceGlobalVCounter))
             {
                 var redisPlaceCounterSetup = redis.As<long>();
                 redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
             }
 
-            if (!CheckNextUrlGlobalCounterExists(hashCountryGlobalVCounter))
+            if (!CheckKeyExists(hashCountryGlobalVCounter))
             {
                 var redisPlaceCounterSetup = redis.As<long>();
                 redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
@@ -85,7 +85,7 @@ namespace Trip_Advisor_Redis
            
         //}
 
-        public static bool CheckNextUrlGlobalCounterExists(string hash)
+        public static bool CheckKeyExists(string hash)
         {
             var test = redis.Get<object>(hash);
             return (test != null) ? true : false;
@@ -209,5 +209,26 @@ namespace Trip_Advisor_Redis
                 redisPlaceCounterSetup.SetValue(hash, 0);   // resetovanje brojaca
             }
         }       //i osvezi redis kes
+
+        public static void UpdateRatings(int placeId)
+        {
+            DataProviderUpdate.UpdatePlaceRating(placeId);
+            RefreshPlaceRCache();                                       //provera da li je potrebno osvezavanje kesa
+
+            int countryId = -1;
+            string hash = "placeId " + placeId;
+            if (!CheckKeyExists(hash))
+            {
+                countryId = DataProviderGet.GetCountryId(placeId);
+                redis.Set<int>(hash, countryId);
+            }
+            else
+            {
+                countryId = redis.Get<int>(hash);
+            }
+
+            UpdateCountryRating(countryId);
+
+        }
     }
 }
