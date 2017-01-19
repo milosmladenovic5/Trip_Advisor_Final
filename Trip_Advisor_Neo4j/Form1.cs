@@ -232,9 +232,9 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.Recommend(stojan, medijana, "Stojan ne razume ko mu je iz Engleske poslao paket.", 5);
             DataRelationships.Recommend(stojan, cele_kula, "Stojan ne razume ko mu je iz Engleske poslao paket.", 5);
             DataRelationships.Recommend(stojan, sumarice, "Stojan ne razume ko mu je iz Engleske poslao paket.", 5);
-            DataRelationships.Recommend(mitar, medijana, "Mitar voz hir!.", 6);
-            DataRelationships.Recommend(pujo, medijana, "Pujan je lud!.", 6);
-            DataRelationships.Recommend(voja, medijana, "Moja ideovogija je besmvtna!.", 10);
+            DataRelationships.Recommend(mitar, medijana, "Mitar voz hir!", 6);
+            DataRelationships.Recommend(pujo, medijana, "Pujan je lud!", 6);
+            DataRelationships.Recommend(voja, medijana, "Moja ideovogija je besmvtna!", 10);
             DataRelationships.Recommend(mitar, hramSCK, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!.", 6);
             DataRelationships.Recommend(mitar, bubanj, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!.", 8);
 

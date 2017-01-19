@@ -35,7 +35,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", Date:'" + DateTime.Now + "'}] -> (place)",
+                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", Date:'" + DateTime.Now.ToLongDateString() + "'}] -> (place)",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -109,7 +109,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
         public static void VisitedPlace(int userId, int placeId, DateTime dateOfVisit)
         {
-            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:VISITED {Date:'"+dateOfVisit+"'}] -> (place)",
+            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:VISITED {Date:'"+dateOfVisit.ToShortDateString()+"'}] -> (place)",
                 null, CypherResultMode.Set);
        
             ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
