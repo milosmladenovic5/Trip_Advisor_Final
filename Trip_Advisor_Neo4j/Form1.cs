@@ -25,7 +25,7 @@ namespace Trip_Advisor_Neo4j
         }
 
         public string defaultUserPicture = "/Content/Images/User-Default.jpg";
-        List<string> pBubanj = new List<string>() { "/Content/Images/Bubanj/1.jpg", "/Content/Images/Bubanj/2.jpg", "/Content/Images/Bubanj/3.jpg", };
+
 
         private void create_data_Click(object sender, EventArgs e)
         {

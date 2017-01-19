@@ -26,7 +26,7 @@ namespace Trip_Advisor_Redis
         private void button1_Click(object sender, EventArgs e)
         {
             RedisDataLayer.InitializeCounters();
-            RedisDataLayer.SaveTopPlaces();
+          
 
         }
 
@@ -35,7 +35,6 @@ namespace Trip_Advisor_Redis
             //get top countries
 
 
-            RedisDataLayer.RefreshPlaceCache();
 
         }
 
