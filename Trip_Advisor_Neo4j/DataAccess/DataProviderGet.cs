@@ -559,6 +559,20 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
+
+        public static int GetCountryId (int placeId)
+        {
+            try
+            {
+                var query = new CypherQuery("match (country) - [h:HASCITY] -> (city) - [:HASPLACE] -> (place:Place {PlaceId:"+placeId+"}) return country.CountryId", null, CypherResultMode.Set);
+
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<int>(query).FirstOrDefault() ;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
        
 
     }
