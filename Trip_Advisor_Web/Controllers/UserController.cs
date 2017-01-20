@@ -42,7 +42,8 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public JsonResult AddInterestTags(int userId, string[] interestTagNames)
         {
-            DataProviderDelete.DeleteInterestsOfUser(userId);
+            if (interestTagNames.Length > 0)
+                DataProviderDelete.DeleteInterestsOfUser(userId);
 
             for(int i = 0; i < interestTagNames.Length; i++)
             {
