@@ -209,7 +209,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("countryId", countryId);
 
-                var query = new CypherQuery("start n=node(*) match (n)-[r:BELONGSTOCITY]->(a)-[t:BELONGSTOCOUNTRY]->(c) where c.CountryId = {countryId} return n",
+                var query = new CypherQuery("match (n)<-[r:HASPLACE]-(a)<-[t:HASCITY]-(c) where c.CountryId = {countryId} return n",
                                                                 queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
