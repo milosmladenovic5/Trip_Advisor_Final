@@ -96,7 +96,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("Place"));
 
-                var query = new CypherQuery("CREATE (n:Place {PlaceId:" + generatedId + ", Name:'" + place.Name + "', Type:'" + place.Type + "' , Description:'" + place.Description + "' , Rating:" + place.Rating + ", Pictures:[]})",
+                var query = new CypherQuery("CREATE (n:Place {PlaceId:" + generatedId + ", Name:'" + place.Name + "', Type:'" + place.Type + "' , CityCenterDistance: " +place.CityCenterDistance+",Description:'" + place.Description + "' , Rating:" + place.Rating + ", Pictures:[]})",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

@@ -228,14 +228,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CardsStyles.css" />
-    <Content Include="Content\Images\67873533.jpg" />
-    <Content Include="Content\Images\Bubanj2.jpg" />
-    <Content Include="Content\Images\Bubanj3.JPG" />
     <Content Include="Content\Images\default.png" />
-    <Content Include="Content\Images\DSC_7660.jpg" />
     <Content Include="Content\Images\rs.jpg" />
-    <Content Include="Content\Images\sl.JPG" />
-    <Content Include="Content\Images\Tri_pesnice_Bubanj.jpg" />
     <Content Include="Content\Images\User-Default.jpg" />
     <Content Include="Content\UserPanelStyles.css" />
     <Content Include="Content\NovoPitanjeStilovi.css" />
