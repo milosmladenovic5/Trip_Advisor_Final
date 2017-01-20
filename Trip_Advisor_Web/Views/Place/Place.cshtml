@@ -10,7 +10,7 @@
 <div class="jumbotron">
     <h1>@Model.Name</h1>
     <p>@Model.Description</p>
-    <p>@Model.PlaceId</p>
+    @*<p>@Model.PlaceId</p>*@
 
     @*<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>*@
 </div>
@@ -40,7 +40,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="@Url.Content(Model.Pictures.Last())" alt="Image" />
+            <img src="@Url.Content(Model.Pictures.First())" alt="Image" />
         </div>
         @if (Model.Pictures.Count != 0)
         {

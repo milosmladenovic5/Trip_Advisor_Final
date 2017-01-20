@@ -603,7 +603,22 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
         }
 
+        public static Place GetCurrentLocation (int userId)
+        {
+            try
+            {
+                var query = new CypherQuery("match (user: User { UserId:" + userId + "}) - [:CURRENTLYAT] -> (place) return place", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).FirstOrDefault();
 
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+       
     }
     
 }

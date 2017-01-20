@@ -10,8 +10,8 @@
     <form method="post" action="@Url.Action("ChangeDataRequest", "Home")">
         <div id="profilePicture" class="col-lg-6 col-md-3 col-sm-3 col-xs-6">
             @{
-                    var test = Model.ProfilePicture;
-             
+                var test = Model.ProfilePicture;
+
                       <img src="@Model.ProfilePicture" class="img-thumbnail" />
             }
             @Html.HiddenFor(m => m.ProfilePicture, new { })
@@ -69,73 +69,78 @@
  
  </div>*@
 
-<div class="container col-lg-5 col-md-5">
-
-
-    <div class="" id="additionalInfo">
-        <div class="followersFollowing">
-            @Html.ActionLink("Followers (" + Model.Followers.Count + ")", "ShowFollowers", "User", new { userId = Model.UserId }, null)
-        </div>
-
-        <br />
-        <div class="followersFollowing">
-            @Html.ActionLink("Following (" + Model.Following.Count + ")", "ShowFollowing", "User", new { userId = Model.UserId }, null)
+<div class="container col-lg-6 col-md-6">
+   
+        <div class="col-lg-4 col-md-4 col-sm-4 currentLocation">
+            <h4>Current location: </h4><br />
+            <img class="thumbnail" src="@Model.CurrentLocation.Pictures[0]" />
+            <h4>@Html.ActionLink(@Model.CurrentLocation.Name, "GetPlaceById", "Place", new { placeId = @Model.CurrentLocation.PlaceId }, null)</h4>
         </div>
          
-        <br />
-
-        <div class="places">
-            @Html.ActionLink("Test place", "GetPlaceById", "Place", new { placeId = 1 }, null)
-        </div>
-
+    <div class="col-lg-1 col-md-2 col-sm-1">
         <br />
 
         <span>
-        @if (Model.UserId == (int)Session["Id"])
-        {
-
-            @Html.ActionLink("View popular places", "GetTopVisitedPlaces", "Place", null, new { @class = "btn btn-info" })
-            string strSpacer = "&nbsp;&nbsp;";
-            @Html.Raw(strSpacer);
-
-            @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info" })
-        }
-        @if (Model.UserId != (int)Session["Id"])
-        {
-            if (!Model.FollowingHim)
+            @if (Model.UserId == (int)Session["Id"])
             {
 
-                <button type="button" name="Follow" id="followBtn" class="btn btn-primary">Follow</button>
+                @Html.ActionLink("View popular places", "GetTopVisitedPlaces", "Place", null, new { @class = "btn btn-info" })
+                string strSpacer = "&nbsp;&nbsp;";
+                @Html.Raw(strSpacer);
 
+                @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info" })
             }
-            else
+            @if (Model.UserId != (int)Session["Id"])
             {
+                if (!Model.FollowingHim)
+                {
 
+                    <button type="button" name="Follow" id="followBtn" class="btn btn-primary">Follow</button>
 
-                <button type="button" name="Unfollow" id="followBtn" class="btn btn-primary">Unfollow</button>
-
-
+                }
+                else
+                {
+                    <button type="button" name="Unfollow" id="followBtn" class="btn btn-primary">Unfollow</button>
+                }
             }
-        }
         </span>
 
         <br />
+    </div>
+</div>
 
+
+<div class="container col-lg-11 col-md-12" id="userPanelList">
+    @if (Model.UserId == (int)Session["Id"])
+    {
+    <div class="container col-lg-3 col-md-3 currentlyList">
+        <h4>Friends at the same city currently:</h4>
+            @foreach (var user in Model.UsersCurrentlyAtTheSamePlace)
+            {
+                @Html.ActionLink(user.Username, "ReturnUserPanel", "User", new { userId = user.UserId }, null);
+                <br />
+            }       
+    </div>
+    }   
+    <div class="container col-lg-4 col-md-3 followersList">
+        <h4> Followers:</h4>
+        @foreach (var user in Model.Followers)
+        {
+            @Html.ActionLink(user.Username, "ReturnUserPanel", "User", new { userId = user.UserId }, null);
+            <br />
+        }
+    </div>
+    <div class="container col-lg-3 col-md-3 followersList">
+        <h4> Followings:</h4>
+        @foreach (var user in Model.Following)
+        {
+            @Html.ActionLink(user.Username, "ReturnUserPanel", "User", new { userId = user.UserId }, null);
+            <br />
+        }
 
     </div>
-
 </div>
 
-
-<div class="container col-lg-4 pull-left">
-    <h4>Users at the same place currently as you:</h4>
-    
-    @foreach( var user in Model.UsersCurrentlyAtTheSamePlace)
-    {
-        @Html.ActionLink(user.Username, "ReturnUserPanel","User", new { userId = user.UserId })
-    }
-
-</div>
 
 
 

@@ -220,7 +220,19 @@ namespace Trip_Advisor_Web
             userModel.Email = user.Email;
             userModel.UserId = user.UserId;
 
+            Place currentLocation = DataProviderGet.GetCurrentLocation(userId);
+            PlaceModel placeMdl = new PlaceModel() {
+                Name = currentLocation.Name,
+                PlaceId = currentLocation.PlaceId,
+                Description = currentLocation.Description
+            };
 
+            for (int pic = 0; pic < 1; pic++)
+            {
+                placeMdl.Pictures.Add(currentLocation.Pictures[pic]);
+            }
+
+            userModel.CurrentLocation = placeMdl;
 
             List<Place> PlacesThatWantsToVisit = DataProviderGet.GetPlaces(user.UserId, "PLANSTOVISIT");
             foreach (var place in PlacesThatWantsToVisit)
@@ -257,6 +269,7 @@ namespace Trip_Advisor_Web
                 UserModel userMd = new UserModel();
                 userMd.Username = friend.Username;
                 userMd.ProfilePicture = friend.ProfilePicture;
+                userMd.UserId = friend.UserId;
                 userModel.Followers.Add(userMd);
 
                 if (friend.UserId == (int)context.Session["Id"])
@@ -297,7 +310,7 @@ namespace Trip_Advisor_Web
                 UserModel userMd = new UserModel();
                 userMd.Username = friend.Username;
                 userMd.ProfilePicture = friend.ProfilePicture;
-              
+                userMd.UserId = friend.UserId;
                                     
                 userModel.Following.Add(userMd);
             }

@@ -78,3 +78,45 @@ textarea {
     left:5%;
     margin-bottom:5px;
 }
+
+#userPanelList{
+    background-color:rgba(117, 204, 80, 0.4);
+    border-radius:10px;
+    margin-top:20px;
+    margin-bottom:20px;
+
+}
+
+.currentlyList
+{
+    background-color:rgba(37, 181, 84, 0.74);
+    border-radius:10px;
+    margin:20px;
+    text-align:center;
+    padding:10px;
+
+}
+
+.followersList{
+    background-color:rgba(37, 181, 84, 0.74);
+    border-radius:10px;
+    margin:20px;
+    text-align:center;
+    padding:10px;
+}
+
+.followersList > a , .currentlyList > a
+{
+    color:#a52c2c;
+}
+
+
+.currentLocation{
+    text-align:center;
+    background-color:rgba(37, 181, 84, 0.74);
+    border-radius:10px;
+    margin:10px;
+    text-align:center;
+    padding-left:10px;
+    padding-right:10px;
+}

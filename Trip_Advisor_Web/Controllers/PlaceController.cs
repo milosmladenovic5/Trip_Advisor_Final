@@ -45,6 +45,7 @@ namespace Trip_Advisor_Web.Controllers
                 DataRelationships.CurrentlyAtPlace(userId, placeId);
         
             List<Place> recommendedPlaces = DataProviderGet.GetSimilarPlacesIds(userId, placeId);
+            ViewBag.CurrentlyAt = true;
             return View("ListOfPlaces", DataMapper.CreateListOfPlacesModel(recommendedPlaces));
         }
 
