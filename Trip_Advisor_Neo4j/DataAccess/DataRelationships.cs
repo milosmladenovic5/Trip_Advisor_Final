@@ -35,7 +35,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", Date:'" + DateTime.Now.ToLongDateString() + "'}] -> (place)",
+                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:'" + DateTime.Now.ToString() + "'}] -> (place)",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

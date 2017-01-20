@@ -14,7 +14,7 @@ namespace Trip_Advisor_Web.Models
         public int UserId { get; set; }
         public int PlaceId { get; set; }
 
-        public DateTime RecommendationTime { get; set; }
+        public String RecommendationTime { get; set; }
 
         public UserModel RefferedBy { get; set; }
         public PlaceModel RatedPlace { get; set; }

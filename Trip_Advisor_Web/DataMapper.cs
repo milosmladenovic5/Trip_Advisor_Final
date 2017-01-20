@@ -162,6 +162,7 @@ namespace Trip_Advisor_Web
                 recommendationModel.Comment = r.Comment;
                 recommendationModel.Rating = r.Rating;
                 recommendationModel.RefferedBy = CreateUserModel(r.UserId);
+                recommendationModel.RecommendationTime = r.RecommendationTime;
                
 
                 placeModel.Recommendations.Add(recommendationModel);
@@ -262,6 +263,20 @@ namespace Trip_Advisor_Web
                 {
                     userModel.FollowingHim = true;
                 }
+            }
+
+            List<User> SamePlaceUsers = DataProviderGet.GetFollowingThatAreCurrentlyAtTheSameCity(userId);
+            foreach(var p in SamePlaceUsers)
+            {
+                UserModel us = new UserModel()
+                {
+                    UserId = p.UserId,
+                    Username = p.Username,
+                    Email = p.Email,
+                    ProfilePicture = p.ProfilePicture
+                };
+
+                userModel.UsersCurrentlyAtTheSamePlace.Add(us);
             }
 
             List<InterestTag> Interests = DataProviderGet.GetInterestsOfUser(user.UserId);

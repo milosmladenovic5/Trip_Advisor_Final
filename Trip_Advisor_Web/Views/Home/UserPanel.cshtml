@@ -127,6 +127,17 @@
 </div>
 
 
+<div class="container col-lg-4 pull-left">
+    <h4>Users at the same place currently as you:</h4>
+    
+    @foreach( var user in Model.UsersCurrentlyAtTheSamePlace)
+    {
+        @Html.ActionLink(user.Username, "ReturnUserPanel","User", new { userId = user.UserId })
+    }
+
+</div>
+
+
 
 
 @Styles.Render("~/Content/UserPanelStyles.css")

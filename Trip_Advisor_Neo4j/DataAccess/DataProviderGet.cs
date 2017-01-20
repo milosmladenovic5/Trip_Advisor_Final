@@ -573,7 +573,36 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return 0;
             }
         }
-       
+
+        public static List<User> GetAllFollowingThatAreCurrentlyAtTheSamePlace (int userId)
+        {
+            try
+            {
+                var query = new CypherQuery("match (user:User {UserId:" + userId + "}) - [f:FOLLOWS] -> (users), (user) - [:CURRENTLYAT] -> (place), (users) - [:CURRENTLYAT] -> (place) return users", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static List<User> GetFollowingThatAreCurrentlyAtTheSameCity (int userId)
+        {
+            try
+            {                
+                var query = new CypherQuery("match(user: User { UserId:"+userId+"}) - [f: FOLLOWS]-> (users), (user) - [:CURRENTLYAT]-> (place) < - [:HASPLACE] - (city), (city) - [:HASPLACE]-> (places), (users) - [:CURRENTLYAT]-> (places) return users", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
 
     }
     

@@ -25,6 +25,9 @@ namespace Trip_Advisor_Web.Models
         public PlaceModel CurrentLocation { get; set; }
         public List<PlaceModel> PlansToVisit { get; set; }
         public List<PlaceModel> Visited { get; set; }
+        
+        //dodatna
+        public List<UserModel> UsersCurrentlyAtTheSamePlace { get; set; }
 
         public HttpPostedFileBase PictureFile { get; set; }
 
@@ -36,6 +39,7 @@ namespace Trip_Advisor_Web.Models
             this.PlansToVisit = new List<PlaceModel>();
             this.Visited = new List<PlaceModel>();
             this.Following = new List<UserModel>();
+            this.UsersCurrentlyAtTheSamePlace = new List<UserModel>();
         }
     }
 }
