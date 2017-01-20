@@ -13,10 +13,11 @@ namespace Trip_Advisor_Web.Models
         public int Rating { get; set; }
         public int UserId { get; set; }
         public int PlaceId { get; set; }
+        public UserModel RefferedBy { get; set; }
 
         public String RecommendationTime { get; set; }
 
-        public UserModel RefferedBy { get; set; }
+        public int RefferedById { get; set; }
         public PlaceModel RatedPlace { get; set; }
 
         public RecommendationModel()

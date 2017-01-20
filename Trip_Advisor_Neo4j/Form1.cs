@@ -234,6 +234,7 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.HasPlace(nis, medijana);
             DataRelationships.HasPlace(nis, cele_kula);
             DataRelationships.HasPlace(nis, hramSCK);
+            DataRelationships.HasPlace(nis, bubanj);
             DataRelationships.HasPlace(kursumlija, djavolja_varos);
             DataRelationships.HasPlace(kragujevac, sumarice);
 

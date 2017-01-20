@@ -120,3 +120,30 @@ textarea {
     padding-left:10px;
     padding-right:10px;
 }
+
+#container
+{
+   border:2px solid #ccc;
+    width:300px; 
+    height: 100px; 
+    overflow-y: scroll; 
+    margin-left:50px;
+    padding-left:50px
+}
+
+
+#profilePicture
+{
+    text-align:center;
+}
+
+
+.link
+{
+    margin-top:10px;
+}
+
+#followBtn{
+    margin-top:10px;
+
+}

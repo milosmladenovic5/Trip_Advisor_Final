@@ -42,7 +42,10 @@ namespace Trip_Advisor_Web.Controllers
         public ActionResult UserCurrentlyAtPlace(int userId, int placeId)
         {
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "CURRENTLYAT"))
+            {
+                DataProviderDelete.DeleteCurrentPlace(userId);
                 DataRelationships.CurrentlyAtPlace(userId, placeId);
+            }
         
             List<Place> recommendedPlaces = DataProviderGet.GetSimilarPlacesIds(userId, placeId);
             ViewBag.CurrentlyAt = true;
@@ -93,7 +96,7 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public ActionResult RecommendPlace(int userId, int placeId, string recommendationComment, int recommendationRating)
         {
-            int rating = recommendationRating % 10;
+            int rating = (recommendationRating==10) ? 10 : recommendationRating%10;
             string dateTest = DateTime.Now.ToString();
             DataRelationships.Recommend(userId, placeId, recommendationComment, rating);
             RedisDataLayer.UpdateRatings(placeId);

@@ -616,7 +616,20 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
+        
+        public static List<string> GetAllTags ()
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:InterestTag) return n.Name", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList();
 
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
        
     }

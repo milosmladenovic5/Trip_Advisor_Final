@@ -12,7 +12,7 @@
             @{
                 var test = Model.ProfilePicture;
 
-                      <img src="@Model.ProfilePicture" class="img-thumbnail" />
+                <img src="@Model.ProfilePicture" class="img-thumbnail" />
             }
             @Html.HiddenFor(m => m.ProfilePicture, new { })
             @if (ViewBag.Change != true && (int)Session["Id"] == @Model.UserId)
@@ -23,7 +23,31 @@
             {
 
             }
+
+
+            @if (Model.UserId == (int)Session["Id"])
+            {
+                <div id="upl"><label class="nnt"></label><button id="interests" class="btn btn-danger" @*onclick="PredloziTag()"*@ data-toggle="modal" data-target=".bs-example-modal-sm">Modify interests</button></div>
+
+
+                <div id="mdl" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content form-horizontal">
+                            <br />
+
+                            <div id="recommendationAdd">
+                                <div id="tagContainer">
+                                </div>
+                                <br />
+                                <button type="button" id="recommendPlaceRequest" value="Choose tags" class="btn btn-danger fc" onclick="selectTags()">Select tags</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
+
     </form>
 
 
@@ -46,7 +70,6 @@
              <br />
              <br />
              <br />
-            @*@Html.TextBoxFor(m => m.Korisnik.Slika, new { @class = "form-control", @name = "Slika" })*@
             <button id="change" type="submit" class="btn btn-danger">Change user info</button>
             @Html.ActionLink("ChangeInfo", "ChangeInfo", "Home", new { user = @Model }, null)
             <br />
@@ -57,26 +80,23 @@
 
 </div>
 
-@*<div class="col-lg-5 col-md-5" id="additionalInfo">
-    <div class="followersFollowing">
-        @Html.ActionLink("Followers (" + Model.Followers.Count + ") -NOT IMPLEMENTED", "ShowFollowers", "User", new { userId = Model.UserId }, null)
-    </div>
-
-    <br />
-    <div class="followersFollowing">
-        @Html.ActionLink("Following (" + Model.Following.Count + ") -NOT IMPLEMENTED", "ShowFollowing", "User", new { userId = Model.UserId }, null)
-    </div>
- 
- </div>*@
-
 <div class="container col-lg-6 col-md-6">
    
+    @if (Model.CurrentLocation != null)
+    {
         <div class="col-lg-4 col-md-4 col-sm-4 currentLocation">
             <h4>Current location: </h4><br />
             <img class="thumbnail" src="@Model.CurrentLocation.Pictures[0]" />
             <h4>@Html.ActionLink(@Model.CurrentLocation.Name, "GetPlaceById", "Place", new { placeId = @Model.CurrentLocation.PlaceId }, null)</h4>
         </div>
-         
+    }
+    else
+    {
+        <div class="col-lg-4 col-md-4 col-sm-4 currentLocation">
+            <h4>No current location</h4><br />
+        </div>
+
+    }
     <div class="col-lg-1 col-md-2 col-sm-1">
         <br />
 
@@ -90,6 +110,14 @@
 
                 @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info" })
             }
+           
+            <br />
+            @Html.ActionLink("User visited", "UserVisited", "Place", new { userId = Model.UserId }, new { @class = "btn btn-info link" })
+
+            @Html.Raw("&nbsp;&nbsp;")
+            @Html.ActionLink("User plans to visit", "UserPlansToVisit", "Place", new { userId = Model.UserId }, new { @class = "btn btn-info link" })
+
+
             @if (Model.UserId != (int)Session["Id"])
             {
                 if (!Model.FollowingHim)
@@ -167,6 +195,59 @@
                 });
             }
 
+        });
+
+        function selectTags()
+        {
+            var parentContainter = document.getElementById('tagContainer');
+            var interestTagNames = new Array();
+
+            var children = parentContainter.children;
+
+            for (var i = 0; i < children.length; i++) {
+                if(children[i].getAttribute("type")=="checkbox")
+                {
+                    if(children[i].checked==true){
+                        interestTagNames.push(children[i].getAttribute("value"));
+                    }
+                }
+            }
+
+            var userId = @Model.UserId;
+
+            $.post("/User/AddInterestTags", {userId:userId, interestTagNames:interestTagNames}, function (data) {
+                $('#mdl').modal('hide');
+                $('#tagContainer').empty();
+            }) 
+
+
+       
+        }
+
+        $('#interests').click(function(){      
+            $.post("/Home/ReturnAllInterestTags",  function (data) {
+                $.each(data, function (index) {
+                    var label = document.createElement("label");
+                    label.innerHTML = data[index];
+                    label.for = "check"+index;
+
+
+                    var input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.value = data[index];
+                    input.name = data[index];
+                    label.id = "check"+ index;
+                    
+                    var br = document.createElement("br");
+
+                    var parent = document.getElementById("tagContainer");
+                    parent.appendChild(input);
+                    parent.appendChild(label);
+                    parent.appendChild(br);
+                    
+                });
+            });        
+        
         });
     }
 </script>

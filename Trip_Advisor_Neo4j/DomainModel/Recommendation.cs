@@ -15,7 +15,7 @@ namespace Trip_Advisor_Neo4j.DomainModel
         public string RecommendationTime { get; set; }
         public int UserId { get; set; }
         public int PlaceId { get; set; }
-
+        
         public User RefferedBy { get; set; }
         public Place RatedPlace { get; set; }
     }

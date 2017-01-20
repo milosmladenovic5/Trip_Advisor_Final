@@ -154,5 +154,33 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }               // kada korisnik poseti mesto
+
+        public static bool DeleteCurrentPlace (int userId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}) - [r:CURRENTLYAT] -> (place)  DELETE r", null, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteInterestsOfUser(int userId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}) - [r:HASINTEREST] -> ()  DELETE r", null, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -38,5 +38,18 @@ namespace Trip_Advisor_Web.Controllers
             return Json("No longer following the user!", JsonRequestBehavior.AllowGet);
 
         }
+
+        [HttpPost]
+        public JsonResult AddInterestTags(int userId, string[] interestTagNames)
+        {
+            DataProviderDelete.DeleteInterestsOfUser(userId);
+
+            for(int i = 0; i < interestTagNames.Length; i++)
+            {
+                DataRelationships.HasInterest(userId, interestTagNames[i]);
+            }
+
+            return Json("Added"+interestTagNames.Length+"new tags", JsonRequestBehavior.AllowGet);
+        }
     }
 }

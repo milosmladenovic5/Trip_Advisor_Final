@@ -149,6 +149,15 @@ namespace Trip_Advisor_Web.Controllers
             return View("Index");
         }
 
+
+        [HttpPost]
+        public JsonResult ReturnAllInterestTags()
+        {
+            List<string> tags = DataProviderGet.GetAllTags();
+
+            return Json(tags, JsonRequestBehavior.AllowGet);
+        }
+
     }
 
 }
