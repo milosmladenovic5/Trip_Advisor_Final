@@ -75,7 +75,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = /*Int32.Parse(DataProviderGet.GenerateId("InterestTag")); */ 1;   // NEMAS OVAJ U BAZI A MRZI ME DA GLEDAM KAKO SE DODAJE
+                int generatedId = Int32.Parse(DataProviderGet.GenerateId("InterestTag"));
 
                 var query = new CypherQuery("CREATE (n:InterestTag {InterestTagId:" + generatedId + ", Name:'" + interestTag.Name + "' , FieldOfLife:'" + interestTag.FieldOfLife + "', Type:'" + interestTag.Type +"'})",
                     null, CypherResultMode.Set);
