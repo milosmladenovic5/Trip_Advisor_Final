@@ -1,0 +1,21 @@
+Kratka dodatna uputstva:
+
+1. Test podaci za bazu se nalaze u folderu "Neo4jDatabase" u spakovanim fajlovima, tako da ta baza može direktno da se pokrene iz servera 
+
+2. Ukoliko postoje bilo kakvi problemi sa tim, može nova baza da se kreira biranjem kao startnog projekta Trip_Advisor_Neo4j i selektovanjem dugmeta "CREATE DATA" u formi.
+
+3. Posle toga samo kao startni projekat postaviti Trip_Advisor_Web i pokrenuti
+
+4. Korisnicka imena sa kojima se možete ulogovati bez registracije: 
+		- Mitar	
+		- Pujo
+		- Vojislav
+		- TonusHleb
+	- Šifra je svima: "123"
+
+5. Ne zamerite ukoliko su nam u kodu negde ostali neki glupi komentari koje nismo stigli ili zaboravili da uklonimo
+
+6. Ukoliko bilo koji deo projekta - kod ili funkcionalnost nisu baš najjasniji, doci ce neko od nas dvojice ili obojica da zajedno pogledamo
+
+
+
