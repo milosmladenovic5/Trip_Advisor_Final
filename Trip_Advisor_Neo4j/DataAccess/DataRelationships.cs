@@ -38,7 +38,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 DateTime date = DateTime.Now;
                 long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
 
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:'" + n + "'}] -> (place)",
+                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:" + n + "}] -> (place)",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

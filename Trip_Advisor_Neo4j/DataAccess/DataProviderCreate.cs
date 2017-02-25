@@ -13,7 +13,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
 {
     public static class DataProviderCreate
     {
-
         public static bool CreateIdNodes()
         {
             try
@@ -59,7 +58,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("Country"));
 
-                var query = new CypherQuery("CREATE (n:Country {CountryId:" + generatedId + ", Name:'" + country.Name + "' , OverallRating:"+country.OverallRating+"})",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -135,15 +133,16 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 DateTime date = DateTime.Now;
                 long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
 
-                var query = new CypherQuery("CREATE (n:User {UserId:"+generatedId+", Username:'"+ user.Username+"', Password:'"+user.Password+"', Email:'"+user.Email+"', ProfilePicture:'"+user.ProfilePicture+ "', DateJoined:'" + n + "'UserStatusFLAG:'" + user.UserStatusFLAG + "'})",
+                var query = new CypherQuery("CREATE (n:User {UserId:"+generatedId+", Username:'"+ user.Username+"', Password:'"+user.Password+"', Email:'"+user.Email+"', ProfilePicture:'"+user.ProfilePicture+ "', DateJoined:'" + n + "', UserStatusFLAG:" +user.UserStatusFLAG+ ", Description: 'No description set.'})",
                                                                null,  CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 
                 return true;
             }
-            catch 
+            catch(Exception e) 
             {
+                MessageBox.Show(e.ToString());
                 return false;
             }
         }

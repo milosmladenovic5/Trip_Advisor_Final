@@ -51,29 +51,36 @@ namespace Trip_Advisor_Redis
 
         public static void InitializeCounters()
         {
-            if (!CheckKeyExists(hashPlaceRCounter))
+            try
             {
-                var redisPlaceCounterSetup = redis.As<long>();
-                //redisCounterSetup.SetEntry(hashPlaceRatingCounter, 0);
-                redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
-            }
+                if (!CheckKeyExists(hashPlaceRCounter))
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    //redisCounterSetup.SetEntry(hashPlaceRatingCounter, 0);
+                    redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
+                }
 
-            if (!CheckKeyExists(hashPlaceGlobalVCounter))
+                if (!CheckKeyExists(hashPlaceGlobalVCounter))
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+                }
+
+                if (!CheckKeyExists(hashCountryGlobalVCounter))
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
+                }
+
+                //timer = new System.Timers.Timer();
+                //timer.Elapsed += Timer_Elapsed;
+                //timer.Interval = 60000;
+                //timer.Enabled = true;
+            }
+            catch (Exception e)
             {
-                var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+                Console.Write(e.Message);
             }
-
-            if (!CheckKeyExists(hashCountryGlobalVCounter))
-            {
-                var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
-            }
-
-            //timer = new System.Timers.Timer();
-            //timer.Elapsed += Timer_Elapsed;
-            //timer.Interval = 60000;
-            //timer.Enabled = true;
 
         }
 
@@ -87,8 +94,16 @@ namespace Trip_Advisor_Redis
 
         public static bool CheckKeyExists(string hash)
         {
-            var test = redis.Get<object>(hash);
-            return (test != null) ? true : false;
+            try
+            {
+                var test = redis.Get<object>(hash);
+                return (test != null) ? true : false;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
         }
 
         public static void SaveTopRatedPlaces()

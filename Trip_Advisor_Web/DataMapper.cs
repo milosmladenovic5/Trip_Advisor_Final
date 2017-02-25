@@ -54,7 +54,6 @@ namespace Trip_Advisor_Web
             return cityModel;
 
         }
-
         public static CountryModel CreateCountryModel(int countryId)
         {
 
@@ -110,8 +109,6 @@ namespace Trip_Advisor_Web
 
             return countryModel;
         }
-
-
         public static ListOfPlacesModel CreateListOfPlacesModel (List<Place> places)
         {
             ListOfPlacesModel list = new ListOfPlacesModel();
@@ -128,8 +125,6 @@ namespace Trip_Advisor_Web
 
             return list;
         }
-
-
         public static PlaceModel CreatePlaceModel (int placeId)
         {
             Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
@@ -154,7 +149,7 @@ namespace Trip_Advisor_Web
             placeModel.PlaceLocation.Name = placeLocation.Name;
      
 
-            List<Recommendation> recommendations = DataProviderGet.GetPlaceRecommendations(placeId);
+            List<Recommendation> recommendations = DataProviderGet.GetPlaceRecommendationsByTime(placeId, false); 
 
             foreach(Recommendation r in recommendations)
             {
@@ -170,8 +165,14 @@ namespace Trip_Advisor_Web
 
                 recommendationModel.RefferedBy = user;
 
-                recommendationModel.RecommendationTime = r.RecommendationTime;
-               
+
+                DateTime time;
+                if (DateTime.TryParseExact(r.RecommendationTime.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
+                    recommendationModel.RecommendationTime = time.ToString("MM/dd/yyyy HH:mm");
+                else
+                    recommendationModel.RecommendationTime = "Error!";
+
+
 
                 placeModel.Recommendations.Add(recommendationModel);
             }
@@ -188,7 +189,6 @@ namespace Trip_Advisor_Web
 
             return placeModel;
         }
-
         public static RecommendationModel CreateRecommendationModel (int recommendationId)
         {
             //Recommendation recomm = DataProviderGet.GetNode<Recommendation>(recommendationId, "Recommendation");
@@ -200,7 +200,6 @@ namespace Trip_Advisor_Web
 
             return null;
         }
-
         public static InterestTagModel CreateInterestTagModel (int interestTagId)
         {
             InterestTag intTag = DataProviderGet.GetNode<InterestTag>(interestTagId, "InterestTag");
@@ -213,8 +212,6 @@ namespace Trip_Advisor_Web
 
             return intTagModel;
         }
-
-     
         public static UserModel CreateUserModel (int userId)
         {
             HttpContext context = HttpContext.Current;

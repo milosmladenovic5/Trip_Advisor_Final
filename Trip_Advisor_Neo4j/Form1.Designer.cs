@@ -32,6 +32,7 @@
             this.add_place_pic = new System.Windows.Forms.Button();
             this.placeId = new System.Windows.Forms.TextBox();
             this.tb_1 = new System.Windows.Forms.Button();
+            this.aditd_1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // create_data
@@ -49,7 +50,7 @@
             // add_place_pic
             // 
             this.add_place_pic.ForeColor = System.Drawing.Color.DarkRed;
-            this.add_place_pic.Location = new System.Drawing.Point(591, 62);
+            this.add_place_pic.Location = new System.Drawing.Point(660, 61);
             this.add_place_pic.Name = "add_place_pic";
             this.add_place_pic.Size = new System.Drawing.Size(130, 20);
             this.add_place_pic.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             // placeId
             // 
-            this.placeId.Location = new System.Drawing.Point(532, 62);
+            this.placeId.Location = new System.Drawing.Point(601, 62);
             this.placeId.Name = "placeId";
             this.placeId.Size = new System.Drawing.Size(53, 20);
             this.placeId.TabIndex = 2;
@@ -76,11 +77,24 @@
             this.tb_1.UseVisualStyleBackColor = true;
             this.tb_1.Click += new System.EventHandler(this.tb_1_Click);
             // 
+            // aditd_1
+            // 
+            this.aditd_1.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aditd_1.ForeColor = System.Drawing.Color.DarkRed;
+            this.aditd_1.Location = new System.Drawing.Point(306, 62);
+            this.aditd_1.Name = "aditd_1";
+            this.aditd_1.Size = new System.Drawing.Size(237, 99);
+            this.aditd_1.TabIndex = 4;
+            this.aditd_1.Text = "AdditionData-1";
+            this.aditd_1.UseVisualStyleBackColor = true;
+            this.aditd_1.Click += new System.EventHandler(this.aditd_1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 319);
+            this.Controls.Add(this.aditd_1);
             this.Controls.Add(this.tb_1);
             this.Controls.Add(this.placeId);
             this.Controls.Add(this.add_place_pic);
@@ -98,6 +112,7 @@
         private System.Windows.Forms.Button add_place_pic;
         private System.Windows.Forms.TextBox placeId;
         private System.Windows.Forms.Button tb_1;
+        private System.Windows.Forms.Button aditd_1;
     }
 }
 

@@ -183,6 +183,7 @@ namespace Trip_Advisor_Neo4j
             ct.Name = "Serbia";
             ct.OverallRating = 0.0f;
             ct.NationalFlag = "/Content/Images/rs.jpg";
+            ct.PromotionalVideoURL = "https://www.youtube.com/embed/xDHpcAFSMr0";
             DataProviderCreate.CreateCountry(ct);
             int serbia = Int32.Parse(DataProviderGet.GetMaxId("Country"));
 
@@ -273,9 +274,13 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.Recommend(mitar, hramSCK, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!", 6);
             DataRelationships.Recommend(mitar, bubanj, "Boze uzmi u svoje nezne ruke ovaj avion i nezno ga spusti na aerodrom Muhare u Cikago!", 8);
             DataRelationships.Recommend(voja, djavolja_varos, "Ovaj \"gvad\" bi bio pvavo mesto za onu vesticu Kavlu del Ponte", 10);
+            System.Threading.Thread.Sleep(1000);
             DataRelationships.Recommend(pujo, djavolja_varos, "Tromo se vreme vuče!", 9);
+            System.Threading.Thread.Sleep(1000);
             DataRelationships.Recommend(mitar, djavolja_varos, "I ničeg novog nema,", 8);
+            System.Threading.Thread.Sleep(1000);
             DataRelationships.Recommend(perica, djavolja_varos, "Danas sve ko juče", 7);
+            System.Threading.Thread.Sleep(1000);
             DataRelationships.Recommend(vucko, djavolja_varos, "Sutra se isto sprema.", 6);
 
             //DataRelationships.HasStatus(mitar, "User");
@@ -350,9 +355,22 @@ namespace Trip_Advisor_Neo4j
 
         private void tb_1_Click(object sender, EventArgs e)
         {
-            DateTime date = DateTime.Now;
-            long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
-            long n1 = long.Parse(date.ToString("yyyyMMddHHmmss"));
+            List<Recommendation> rl = DataProviderGet.GetPlaceRecommendationsByTime(1, false);
+
+            string temp = rl[0].RecommendationTime.ToString();
+            //temp = temp.Remove(temp.Length - 2);
+            string s  = string.Empty;
+
+            foreach (Recommendation r in rl)
+                s += r.RecommendationTime.ToString() + "\n";
+
+            MessageBox.Show(s);
+           
+        }
+
+        private void aditd_1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool AddPictureOfPlace (string picturePath, int placeId)
         {
             try
@@ -57,8 +56,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-
-
         public static bool UpdatePlace(Place place)
         {
             try
@@ -84,7 +81,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool UpdateCountry(Country country)
         {
             try
@@ -108,7 +104,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool UpdateCity(City city)
         {
             try
@@ -131,7 +126,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool UpdateRecommendation(int userId, int placeId, Recommendation recommendation)
         {
             try
@@ -157,7 +151,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool UpdatePlaceRating(int placeId)
         {
             try
@@ -180,7 +173,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool UpdateCountryRating(int countryId)
         {
             try

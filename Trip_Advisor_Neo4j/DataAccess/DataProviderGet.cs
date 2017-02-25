@@ -25,8 +25,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
             return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList().FirstOrDefault();
                 
-        }
-        
+        } 
         public static string GenerateId(string entityType)
         {
             try
@@ -46,7 +45,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
-
         public static List<Place> GetSimilarPlacesIds(int userId, int placeId)
         {
             try
@@ -61,7 +59,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<User> GetAllFollowers (int userId)
         {
             try
@@ -77,7 +74,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
            
 
         }
-
         public static List<User> GetAllFollowing (int userId)
         {
             try
@@ -92,7 +88,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
             
         }
-
         public static List<City> GetAllCountryCities(int countryId)
         {
             try
@@ -108,7 +103,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
 
         }
-
         public static List<User> GetAllUsersThatVisitedPlace (int placeId)
         {
             try
@@ -124,7 +118,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
             
         }
-
         public static List<User> GetUsersThatHaveSameStatus (int userId)
         {
             try
@@ -140,7 +133,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-
         public static List<Place> GetPlaces(int userId, string relationship)        // relationship - VISITED, PLANSTOVISIT
         {
             try
@@ -161,7 +153,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
-
         public static List<Recommendation> GetUserRecommendations(int userId)
         {
             try
@@ -181,7 +172,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             
 
         }
-
         public static List<Recommendation> GetPlaceRecommendations(int placeId)
         {
             try
@@ -201,7 +191,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
            
 
         }
-
         public static List<Place> GetCountryPlaces(int countryId)
         {
             try
@@ -220,7 +209,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
-
         public static float CalculatePlaceRating(int placeId)
         {
             List<Recommendation> rl = GetPlaceRecommendations(placeId);
@@ -233,7 +221,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
             return rating / rl.Count;
         }
-
         public static float CalculateCountryRating(int countryId)
         {
             List<Place> cp = GetCountryPlaces(countryId);
@@ -264,7 +251,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
             
         }
-
         public static List<Country> GetTopNVisitedCountries(int n)
         {
 
@@ -281,7 +267,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
-
         public static List<Place> GetTopNRatedPlaces(int n)
         {
             try
@@ -296,7 +281,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<Place> GetTopNVisitedPlaces(int n)
         {
             try
@@ -312,7 +296,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
          
         }
-
         public static List<Place> GetTopNRatedPlacesByCountry (int n, int countryId)
         {
             try
@@ -330,7 +313,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<Place> GetTopNVisitedPlacesByCountry (int n, int countryId)
         {
             try
@@ -370,7 +352,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
        
         }
-
         public static Place GetPlaceByName (string placeName)
         {
             try
@@ -387,7 +368,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static Country GetCountryByName (string countryName)
         {
             try
@@ -404,7 +384,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static City GetCityByName (string cityName)
         {
             try
@@ -421,7 +400,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-  
         public static T GetNode<T>(int nodeId, string nodeName)
         {
             try
@@ -455,7 +433,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static City GetPlaceLocation  (int placeId)
         {
             try
@@ -472,7 +449,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<InterestTag> GetInterestTagsOfPlace(int placeId)
         {
             try
@@ -489,7 +465,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<string> GetEntityByFirstLetter (string firstLetter, string entity, string attributeName)
         {
             try
@@ -505,7 +480,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-
         public static bool HasRelationshipWithaPlace(int userId, int placeId, string relName)
         {
             try
@@ -526,8 +500,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
-
         public static Country GetCitysCountry (int cityId)
         {
             try
@@ -543,7 +515,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<Place> GetPlacesOfCity(int cityId)
         {
             try
@@ -558,8 +529,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
-
         public static int GetCountryId (int placeId)
         {
             try
@@ -573,7 +542,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return 0;
             }
         }
-
         public static List<User> GetAllFollowingThatAreCurrentlyAtTheSamePlace (int userId)
         {
             try
@@ -587,7 +555,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
-
         public static List<User> GetFollowingThatAreCurrentlyAtTheSameCity (int userId)
         {
             try
@@ -602,7 +569,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-
         public static Place GetCurrentLocation (int userId)
         {
             try
@@ -615,8 +581,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 return null;
             }
-        }
-        
+        }    
         public static List<string> GetAllTags ()
         {
             try
@@ -631,7 +596,24 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
-       
+        public static List<Recommendation> GetPlaceRecommendationsByTime(int placeId, bool ascending)
+        {
+            try
+            {
+                string orderKW = ascending ? string.Empty : "desc";
+                var query = new CypherQuery("match (n)-[r:RECOMMENDS]->(a) where a.PlaceId = "+ placeId +" return r order by r.RecommendationTime "+orderKW+" ",
+                                                                null, CypherResultMode.Set);
+
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Recommendation>(query).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+
+
+        }
+
     }
     
 }
