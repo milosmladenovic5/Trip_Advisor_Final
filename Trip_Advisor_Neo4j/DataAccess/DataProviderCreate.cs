@@ -40,7 +40,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("City"));
 
-                var query = new CypherQuery("CREATE (n:City {CityId:" + generatedId + ", Name:'" + city.Name + "'})",
+                var query = new CypherQuery("CREATE (n:City {CityId:" + generatedId + ", Name:'" + city.Name + "', CenterLatitude:"+city.CenterLatitude+", CenterLongitude:"+city.CenterLongitude+"})",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -95,7 +95,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("Place"));
 
-                var query = new CypherQuery("CREATE (n:Place {PlaceId:" + generatedId + ", Name:'" + place.Name + "', Type:'" + place.Type + "' , CityCenterDistance: " +place.CityCenterDistance+",Description:'" + place.Description + "' , Rating:" + place.Rating + ", Pictures:[]})",
+                var query = new CypherQuery("CREATE (n:Place {PlaceId:" + generatedId + ", Name:'" + place.Name + "', Type:'" + place.Type + "' , CityCenterDistance: " +place.CityCenterDistance+",Description:'" + place.Description + "' , Rating:" + place.Rating + ", Pictures:[], Longitude:"+place.Longitude+", Latitude:"+place.Latitude+"})",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

@@ -21,8 +21,10 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("Password", user.Password);
                 queryDict.Add("Email", user.Email);
                 queryDict.Add("ProfilePicture", user.ProfilePicture);
+                queryDict.Add("Description", user.Description);
+                queryDict.Add("UserStatusFLAG", user.UserStatusFLAG);
 
-                var query = new CypherQuery("match (n:User {UserId: {UserId} }) set n.Username = {Username}, n.Password = {Password}, n.Email = {Email}, n.ProfilePicture = {ProfilePicture} ",
+                var query = new CypherQuery("match (n:User {UserId: {UserId} }) set n.Username = {Username}, n.Password = {Password}, n.Email = {Email}, n.ProfilePicture = {ProfilePicture}, n.UserStatusFLAG = {UserStatusFLAG}, n.Description = {Description}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -67,9 +69,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("Type", place.Type);
                 queryDict.Add("Description", place.Description);
                 queryDict.Add("CityCenterDistance", place.CityCenterDistance);
+                queryDict.Add("Latitude", place.Latitude);
+                queryDict.Add("Longitude", place.Longitude);
 
 
-                var query = new CypherQuery("match (n:Place {PlaceId: {PlaceId} }) set n.Name = {Name}, n.Type = {Type}, n.Description = {Description}, n.CityCenterDistance = {CityCenterDistance}, n.Rating = {Rating} ",
+                var query = new CypherQuery("match (n:Place {PlaceId: {PlaceId} }) set n.Name = {Name}, n.Type = {Type}, n.Description = {Description}, n.CityCenterDistance = {CityCenterDistance}, n.Rating = {Rating}, n.Longitude = {Longitude}, n.Latitude = {Latitude}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -89,10 +93,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("CountryId", country.CountryId);
                 queryDict.Add("Name", country.Name);
                 queryDict.Add("OverallRating", country.OverallRating);
-         
+                queryDict.Add("PromotionalVideoURL", country.PromotionalVideoURL);
 
 
-                var query = new CypherQuery("match (n:Country {CountryId: {CountryId} }) set n.Name = {Name}, n.OverallRating = {OverallRating}",
+
+                var query = new CypherQuery("match (n:Country {CountryId: {CountryId} }) set n.Name = {Name}, n.OverallRating = {OverallRating}, n.PromotionalVideoURL = {PromotionalVideoURL}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -111,10 +116,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("CityId", city.CityId);
                 queryDict.Add("Name", city.Name);
-              
+                queryDict.Add("CenterLatitude", city.CenterLatitude);
+                queryDict.Add("CenterLongitude", city.CenterLongitude);
 
 
-                var query = new CypherQuery("match (n:City {CityId: {CityId} }) set n.Name = {Name}",
+
+                var query = new CypherQuery("match (n:City {CityId: {CityId} }) set n.Name = {Name}, n.CenterLongitude = {CenterLongitude}, n.CenterLatitude = {CenterLatitude}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
