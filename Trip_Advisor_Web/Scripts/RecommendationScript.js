@@ -1,31 +1,34 @@
-﻿window.onload = function()
-{
-    function SomeFunction() {
+﻿{
+    window.onload = function ()
+    {
+        function SomeFunction()
+        {
 
-        if ($("#recommendationText").length == 0) {
-            var recommendations = $('#recommendationAdd');
+            if ($("#recommendationText").length == 0) {
+                var recommendations = $('#recommendationAdd');
 
-            var labelText = $(document.createElement('label'));
-            labelText.text('Recommendation text: ');
+                var labelText = $(document.createElement('label'));
+                labelText.text('Recommendation text: ');
 
-            var labelRating = $(document.createElement('label'));
-            labelRating.text('Enter your numeric rating of place, enter numbers in range of 1 to 10: ');
-
-
-            var textBox = $(document.createElement('textarea'));
-            var ratingText = $("<input type='text'>");
-
-            textBox.attr('id', 'recommendationText');
-            textBox.attr('class', 'submits');
+                var labelRating = $(document.createElement('label'));
+                labelRating.text('Enter your numeric rating of place, enter numbers in range of 1 to 10: ');
 
 
-            ratingText.attr('id', 'ratingValue');
-            ratingText.attr('name', 'ratingValue');
-            ratingText.attr('class', 'submits');
+                var textBox = $(document.createElement('textarea'));
+                var ratingText = $("<input type='text'>");
 
-        }
+                textBox.attr('id', 'recommendationText');
+                textBox.attr('class', 'submits');
 
-    };
+
+                ratingText.attr('id', 'ratingValue');
+                ratingText.attr('name', 'ratingValue');
+                ratingText.attr('class', 'submits');
+
+            }
+
+        };
+    }
 
     $('#recommendationText').change(function () {
 
@@ -53,9 +56,6 @@
 
         $('#recommendationRating').val($('#ratingValue').val());
     });
-
-
-
 
 
 }

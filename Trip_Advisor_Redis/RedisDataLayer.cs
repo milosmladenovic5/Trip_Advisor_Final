@@ -93,31 +93,60 @@ namespace Trip_Advisor_Redis
 
         public static void SaveTopRatedPlaces()
         {
-            redis.RemoveAllFromList(hashPlacesByRating);
-            List<Place> topRatedPlaces = DataProviderGet.GetTopNRatedPlaces(10);
-            redis.PushItemToList(hashPlacesByRating, JsonSerializer.SerializeToString<List<Place>>(topRatedPlaces));    
+            try
+            {
+                redis.RemoveAllFromList(hashPlacesByRating);
+                List<Place> topRatedPlaces = DataProviderGet.GetTopNRatedPlaces(10);
+                redis.PushItemToList(hashPlacesByRating, JsonSerializer.SerializeToString<List<Place>>(topRatedPlaces));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
 
         public static void SaveTopVisitedPlaces()
         {
-            redis.RemoveAllFromList(hashPlacesByVisitors);
-            List<Place> topVisitedPlaces = DataProviderGet.GetTopNVisitedPlaces(10);
-            redis.PushItemToList(hashPlacesByVisitors, JsonSerializer.SerializeToString<List<Place>>(topVisitedPlaces));
+            try
+            {
+                redis.RemoveAllFromList(hashPlacesByVisitors);
+                List<Place> topVisitedPlaces = DataProviderGet.GetTopNVisitedPlaces(10);
+                redis.PushItemToList(hashPlacesByVisitors, JsonSerializer.SerializeToString<List<Place>>(topVisitedPlaces));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
 
         public static void SaveTopRatedCountries()
         {
-            redis.RemoveAllFromList(hashCountriesByRating);
-            List<Country> topRatedCountries = DataProviderGet.GetTopNRatedCountries(10);
-            redis.PushItemToList(hashCountriesByRating, JsonSerializer.SerializeToString<List<Country>>(topRatedCountries));
+
+            try
+            {
+                redis.RemoveAllFromList(hashCountriesByRating);
+                List<Country> topRatedCountries = DataProviderGet.GetTopNRatedCountries(10);
+                redis.PushItemToList(hashCountriesByRating, JsonSerializer.SerializeToString<List<Country>>(topRatedCountries));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
 
         }
 
         public static void SaveTopVisitedCountries()
         {
-            redis.RemoveAllFromList(hashCountriesByVisitors);
-            List<Country> topVisitedCountries = DataProviderGet.GetTopNVisitedCountries(10);
-            redis.PushItemToList(hashCountriesByVisitors, JsonSerializer.SerializeToString<List<Country>>(topVisitedCountries));
+            try
+            {
+                redis.RemoveAllFromList(hashCountriesByVisitors);
+                List<Country> topVisitedCountries = DataProviderGet.GetTopNVisitedCountries(10);
+                redis.PushItemToList(hashCountriesByVisitors, JsonSerializer.SerializeToString<List<Country>>(topVisitedCountries));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
 
         public static List<Country> GetTopCountriesByRating()
@@ -159,15 +188,24 @@ namespace Trip_Advisor_Redis
 
         public static void RefreshPlaceRCache()
         {
-            long placeRatingChangeCounter = redis.Incr(hashPlaceRCounter);
-            //MessageBox.Show(nextCounterKey.ToString());
-            if(placeRatingChangeCounter == 15)                          // kada 15 mesta promeni rejting kes se osvezava
+            try
             {
-                var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
 
-               // redis.Del()
-                SaveTopRatedPlaces(); 
+                long placeRatingChangeCounter = redis.Incr(hashPlaceRCounter);
+                //MessageBox.Show(nextCounterKey.ToString());
+                if (placeRatingChangeCounter == 15)                          // kada 15 mesta promeni rejting kes se osvezava
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hashPlaceRCounter, 0);
+
+                    // redis.Del()
+                    SaveTopRatedPlaces();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+              
             }
         }
 
@@ -199,14 +237,21 @@ namespace Trip_Advisor_Redis
 
         public static void UpdateCountryRating(int countryId)
         {
-            string hash = "CountryId: " + countryId;
-            long countryRatingUpdaterCounter = redis.Incr(hash);
-            if(countryRatingUpdaterCounter == 5)                       // broj mesta kojima je apdejtovan rejting 
-            {                                                          // zemlja mora imati barem 5 turistickih mesta kako bi dobila privilegiju da bude dodata u nas sistem (tbh. broj promeniti po potrebi ili parametrizovati)
-                DataProviderUpdate.UpdateCountryRating(countryId);     // apdejtujemo rejting zemlje u glavnoj bazi
-                SaveTopRatedCountries();                                    // osvezavamo kes (osvezava i topVisited - korisnik mora prvo da poseti neku zemlju da bi je ocenio
-                var redisPlaceCounterSetup = redis.As<long>();         
-                redisPlaceCounterSetup.SetValue(hash, 0);   // resetovanje brojaca
+            try
+            {
+                string hash = "CountryId: " + countryId;
+                long countryRatingUpdaterCounter = redis.Incr(hash);
+                if (countryRatingUpdaterCounter == 5)                       // broj mesta kojima je apdejtovan rejting 
+                {                                                          // zemlja mora imati barem 5 turistickih mesta kako bi dobila privilegiju da bude dodata u nas sistem (tbh. broj promeniti po potrebi ili parametrizovati)
+                    DataProviderUpdate.UpdateCountryRating(countryId);     // apdejtujemo rejting zemlje u glavnoj bazi
+                    SaveTopRatedCountries();                                    // osvezavamo kes (osvezava i topVisited - korisnik mora prvo da poseti neku zemlju da bi je ocenio
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hash, 0);   // resetovanje brojaca
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
             }
         }       //i osvezi redis kes
 

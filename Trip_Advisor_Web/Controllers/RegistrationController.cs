@@ -31,17 +31,17 @@ namespace Trip_Advisor_Web.Controllers
                     Email = model.Email,
                     Password = model.Password,
                     UserStatus = null,
-                    ProfilePicture = null
+                    ProfilePicture = "/Content/Images/User-Default.jpg"
                 };
                
                 
                 DataProviderCreate.CreateUser(user);
 
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View("Register", model);
+                return View("Registration", model);
             }
 
         }

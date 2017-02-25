@@ -228,8 +228,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CardsStyles.css" />
+    <Content Include="Content\Images\background.jpg" />
+    <Content Include="Content\Images\background2.jpeg" />
     <Content Include="Content\Images\default.png" />
     <Content Include="Content\Images\rs.jpg" />
+    <Content Include="Content\Images\travel1.jpeg" />
+    <Content Include="Content\Images\travel2.jpeg" />
+    <Content Include="Content\Images\travel3.jpg" />
+    <Content Include="Content\Images\travel4.jpeg" />
+    <Content Include="Content\Images\travel5.jpeg" />
+    <Content Include="Content\Images\travel6.jpeg" />
+    <Content Include="Content\Images\travel7.jpeg" />
     <Content Include="Content\Images\User-Default.jpg" />
     <Content Include="Content\UserPanelStyles.css" />
     <Content Include="Content\NovoPitanjeStilovi.css" />

@@ -47,6 +47,11 @@ audio:not([controls]) {
   height: 0;
 }
 
+body {
+    background: url(Images/background2.jpg);
+}   
+
+
 [hidden] {
   display: none;
 }

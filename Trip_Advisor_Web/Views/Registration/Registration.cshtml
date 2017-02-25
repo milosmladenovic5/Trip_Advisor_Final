@@ -6,26 +6,26 @@
 }
 
 <form method="post" action="@Url.Action("Registration", "Registration")">
-
-
-    <!-- <input type="number" id="prezime" class="form-control" placeholder="Prezime" name="BrojIndeksa" />-->
-    @Html.LabelFor(m => m.Username, new { @value = "Username" })
-    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @id = "username", @name = "Username", @placeholder = "Username" })
-    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-    <br />
-    @Html.LabelFor(m => m.Password, new { })
-    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password", @name = "password", @placeholder = "Password" })
-    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-    <br />
-    @Html.LabelFor(m => m.ConfirmPassword, new { })
-    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @id = "confirmPassword", @name = "ConfirmPassword", @placeholder = "Confirm password" })
-    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-    <br />
-    @Html.LabelFor(m => m.Email, new { })
-    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @name = "Email", @placeholder = "E-mail address" })
-    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-    <br />
-    <span>
-        <button id="register" class="btn btn-success space-vert" >Register</button>
-    </span>
+    <div class="col-lg-5 col-md-5 col-sm-5 regDiv">
+        <!-- <input type="number" id="prezime" class="form-control" placeholder="Prezime" name="BrojIndeksa" />-->
+        @Html.LabelFor(m => m.Username, new { @value = "Username" })
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @id = "username", @name = "Username", @placeholder = "Username" })
+        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        <br />
+        @Html.LabelFor(m => m.Password, new { })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password", @name = "password", @placeholder = "Password" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        <br />
+        @Html.LabelFor(m => m.ConfirmPassword, new { })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @id = "confirmPassword", @name = "ConfirmPassword", @placeholder = "Confirm password" })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        <br />
+        @Html.LabelFor(m => m.Email, new { })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email", @name = "Email", @placeholder = "E-mail address" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <br />
+        <span>
+            <button id="register" class="btn btn-success space-vert">Register</button>
+        </span>
+    </div>
 </form>

@@ -8,6 +8,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
 </head>
 <body>
@@ -70,16 +72,13 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+      
         <footer>
       
         </footer>
     </div>
 
-    @Scripts.Render("/Scripts/SearchScript.js")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/SearchScript.js")
 </body>
 </html>
 

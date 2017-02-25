@@ -86,7 +86,7 @@
 
 <br />
 <div class="container">
-    <div class="jumbotron" id="recommendations">
+    <div class="recommCont" id="recommendations">
         <h1>Recommendations</h1>
         <p>
             @for (int i = 0; i < Model.Recommendations.Count; i++)
@@ -156,4 +156,9 @@
     </div>
 </div>
 
-@Scripts.Render("/Scripts/RecommendationScript.js")
+<script>
+  
+
+</script>
+
+@Scripts.Render("~/Scripts/RecommendationScript.js")
