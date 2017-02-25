@@ -58,6 +58,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("Country"));
 
+                var query = new CypherQuery("CREATE (n:Country {CountryId:" + generatedId + ", Name:'" + country.Name + "' , OverallRating:"+country.OverallRating+ ", PromotionalVideoURL:'" + country.PromotionalVideoURL + "' , NationalFlag:'" + country.NationalFlag + "'})",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
