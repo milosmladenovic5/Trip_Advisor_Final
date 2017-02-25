@@ -162,20 +162,28 @@ namespace Trip_Advisor_Neo4j
             City c = new City();
 
             c.Name = "Niš";
+            c.CenterLatitude = 43.320797f;
+            c.CenterLongitude = 21.896105f;
             DataProviderCreate.CreateCity(c);
             int nis = Int32.Parse(DataProviderGet.GetMaxId("City"));
 
 
             c.Name = "Beograd";
+            c.CenterLatitude = 44.793582f;
+            c.CenterLongitude = 20.453716f;
             DataProviderCreate.CreateCity(c);
             int beograd = Int32.Parse(DataProviderGet.GetMaxId("City"));
 
             c.Name = "Kursumlija";
+            c.CenterLatitude = 43.140667f;
+            c.CenterLongitude = 21.273391f;
             DataProviderCreate.CreateCity(c);
             int kursumlija = Int32.Parse(DataProviderGet.GetMaxId("City"));
 
 
             c.Name = "Kragujevac";
+            c.CenterLatitude = 44.013028f;
+            c.CenterLongitude = 20.906487f;
             DataProviderCreate.CreateCity(c);
             int kragujevac = Int32.Parse(DataProviderGet.GetMaxId("City"));
 
