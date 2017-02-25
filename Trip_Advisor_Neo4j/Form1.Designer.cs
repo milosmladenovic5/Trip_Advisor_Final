@@ -31,6 +31,7 @@
             this.create_data = new System.Windows.Forms.Button();
             this.add_place_pic = new System.Windows.Forms.Button();
             this.placeId = new System.Windows.Forms.TextBox();
+            this.tb_1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // create_data
@@ -64,11 +65,23 @@
             this.placeId.TabIndex = 2;
             this.placeId.Text = "PlaceId";
             // 
+            // tb_1
+            // 
+            this.tb_1.ForeColor = System.Drawing.Color.DarkRed;
+            this.tb_1.Location = new System.Drawing.Point(591, 162);
+            this.tb_1.Name = "tb_1";
+            this.tb_1.Size = new System.Drawing.Size(130, 20);
+            this.tb_1.TabIndex = 3;
+            this.tb_1.Text = "TB1";
+            this.tb_1.UseVisualStyleBackColor = true;
+            this.tb_1.Click += new System.EventHandler(this.tb_1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 319);
+            this.Controls.Add(this.tb_1);
             this.Controls.Add(this.placeId);
             this.Controls.Add(this.add_place_pic);
             this.Controls.Add(this.create_data);
@@ -84,6 +97,7 @@
         private System.Windows.Forms.Button create_data;
         private System.Windows.Forms.Button add_place_pic;
         private System.Windows.Forms.TextBox placeId;
+        private System.Windows.Forms.Button tb_1;
     }
 }
 

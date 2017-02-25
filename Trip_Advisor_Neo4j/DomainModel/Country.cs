@@ -15,6 +15,8 @@ namespace Trip_Advisor_Neo4j.DomainModel
         public List<City> Cities { get; set; }
         public float OverallRating { get; set; }
 
+        public string PromotionalVideoURL { get; set; }
+
         public Country()
         {
             Cities = new List<City>();

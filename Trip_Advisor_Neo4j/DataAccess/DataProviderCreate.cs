@@ -132,7 +132,10 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 int generatedId = Int32.Parse(DataProviderGet.GenerateId("User"));
 
-                var query = new CypherQuery("CREATE (n:User {UserId:"+generatedId+", Username:'"+ user.Username+"', Password:'"+user.Password+"', Email:'"+user.Email+"', ProfilePicture:'"+user.ProfilePicture+"'})",
+                DateTime date = DateTime.Now;
+                long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
+
+                var query = new CypherQuery("CREATE (n:User {UserId:"+generatedId+", Username:'"+ user.Username+"', Password:'"+user.Password+"', Email:'"+user.Email+"', ProfilePicture:'"+user.ProfilePicture+ "', DateJoined:'" + n + "'UserStatusFLAG:'" + user.UserStatusFLAG + "'})",
                                                                null,  CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

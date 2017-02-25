@@ -26,6 +26,8 @@ namespace Trip_Advisor_Neo4j
 
         public string defaultUserPicture = "/Content/Images/User-Default.jpg";
 
+        public int[] userIds = new int[15];
+
 
         private void create_data_Click(object sender, EventArgs e)
         {
@@ -34,8 +36,11 @@ namespace Trip_Advisor_Neo4j
 
             System.Threading.Thread.Sleep(150);
 
+            
+
             User u1 = new User();
             u1.Username = "Perica";
+            u1.UserStatusFLAG = 1;
             u1.Email = u1.Username + "@gmail.com";
             u1.Password = "123";
             u1.ProfilePicture = this.defaultUserPicture;
@@ -43,6 +48,7 @@ namespace Trip_Advisor_Neo4j
             int perica = Int32.Parse(DataProviderGet.GetMaxId("User"));
        
             u1.Username = "Mitar";
+            u1.UserStatusFLAG = 1;
             u1.Password = "123";
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
@@ -51,6 +57,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Pujo";
             u1.Password = "123";
+            u1.UserStatusFLAG = 1;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -58,6 +65,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Stojan";
             u1.Password = "123";
+            u1.UserStatusFLAG = 9;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -66,6 +74,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "TonusHleb";
             u1.Password = "123";
+            u1.UserStatusFLAG = 1;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -74,6 +83,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Vojislav";
             u1.Password = "123";
+            u1.UserStatusFLAG = 9;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -82,9 +92,20 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Vucko";
             u1.Password = "123";
+            u1.Email = u1.Username + "@gmail.com";
+            u1.UserStatusFLAG = 1;
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int vucko = Int32.Parse(DataProviderGet.GetMaxId("User"));
+
+
+            u1.Username = "admin";
+            u1.Password = "admin";
+            u1.Email = u1.Username + "@gmail.com";
+            u1.UserStatusFLAG = 10;
+            u1.ProfilePicture = this.defaultUserPicture;
+            DataProviderCreate.CreateUser(u1);
+            int admin = Int32.Parse(DataProviderGet.GetMaxId("User"));
 
 
 
@@ -184,21 +205,21 @@ namespace Trip_Advisor_Neo4j
             DataProviderCreate.CreateInterestTag(it);
             int nature = Int32.Parse(DataProviderGet.GetMaxId("InterestTag"));
 
-            Status s = new Status();
-            s.Description = "Ovo je obican korisnik!";
-            s.StatusName = "User";
-            DataProviderCreate.CreateStatus(s);
-            int user = Int32.Parse(DataProviderGet.GetMaxId("Status"));
+            //Status s = new Status();
+            //s.Description = "Ovo je obican korisnik!";
+            //s.StatusName = "User";
+            //DataProviderCreate.CreateStatus(s);
+            //int user = Int32.Parse(DataProviderGet.GetMaxId("Status"));
 
-            s.Description = "Ovo je obican admin!";
-            s.StatusName = "Admin";
-            DataProviderCreate.CreateStatus(s);
-            int admin = Int32.Parse(DataProviderGet.GetMaxId("Status"));
+            //s.Description = "Ovo je obican admin!";
+            //s.StatusName = "Admin";
+            //DataProviderCreate.CreateStatus(s);
+            //int admin = Int32.Parse(DataProviderGet.GetMaxId("Status"));
 
-            s.Description = "Ovo je obican moderator!";
-            s.StatusName = "Moderator";
-            DataProviderCreate.CreateStatus(s);
-            int moderator = Int32.Parse(DataProviderGet.GetMaxId("Status"));
+            //s.Description = "Ovo je obican moderator!";
+            //s.StatusName = "Moderator";
+            //DataProviderCreate.CreateStatus(s);
+            //int moderator = Int32.Parse(DataProviderGet.GetMaxId("Status"));
 
             // veze
 
@@ -257,12 +278,12 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.Recommend(perica, djavolja_varos, "Danas sve ko juče", 7);
             DataRelationships.Recommend(vucko, djavolja_varos, "Sutra se isto sprema.", 6);
 
-            DataRelationships.HasStatus(mitar, "User");
-            DataRelationships.HasStatus(stojan, "Admin");
-            DataRelationships.HasStatus(voja, "Moderator");
-            DataRelationships.HasStatus(perica, "User");
-            DataRelationships.HasStatus(pujo, "User");
-            DataRelationships.HasStatus(tonushleb, "User");
+            //DataRelationships.HasStatus(mitar, "User");
+            //DataRelationships.HasStatus(stojan, "Admin");
+            //DataRelationships.HasStatus(voja, "Moderator");
+            //DataRelationships.HasStatus(perica, "User");
+            //DataRelationships.HasStatus(pujo, "User");
+            //DataRelationships.HasStatus(tonushleb, "User");
 
             DataRelationships.HasInterest(mitar, "historical");
             DataRelationships.HasInterest(stojan, "religion");
@@ -325,6 +346,13 @@ namespace Trip_Advisor_Neo4j
             {
                 DataProviderUpdate.AddPictureOfPlace("/Content/Images/" + placeFolderName + "/" + i + ".jpg", placeId);
             }
+        }
+
+        private void tb_1_Click(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
+            long n1 = long.Parse(date.ToString("yyyyMMddHHmmss"));
         }
     }
 }

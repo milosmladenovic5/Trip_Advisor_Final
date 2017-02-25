@@ -8,7 +8,17 @@ namespace Trip_Advisor_Neo4j.DomainModel
 {
     public class User
     {
-        //mozemo da dodamo i dodatnu listu za cekanje na prihvatanje
+       
+        public string Description { get; set; }
+        public long DateJoined { get; set; }
+        public int UserStatusFLAG { get; set; }
+
+        // 0 - registrovan 
+        // 1 - redovan korisnik
+        // 2 - muted
+        // 3 - suspendovan
+        // 9 - moderator
+        // 10 - admin
 
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -20,7 +30,7 @@ namespace Trip_Advisor_Neo4j.DomainModel
         public List<User> Followers { get; set; }
         public List<User> Following { get; set; }
         public List<InterestTag> Interests { get; set; }
-        public List<Recommendation> Recommended { get; set; }//ovo ce da budu istovremeno i posecena i ocenjena mesta
+        public List<Recommendation> Recommended { get; set; }
         public Place CurrentLocation { get; set; }
         public List<Place> PlansToVisit { get; set; }
         public List<Place> Visited { get; set; }

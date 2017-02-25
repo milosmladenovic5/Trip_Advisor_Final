@@ -12,7 +12,8 @@ namespace Trip_Advisor_Neo4j.DomainModel
 
         public string Comment { get; set; }
         public int Rating { get; set; }
-        public string RecommendationTime { get; set; }
+        //public string RecommendationTime { get; set; }
+        public long RecommendationTime { get; set; }
         public int UserId { get; set; }
         public int PlaceId { get; set; }
         

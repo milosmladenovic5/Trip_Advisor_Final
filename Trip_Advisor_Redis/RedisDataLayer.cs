@@ -151,36 +151,75 @@ namespace Trip_Advisor_Redis
 
         public static List<Country> GetTopCountriesByRating()
         {
-            string stringOfCountries = redis.GetRangeFromList(hashCountriesByRating, 0, 0).First();
-  
-            return (List<Country>)JsonSerializer.DeserializeFromString(stringOfCountries, typeof(List<Country>));
+            try
+            {
+                string stringOfCountries = redis.GetRangeFromList(hashCountriesByRating, 0, 0).First();
+
+                return (List<Country>)JsonSerializer.DeserializeFromString(stringOfCountries, typeof(List<Country>));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
 
         public static List<Country> GetTopCountriesByVisitors()
         {
-            string stringOfCountries = redis.GetRangeFromList(hashCountriesByVisitors, 0, 0).First();
+            try
+            {
+                string stringOfCountries = redis.GetRangeFromList(hashCountriesByVisitors, 0, 0).First();
 
-            return (List<Country>)JsonSerializer.DeserializeFromString(stringOfCountries, typeof(List<Country>));
+                return (List<Country>)JsonSerializer.DeserializeFromString(stringOfCountries, typeof(List<Country>));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
 
         public static List<Place> GetTopPlacesByRating()
         {
-            string stringOfPlaces = redis.GetRangeFromList(hashPlacesByRating, 0, 0).First();
+            try
+            {
+                string stringOfPlaces = redis.GetRangeFromList(hashPlacesByRating, 0, 0).First();
 
-            return (List<Place>)JsonSerializer.DeserializeFromString(stringOfPlaces, typeof(List<Place>));
+                return (List<Place>)JsonSerializer.DeserializeFromString(stringOfPlaces, typeof(List<Place>));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
 
         public static List<Place> GetTopPlacesByVisitors()
         {
-            string stringOfPlaces = redis.GetRangeFromList(hashPlacesByVisitors, 0, 0).First();
+            try
+            {
+                string stringOfPlaces = redis.GetRangeFromList(hashPlacesByVisitors, 0, 0).First();
 
-            return (List<Place>)JsonSerializer.DeserializeFromString(stringOfPlaces, typeof(List<Place>));
+                return (List<Place>)JsonSerializer.DeserializeFromString(stringOfPlaces, typeof(List<Place>));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
 
         public static void SaveAllCountries()
         {
-            List<Country> countriesByRating = DataProviderGet.GetTopNRatedCountries(60);
-            redis.PushItemToList(hashAllCountries, JsonSerializer.SerializeToString<List<Country>>(countriesByRating));
+            try
+            {
+                List<Country> countriesByRating = DataProviderGet.GetTopNRatedCountries(60);
+                redis.PushItemToList(hashAllCountries, JsonSerializer.SerializeToString<List<Country>>(countriesByRating));
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
 
         }          // NIJE ISKORISCENO I NAJVEROVATNIJE I NECE !
 
@@ -211,26 +250,33 @@ namespace Trip_Advisor_Redis
 
         public static void RefreshPlaceVCache()
         {
-            long placeGlobalVisitorCounter = redis.Incr(hashPlaceGlobalVCounter);
-    
-            if (placeGlobalVisitorCounter == 30)                          
+            try
             {
-                var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+                long placeGlobalVisitorCounter = redis.Incr(hashPlaceGlobalVCounter);
 
-       
-                SaveTopVisitedPlaces();
+                if (placeGlobalVisitorCounter == 30)
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
+
+
+                    SaveTopVisitedPlaces();
+                }
+
+                long countryGlobalVisitorCounter = redis.Incr(hashCountryGlobalVCounter);
+
+                if (countryGlobalVisitorCounter == 100)
+                {
+                    var redisPlaceCounterSetup = redis.As<long>();
+                    redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
+
+
+                    SaveTopVisitedCountries();
+                }
             }
-
-            long countryGlobalVisitorCounter = redis.Incr(hashCountryGlobalVCounter);
-
-            if (countryGlobalVisitorCounter == 100)
+            catch (Exception e)
             {
-                var redisPlaceCounterSetup = redis.As<long>();
-                redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
-
-
-                SaveTopVisitedCountries();
+                Console.Write(e.Message);
             }
 
         }
@@ -257,22 +303,29 @@ namespace Trip_Advisor_Redis
 
         public static void UpdateRatings(int placeId)
         {
-            DataProviderUpdate.UpdatePlaceRating(placeId);
-            RefreshPlaceRCache();                                       //provera da li je potrebno osvezavanje kesa
-
-            int countryId = -1;
-            string hash = "placeId " + placeId;
-            if (!CheckKeyExists(hash))
+            try
             {
-                countryId = DataProviderGet.GetCountryId(placeId);
-                redis.Set<int>(hash, countryId);
-            }
-            else
-            {
-                countryId = redis.Get<int>(hash);
-            }
+                DataProviderUpdate.UpdatePlaceRating(placeId);
+                RefreshPlaceRCache();                                       //provera da li je potrebno osvezavanje kesa
 
-            UpdateCountryRating(countryId);
+                int countryId = -1;
+                string hash = "placeId " + placeId;
+                if (!CheckKeyExists(hash))
+                {
+                    countryId = DataProviderGet.GetCountryId(placeId);
+                    redis.Set<int>(hash, countryId);
+                }
+                else
+                {
+                    countryId = redis.Get<int>(hash);
+                }
+
+                UpdateCountryRating(countryId);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
 
         }
     }

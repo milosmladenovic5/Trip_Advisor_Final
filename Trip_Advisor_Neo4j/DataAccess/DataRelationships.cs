@@ -24,112 +24,162 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                Console.Write(e.Message);
                 return false;
             }
 
         }
-
-        public static void Recommend(int recommenderId, int placeId, string comment, int rating)
+        public static bool Recommend(int recommenderId, int placeId, string comment, int rating)
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:'" + DateTime.Now.ToString() + "'}] -> (place)",
+                DateTime date = DateTime.Now;
+                long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
+
+                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:'" + n + "'}] -> (place)",
                     null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
             }
-            catch(Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show(ex.ToString());
+                Console.Write(e.Message);
+                return false;
             }
-            
-        }
 
-        public static void HasCity(int countryId, int cityId)
+        }
+        public static bool HasCity(int countryId, int cityId)
         {
-            var query = new CypherQuery("MATCH (country:Country {CountryId:" + countryId + "}), (city:City {CityId:" + cityId + "}) CREATE (country) - [r:HASCITY] -> (city)", null, CypherResultMode.Set);
+            try
+            {
+                var query = new CypherQuery("MATCH (country:Country {CountryId:" + countryId + "}), (city:City {CityId:" + cityId + "}) CREATE (country) - [r:HASCITY] -> (city)", null, CypherResultMode.Set);
 
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
         }
-
-        public static void HasPlace(int cityId, int placeId)
+        public static bool HasPlace(int cityId, int placeId)
         {
-            var query = new CypherQuery("MATCH (city:City {CityId:" + cityId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (city) - [r:HASPLACE] -> (place)",
-                null, CypherResultMode.Set);
+            try
+            {
+                var query = new CypherQuery("MATCH (city:City {CityId:" + cityId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (city) - [r:HASPLACE] -> (place)",
+                        null, CypherResultMode.Set);
 
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
         }
-        
-        public static void HasInterest( int userId, string interestTagName)             // odnosi se na korisnika, koga interesuje neka oblast
+        public static bool HasInterest( int userId, string interestTagName)             // odnosi se na korisnika, koga interesuje neka oblast
         {
             try
             {
                 var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (interest:InterestTag {Name:'" + interestTagName + "'}) CREATE (user) - [r:HASINTEREST] -> (interest)", null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
             }
-            catch(Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show(ex.ToString());
+                Console.Write(e.Message);
+                return false;
             }
 
         }
-
-        public static void HasInterestTag (int placeId, string interestTagName)         //odnosi se na mesto koje sadrzi tag
+        public static bool HasInterestTag (int placeId, string interestTagName)         //odnosi se na mesto koje sadrzi tag
         {
-            var query = new CypherQuery("MATCH (place:Place {PlaceId:" + placeId + "}), (interest:InterestTag {Name:'" + interestTagName + "'}) CREATE (place) - [r:HASINTERESTTAG] -> (interest)", null, CypherResultMode.Set);
+            try
+            {
 
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                var query = new CypherQuery("MATCH (place:Place {PlaceId:" + placeId + "}), (interest:InterestTag {Name:'" + interestTagName + "'}) CREATE (place) - [r:HASINTERESTTAG] -> (interest)", null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
         }
-
-        public static void HasStatus (int userId, string statusName)
+        public static bool HasStatus (int userId, string statusName)
         {
-            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (status:Status {StatusName:'" + statusName + "'}) CREATE (user) - [r:HASSTATUS] -> (status)", null, CypherResultMode.Set);
+            try
+            {
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (status:Status {StatusName:'" + statusName + "'}) CREATE (user) - [r:HASSTATUS] -> (status)", null, CypherResultMode.Set);
 
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
-
-        }
-
-        public static void BelongsToCountry (int cityId, int countryId)
-        {
-            var query = new CypherQuery("MATCH (city:City {CityId:" + cityId + "}), (country:Country {CountryId:" + countryId + "}) CREATE (city) - [r:BELONGSTOCOUNTRY] -> (country)", null, CypherResultMode.Set);
-
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
-        }
-
-        public static void BelongsToCity(int placeId, int cityId)
-        {
-            var query = new CypherQuery("MATCH (place:Place {PlaceId:" + placeId + "}), (city:City {CityId:" + cityId + "}) CREATE (place) - [r:BELONGSTOCITY] -> (city)", null, CypherResultMode.Set);
-
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
-        }
-
-
-        public static void VisitedPlace(int userId, int placeId, DateTime dateOfVisit)
-        {
-            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:VISITED {Date:'"+dateOfVisit.ToShortDateString()+"'}] -> (place)",
-                null, CypherResultMode.Set);
-       
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
-        }
-
-        public static void PlansToVisit (int userId, int placeId)
-        {
-            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:PLANSTOVISIT] -> (place)",
-                null, CypherResultMode.Set);
-
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
 
         }
-
-        public static void CurrentlyAtPlace (int userId, int placeId)
+        public static bool VisitedPlace(int userId, int placeId, DateTime dateOfVisit)
         {
-            var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:CURRENTLYAT] -> (place)",
-               null, CypherResultMode.Set);
+            try
+            {
+                long n = long.Parse(dateOfVisit.ToString("yyyyMMddHHmmss"));
 
-            ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:VISITED {Date:'" + n + "'}] -> (place)",
+                        null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
+        }
+        public static bool PlansToVisit (int userId, int placeId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:PLANSTOVISIT] -> (place)",
+                    null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
+
+        }
+        public static bool CurrentlyAtPlace (int userId, int placeId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:CURRENTLYAT] -> (place)",
+                       null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return false;
+            }
 
         }
 
