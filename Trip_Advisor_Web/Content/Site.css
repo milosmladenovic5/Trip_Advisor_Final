@@ -239,3 +239,37 @@ textarea {
 #Password{
     margin-left:0px;
 }
+
+ #map {
+        height: 400px;
+        width: 95%;
+ }
+
+ .container > h2{
+    background:rgba(0, 0, 0,0.5);
+    color:white;
+    max-width:92%;
+    padding-bottom:5px;
+    padding-top:5px
+
+ }
+
+ .col-lg-5 {
+    background:rgba(0, 0, 0,0.5);
+    padding:10px;
+
+} 
+
+ .cityPlaces{
+      background:rgba(0, 0, 0,0.5);
+
+ }
+
+ .cityPlaces > h4{
+     color:white;
+ }
+
+
+ .container > .panel > .panel-heading{
+     background:rgba(1, 104, 131, 0.89);
+ }

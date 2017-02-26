@@ -7,9 +7,19 @@
 <h2>@Model.Name</h2>
 
 
-<div class="jumbotron col-lg-6">
-    <h4>All the places in:  @Model.Name</h4>
+<div class="col-lg-5 col-md-5 col-sm-5">
+    <div id="map">
+        @Html.Hidden("centLat", @Model.CenterLatitude);
+        @Html.Hidden("centLong", Model.CenterLongitude);
+    </div>
+</div>
 
+
+
+<div class="jumbotron col-lg-6 cityPlaces">
+    <h4>All the places in:  @Model.Name</h4>
+    
+   
     <div class="container">
         @for (int i = 0; i < Model.Places.Count; i++)
         {
@@ -25,3 +35,8 @@
     </div>
 
 </div>
+
+@Scripts.Render("~/Scripts/UserScripts/GoogleMaps.js")
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB81Hi8JPgzPCSDdjLbQ0XULeb0b_lSy34&callback=initMap">
+</script>

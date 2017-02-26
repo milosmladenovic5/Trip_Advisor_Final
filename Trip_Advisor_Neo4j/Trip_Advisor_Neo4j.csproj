@@ -63,6 +63,7 @@
     <Compile Include="DomainModel\City.cs" />
     <Compile Include="DomainModel\Country.cs" />
     <Compile Include="DomainModel\InterestTag.cs" />
+    <Compile Include="DomainModel\Message.cs" />
     <Compile Include="DomainModel\Place.cs" />
     <Compile Include="DomainModel\Recommendation.cs" />
     <Compile Include="DomainModel\Status.cs" />

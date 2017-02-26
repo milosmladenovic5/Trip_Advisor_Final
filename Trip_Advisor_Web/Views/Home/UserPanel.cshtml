@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+@Styles.Render("~/Content/UserPanelStyles.css")
+
 
 <div id="user" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     @*ovaj div ce da sluzi za smestanje profilne slike*@
@@ -56,6 +58,8 @@
         <div id="description" class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
             <label>Username: &nbsp; </label>@Html.DisplayTextFor(m => m.Username)<br />
             <label>E-mail adresa:&nbsp; </label>@Html.DisplayTextFor(m => m.Email)<br />
+            <label>Short description:&nbsp;</label>@Html.DisplayTextFor(m => m.Description)<br />
+            <label>Date of join: &nbsp;</label>@Html.DisplayTextFor(m => m.DateJoined)<br />
         </div>
 
     }
@@ -64,8 +68,9 @@
          <div id="user" class="col-lg-6 col-md-7 col-sm-4 col-xs-4">
                <label>Username: &nbsp; </label>@Html.TextBoxFor(m => m.Username, new { @class = "form-control", @name = "Username" }) <br />
                <label>E-mail address:&nbsp; </label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @name = "E-mail" })<br />
-               <label>Add profile picture: &nbsp;</label>@Html.TextBoxFor(m => m.PictureFile, new { @type = "file", @name = "PictureFile", @class = "form-control" })
+               <label>Short description: &nbsp;</label>@Html.TextAreaFor(m=>m.Description, new { @class = "form-control", @name = "Description" }<br/>
 
+               <label>Add profile picture: &nbsp;</label>@Html.TextBoxFor(m => m.PictureFile, new { @type = "file", @name = "PictureFile", @class = "form-control" })
 
              <br />
              <br />
@@ -169,85 +174,6 @@
     </div>
 </div>
 
+@Html.Hidden("userIdHid", Model.UserId)
 
-
-
-
-@Styles.Render("~/Content/UserPanelStyles.css")
-
-<script type="text/javascript">
-    {
-        $('#followBtn').on('click', function () {
-            var action = $('#followBtn').attr("name");
-
-            if (action == "Follow")
-            {
-                $.post("/User/Follow", { userId: @Model.UserId }, function (data) {
-                    $('#followBtn').attr("name", "Unfollow");
-                    $('#followBtn').text("Unfollow");
-                });
-            }
-            else
-            {
-                $.post("/User/Unfollow", { userId: @Model.UserId }, function (data) {
-                    $('#followBtn').attr("name", "Follow");
-                    $('#followBtn').text("Follow");
-                });
-            }
-
-        });
-
-        function selectTags()
-        {
-            var parentContainter = document.getElementById('tagContainer');
-            var interestTagNames = new Array();
-
-            var children = parentContainter.children;
-
-            for (var i = 0; i < children.length; i++) {
-                if(children[i].getAttribute("type")=="checkbox")
-                {
-                    if(children[i].checked==true){
-                        interestTagNames.push(children[i].getAttribute("value"));
-                    }
-                }
-            }
-
-            var userId = @Model.UserId;
-
-            $.post("/User/AddInterestTags", {userId:userId, interestTagNames:interestTagNames}, function (data) {
-                $('#mdl').modal('hide');
-                $('#tagContainer').empty();
-            }) 
-
-
-       
-        }
-
-        $('#interests').click(function(){      
-            $.post("/Home/ReturnAllInterestTags",  function (data) {
-                $.each(data, function (index) {
-                    var label = document.createElement("label");
-                    label.innerHTML = data[index];
-                    label.for = "check"+index;
-
-
-                    var input = document.createElement("input");
-                    input.type = "checkbox";
-                    input.value = data[index];
-                    input.name = data[index];
-                    label.id = "check"+ index;
-                    
-                    var br = document.createElement("br");
-
-                    var parent = document.getElementById("tagContainer");
-                    parent.appendChild(input);
-                    parent.appendChild(label);
-                    parent.appendChild(br);
-                    
-                });
-            });        
-        
-        });
-    }
-</script>
+@Scripts.Render("~/Scripts/UserScripts/UserPanelScript.js")

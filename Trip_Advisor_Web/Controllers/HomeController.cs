@@ -104,6 +104,7 @@ namespace Trip_Advisor_Web.Controllers
             userForChange.Username = user.Username;
             userForChange.Password = (string)Session["Password"];
             userForChange.Email = user.Email;
+            userForChange.Description = user.Description;
             userForChange.ProfilePicture = user.ProfilePicture;
             ViewBag.Change = false;
 

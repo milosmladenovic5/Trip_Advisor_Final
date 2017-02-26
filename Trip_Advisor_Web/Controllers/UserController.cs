@@ -16,7 +16,7 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ReturnUserPanel (int userId)
+        public ActionResult ReturnUserPanel(int userId)
         {
             return View("~/Views/Home/UserPanel.cshtml", DataMapper.CreateUserModel(userId));
         }
@@ -45,12 +45,22 @@ namespace Trip_Advisor_Web.Controllers
             if (interestTagNames.Length > 0)
                 DataProviderDelete.DeleteInterestsOfUser(userId);
 
-            for(int i = 0; i < interestTagNames.Length; i++)
+            for (int i = 0; i < interestTagNames.Length; i++)
             {
                 DataRelationships.HasInterest(userId, interestTagNames[i]);
             }
 
-            return Json("Added"+interestTagNames.Length+"new tags", JsonRequestBehavior.AllowGet);
+            return Json("Added" + interestTagNames.Length + "new tags", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SendMessage(int senderId, int receiverId, string messageText, string subject)
+        {
+            DateTime date = DateTime.Now;
+            
+
+
+            return Json("empty");
         }
     }
 }

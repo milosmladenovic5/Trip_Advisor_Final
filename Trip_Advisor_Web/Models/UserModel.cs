@@ -16,6 +16,8 @@ namespace Trip_Advisor_Web.Models
         public string ProfilePicture { get; set; }
         public string DateOfBirth { get; set; }
         public bool FollowingHim { get; set; }
+        public string Description { get; set; }
+        public string DateJoined { get; set; }
 
         public StatusModel UserStatus { get; set; }
         public List<UserModel> Followers { get; set; }

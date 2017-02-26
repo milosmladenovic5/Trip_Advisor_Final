@@ -14,6 +14,8 @@ namespace Trip_Advisor_Web.Models
         public string Name { get; set; }
         public List<PlaceModel> Places { get; set; }
         public CountryModel Country { get; set; }
+        public double CenterLatitude { get; set; }
+        public double CenterLongitude { get; set; }
 
         public CityModel()
         {

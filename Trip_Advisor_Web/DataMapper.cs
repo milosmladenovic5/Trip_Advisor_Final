@@ -24,7 +24,9 @@ namespace Trip_Advisor_Web
             CityModel cityModel = new CityModel()
             {
                 CityId = cityId,
-                Name = city.Name
+                Name = city.Name,
+                CenterLatitude = city.CenterLatitude,
+                CenterLongitude = city.CenterLongitude
             };
 
             Country country = DataProviderGet.GetCitysCountry(cityId);
@@ -125,7 +127,7 @@ namespace Trip_Advisor_Web
 
             return list;
         }
-        public static PlaceModel CreatePlaceModel (int placeId)
+        public static PlaceModel CreatePlaceModel  (int placeId)
         {
             Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
 
@@ -164,7 +166,7 @@ namespace Trip_Advisor_Web
                 user.Username = recommender.Username;
 
                 recommendationModel.RefferedBy = user;
-
+            
 
                 DateTime time;
                 if (DateTime.TryParseExact(r.RecommendationTime.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
@@ -224,6 +226,16 @@ namespace Trip_Advisor_Web
             userModel.ProfilePicture = user.ProfilePicture;
             userModel.Email = user.Email;
             userModel.UserId = user.UserId;
+            userModel.Description = user.Description;
+
+            DateTime time;
+
+            if (DateTime.TryParseExact(user.DateJoined.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
+                userModel.DateJoined = time.ToString("MM/dd/yyyy HH:mm");
+            else
+                userModel.DateJoined = "Error!";
+
+
 
             Place currentLocation = DataProviderGet.GetCurrentLocation(userId);
             if (currentLocation != null)
