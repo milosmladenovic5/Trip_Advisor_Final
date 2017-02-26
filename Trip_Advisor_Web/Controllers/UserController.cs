@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Trip_Advisor_Neo4j.DataAccess;
 
+
 namespace Trip_Advisor_Web.Controllers
 {
     public class UserController : Controller
@@ -56,11 +57,11 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public JsonResult SendMessage(int senderId, int receiverId, string messageText, string subject)
         {
-            DateTime date = DateTime.Now;
-            
+            int messId = DataProviderCreate.CreateMessage(messageText, subject);
+            bool success = DataRelationships.SendMessage(senderId, receiverId, messId);
+          
 
-
-            return Json("empty");
+            return Json(success);
         }
     }
 }

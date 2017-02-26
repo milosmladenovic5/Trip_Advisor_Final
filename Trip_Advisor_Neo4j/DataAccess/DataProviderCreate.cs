@@ -147,5 +147,30 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
+
+        public static int CreateMessage(string text, string subject)
+        {
+            try
+            {
+                int generatedId = Int32.Parse(DataProviderGet.GenerateId("Message"));
+
+                DateTime date = DateTime.Now;
+                long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
+
+                var query = new CypherQuery("CREATE (m:Message {MessageId:" + generatedId + ", Text:'" + text + "', Subject:'" + subject + "', SendingDate:"+n+"})", null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+
+                return generatedId;
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+
     }
 }

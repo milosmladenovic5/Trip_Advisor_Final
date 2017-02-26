@@ -183,7 +183,46 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
         }
 
-      
+
+        public static bool SendMessage(int senderId, int receiverId, int messageId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (sender:User {UserId:" + senderId + "}), (receiver:User {UserId:" + receiverId + "}), (message:Message {MessageId:" + messageId + "}) CREATE (sender) - [r:SENT] -> (message) <- [h:RECEIVED] - (receiver)", 
+                        null, CypherResultMode.Set);
+         
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Sending exception: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static bool SendMessageToUser(string senderUsername, string receiverUsername, int messageId)
+        {
+            try
+            {
+                var query = new CypherQuery("MATCH (sender:User {Username:'" + senderUsername + "'}), (receiver:User {Username:'" + receiverUsername + "'}), (message:Message {MessageId:" + messageId + "}) CREATE (sender) - [r:SENT] -> (message) <- [h:RECEIVED] - (receiver)",
+                        null, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Sending exception: " + ex.Message);
+                return false;
+            }
+        }
+
+
+
+
     }
 
 }

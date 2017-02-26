@@ -610,9 +610,24 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 return null;
             }
-
-
         }
+
+        public static List<DomainModel.Message> GetAllMessagesSentOrReceivedByUser(int userId, string relName)//relName = "SENT" || "RECEIVED"
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:User {UserId:" + userId + "}) - [r:" + relName + "] -> (m:Message) return m", null, CypherResultMode.Set);
+
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<DomainModel.Message>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+       
 
     }
     

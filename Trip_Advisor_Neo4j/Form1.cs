@@ -17,6 +17,9 @@ namespace Trip_Advisor_Neo4j
 {
     public partial class Form1 : Form
     {
+        public static int mitarId;
+        public static int vojaId;
+
         public Form1()
         {
             InitializeComponent();
@@ -54,6 +57,7 @@ namespace Trip_Advisor_Neo4j
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int mitar = Int32.Parse(DataProviderGet.GetMaxId("User"));
+            mitarId = mitar;
 
             u1.Username = "Pujo";
             u1.Password = "123";
@@ -88,6 +92,7 @@ namespace Trip_Advisor_Neo4j
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int voja = Int32.Parse(DataProviderGet.GetMaxId("User"));
+            vojaId = voja;
 
 
             u1.Username = "Vucko";
@@ -108,7 +113,7 @@ namespace Trip_Advisor_Neo4j
             int admin = Int32.Parse(DataProviderGet.GetMaxId("User"));
 
 
-
+         
 
             Place p = new Place();
             p.Name = "Đavolja Varoš";
@@ -231,6 +236,11 @@ namespace Trip_Advisor_Neo4j
             //int moderator = Int32.Parse(DataProviderGet.GetMaxId("Status"));
 
             // veze
+
+    
+                        
+
+
 
             DataRelationships.Follow(mitar, pujo);
             DataRelationships.Follow(mitar, vucko);
@@ -378,6 +388,34 @@ namespace Trip_Advisor_Neo4j
 
         private void aditd_1_Click(object sender, EventArgs e)
         {
+            //int messId = DataProviderCreate.CreateMessage("Ovo je poruka kojom ce se Mitar napsovati majke Voji.", "Pu, govno");
+            //DataRelationships.SendMessage(2, 6, 2);
+
+            //int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
+            //DataRelationships.SendMessage(1, 6, 2);
+
+            //int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
+            //DataRelationships.SendMessage(3, 2, messId3);
+
+            //int messId4 = DataProviderCreate.CreateMessage("Vojo, jebacu ti majkata.", "Rakijestina");
+            //DataRelationships.SendMessage(2, 6, messId4);
+
+            //int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
+            //DataRelationships.SendMessageToUser("Mitar", "Pujo",messId5);
+
+
+            List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");
+
+            foreach(var m  in mitrovePoruke)
+            {
+                MessageBox.Show(m.Text);
+            }
+
+            List<DomainModel.Message> mitrovePrimljene = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "RECEIVED");
+            foreach(var m in mitrovePrimljene)
+            {
+                MessageBox.Show(m.Text);
+            }
 
         }
     }
