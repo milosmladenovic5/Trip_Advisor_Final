@@ -105,8 +105,15 @@ namespace Trip_Advisor_Web.Controllers
             userForChange.Password = (string)Session["Password"];
             userForChange.Email = user.Email;
             userForChange.Description = user.Description;
-            userForChange.ProfilePicture = user.ProfilePicture;
+
             ViewBag.Change = false;
+
+            if(user.ProfilePicture==null)
+            {
+                User changedUser = DataProviderGet.GetNode<User>(userForChange.UserId, "User");
+                userForChange.ProfilePicture = changedUser.ProfilePicture;
+            }
+
 
             string picturePath = String.Empty;
             if (user.PictureFile != null)

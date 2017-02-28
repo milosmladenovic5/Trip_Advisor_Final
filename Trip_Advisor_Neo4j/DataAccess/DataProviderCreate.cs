@@ -17,7 +17,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                string[] id_nodes = new string[] { "UserId", "CountryId", "InterestTagId", "CityId", "PlaceId", "StatusId", "RecommendationId" };
+                string[] id_nodes = new string[] { "UserId", "CountryId", "InterestTagId", "CityId", "PlaceId", "StatusId", "RecommendationId", "MessageId" };
 
                 for (int i = 0; i < id_nodes.Length; i++)
                 {

@@ -59,8 +59,7 @@ namespace Trip_Advisor_Web.Controllers
         {
             int messId = DataProviderCreate.CreateMessage(messageText, subject);
             bool success = DataRelationships.SendMessage(senderId, receiverId, messId);
-          
-
+           
             return Json(success);
         }
     }

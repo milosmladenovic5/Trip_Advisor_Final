@@ -122,8 +122,9 @@ textarea {
 }
 
 #userPanelList{
-    background-color:rgba(117, 204, 80, 0.4);
-    border-radius:10px;
+   /* background-color:rgba(117, 204, 80, 0.4);*/
+         background:rgba(0, 0, 0,0.5); 
+   border-radius:10px;
     margin-top:20px;
     margin-bottom:20px;
 
@@ -131,11 +132,14 @@ textarea {
 
 .currentlyList
 {
-    background-color:rgba(37, 181, 84, 0.74);
+   /* background-color:rgba(37, 181, 84, 0.74);*/
+    background:rgba(0, 0, 0,0.5);
     border-radius:10px;
     margin:20px;
     text-align:center;
     padding:10px;
+    color:white;
+
 
 }
 
@@ -145,6 +149,8 @@ textarea {
     margin:20px;
     text-align:center;
     padding:10px;
+    background:rgba(0, 0, 0,0.5);
+    color:white;
 }
 
 .followersList > a , .currentlyList > a
@@ -155,7 +161,9 @@ textarea {
 
 .currentLocation{
     text-align:center;
-    background-color:rgba(37, 181, 84, 0.74);
+    /*background-color:rgba(37, 181, 84, 0.74);*/
+    background:rgba(0, 0, 0,0.5);
+    color:white;
     border-radius:10px;
     margin:10px;
     text-align:center;

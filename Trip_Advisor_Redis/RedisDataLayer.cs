@@ -12,9 +12,8 @@ using System.Windows.Forms;
 //quartz
 //signaler
 
-
 // kada god neki korisnik oceni neko mesto globalni brojac redisa (x) ce se inkrementirati
-// kada brojac dostigne zadati broj x (npr. 50) memoriski kes redisa ce se osveziti 
+// kada brojac dostigne zadati broj x (npr. 50) memorijski kes redisa ce se osveziti 
 // posto korisnik mora posetiti neko mesto da bi ga oceni isto vazi i za posecena mesta
 
 
