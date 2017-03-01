@@ -208,7 +208,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -231,8 +230,37 @@
     <Content Include="Content\CardsStyles.css" />
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\background2.jpeg" />
+    <Content Include="Content\Images\Bubanj\1.jpg" />
+    <Content Include="Content\Images\Bubanj\2.jpg" />
+    <Content Include="Content\Images\Bubanj\3.JPG" />
+    <Content Include="Content\Images\Bubanj\4.jpg" />
+    <Content Include="Content\Images\CeleKula\1.jpg" />
+    <Content Include="Content\Images\CeleKula\2.jpg" />
+    <Content Include="Content\Images\CeleKula\3.jpg" />
+    <Content Include="Content\Images\CeleKula\4.jpg" />
     <Content Include="Content\Images\default.png" />
+    <Content Include="Content\Images\DjavoljaVaros\1.jpg" />
+    <Content Include="Content\Images\DjavoljaVaros\2.jpg" />
+    <Content Include="Content\Images\DjavoljaVaros\3.jpg" />
+    <Content Include="Content\Images\DjavoljaVaros\4.jpg" />
+    <Content Include="Content\Images\it.svg" />
+    <Content Include="Content\Images\Medijana\1.jpg" />
+    <Content Include="Content\Images\Medijana\2.jpg" />
+    <Content Include="Content\Images\Medijana\3.jpg" />
+    <Content Include="Content\Images\Medijana\4.jpg" />
+    <Content Include="Content\Images\pattern1.jpg" />
+    <Content Include="Content\Images\pattern2.jpg" />
+    <Content Include="Content\Images\pattern3.jpg" />
+    <Content Include="Content\PlaceStyles.css" />
     <Content Include="Content\Images\rs.jpg" />
+    <Content Include="Content\Images\SCK\1.jpg" />
+    <Content Include="Content\Images\SCK\2.jpg" />
+    <Content Include="Content\Images\SCK\3.jpg" />
+    <Content Include="Content\Images\SCK\4.jpg" />
+    <Content Include="Content\Images\Sumarice\1.jpg" />
+    <Content Include="Content\Images\Sumarice\2.jpg" />
+    <Content Include="Content\Images\Sumarice\3.jpg" />
+    <Content Include="Content\Images\Sumarice\4.JPG" />
     <Content Include="Content\Images\travel1.jpeg" />
     <Content Include="Content\Images\travel2.jpeg" />
     <Content Include="Content\Images\travel3.jpg" />
@@ -290,18 +318,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -319,6 +335,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\BasilicaSanMarco\" />
+    <Folder Include="Content\Images\Colosseum\" />
+    <Folder Include="Content\Images\ForumRomanum\" />
+    <Folder Include="Content\Images\Pantheon\" />
+    <Folder Include="Content\Images\PiazaDuomo\" />
+    <Folder Include="Content\Images\PiazzaSanMarco\" />
+    <Folder Include="Content\Images\TreviFountain\" />
+    <Folder Include="Content\Images\VaticanMuseums\" />
     <Folder Include="Views\InterestTag\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

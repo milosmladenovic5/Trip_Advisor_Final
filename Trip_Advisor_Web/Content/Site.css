@@ -133,7 +133,7 @@ textarea {
 .currentlyList
 {
    /* background-color:rgba(37, 181, 84, 0.74);*/
-    background:rgba(0, 0, 0,0.5);
+    background:rgba(0, 0, 0,0.6);
     border-radius:10px;
     margin:20px;
     text-align:center;
@@ -144,7 +144,8 @@ textarea {
 }
 
 .followersList{
-    background-color:rgba(37, 181, 84, 0.74);
+   /* background-color:rgba(37, 181, 84, 0.74);*/
+    background:rgba(0, 0, 0,0.6);
     border-radius:10px;
     margin:20px;
     text-align:center;
@@ -162,13 +163,14 @@ textarea {
 .currentLocation{
     text-align:center;
     /*background-color:rgba(37, 181, 84, 0.74);*/
-    background:rgba(0, 0, 0,0.5);
+   /* background:rgba(0, 0, 0,0.5);*/
     color:white;
     border-radius:10px;
     margin:10px;
     text-align:center;
     padding-left:10px;
     padding-right:10px;
+    margin-top:8%;
 }
 
 #container
@@ -281,3 +283,61 @@ textarea {
  .container > .panel > .panel-heading{
      background:rgba(1, 104, 131, 0.89);
  }
+
+ h4 > a {
+     color:rgb(204, 112, 46);
+ }
+
+ 
+
+ .usrLbl{
+     color:white;
+ }
+
+.labelsInfo{
+    color:rgb(165, 44, 44);
+
+}
+
+
+.placeDescription{
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+}
+
+
+#indexPage{
+    min-height:300px;
+
+    color:white;
+}
+
+#indexPage > h1{
+    font-family:Tahoma;
+}
+
+#indexPage > h4{
+    font-family:Tahoma;
+    color:rgba(37, 181, 84, 0.74);
+    font-style:oblique;
+ }
+
+#indexPage > h4 > a{
+    font-family:Tahoma;
+    color:rgb(1, 134, 181);
+    font-style:normal;
+}
+
+
+.indexContainer{
+        background:rgba(0,0,0,0.5);
+        min-height:350px;
+        padding-top:10px;
+        padding-left:10px;
+        padding-right:10px;
+}
+
+#indexPage > p{
+    font-family:Tahoma;
+    font-style:normal;
+}

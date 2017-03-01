@@ -2,7 +2,7 @@
 ﻿#description{
     font-family:Tahoma;
     background-size:300px;
-    background-image:none;
+
 
 }
 
@@ -46,11 +46,13 @@
 }
 
 #user{
-    background-color:rgba(119, 158, 203, 0.56);
+  /*  background-color:rgba(119, 158, 203, 0.76);*/
     /*background-color:#aec6cf;*/
+    background:rgba(0, 0, 0,0.7);
+    
     border-radius:8px;
     padding:8px;
-
+    margin-top:10px;
 }
 
 #profilePicture{
@@ -147,4 +149,26 @@ legend{
 #postaviPanel{
     position:relative;
     left:7%;
+}
+
+
+.body-content{
+    background:rgba(0,0,0,0.62);
+   
+   
+}
+
+.usrBtns{
+    width:250px;
+    background:rgba(103, 208, 121, 0.92);
+    border:none;
+}
+
+.btnCont{
+    padding-left:15%;
+    padding-top:15%;
+}
+
+.popPlc{
+    margin-bottom:10px;
 }

@@ -102,8 +102,9 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
                 return true;
             }
-            catch 
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
