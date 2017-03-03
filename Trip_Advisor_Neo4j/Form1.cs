@@ -158,7 +158,6 @@ namespace Trip_Advisor_Neo4j
             int medijana = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
             p.Name = "Hram Svetog cara Konstantina i carice Jelene";
-            //p.Pictures = this.CreatePlacePictureList("HKC", 4);
             p.CityCenterDistance = 13;
             p.Rating = 0.0f;
             p.Latitude = 43.3205f;
@@ -231,7 +230,7 @@ namespace Trip_Advisor_Neo4j
             p.CityCenterDistance = 5;
             p.Latitude = 41.8925f;
             p.Longitude = 12.4853f;
-            p.Description = "The Roman Forum (Latin: Forum Romanum; Italian: Foro Romano) is a rectangular forum (plaza) surrounded by the ruins of several important ancient government buildings at the center of the city of Rome. Citizens of the ancient city referred to this space, originally a marketplace, as the Forum Magnum, or simply the Forum.It was for centuries the center of Roman public life: the site of triumphal processions and elections; the venue for public speeches, criminal trials, and gladiatorial matches; and the nucleus of commercial affairs.Here statues and monuments commemorated the citys great men. The teeming heart of ancient Rome, it has been called the most celebrated meeting place in the world, and in all history.[1] Located in the small valley between the Palatine and Capitoline Hills, the Forum today is a sprawling ruin of architectural fragments and intermittent archaeological excavations attracting 4.5 million sightseers yearly.[2]";
+            p.Description = "The Roman (Latin: Forum Romanum; Italian: Foro Romano) is a rectangular forum (plaza) surrounded by the ruins of several important ancient government buildings at the center of the city of Rome. Citizens of the ancient city referred to this space, originally a marketplace, as the Forum Magnum, or simply the Forum.It was for centuries the center of Roman public life: the site of triumphal processions and elections; the venue for public speeches, criminal trials, and gladiatorial matches; and the nucleus of commercial affairs.Here statues and monuments commemorated the citys great men. The teeming heart of ancient Rome, it has been called the most celebrated meeting place in the world, and in all history.[1] Located in the small valley between the Palatine and Capitoline Hills, the Forum today is a sprawling ruin of architectural fragments and intermittent archaeological excavations attracting 4.5 million sightseers yearly.[2]";
             DataProviderCreate.CreatePlace(p);
             int forumRomanum = Int32.Parse(DataProviderGet.GetMaxId("Place"));
 
@@ -566,20 +565,20 @@ namespace Trip_Advisor_Neo4j
 
         private void aditd_1_Click(object sender, EventArgs e)
         {
-            //int messId = DataProviderCreate.CreateMessage("Ovo je poruka kojom ce se Mitar napsovati majke Voji.", "Pu, govno");
-            //DataRelationships.SendMessage(2, 6, 2);
+            int messId = DataProviderCreate.CreateMessage("Ovo je poruka kojom ce se Mitar napsovati majke Voji.", "Pu, govno");
+            DataRelationships.SendMessage(2, 6, 2);
 
-            //int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
-            //DataRelationships.SendMessage(1, 6, 2);
+            int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
+            DataRelationships.SendMessage(1, 6, 2);
 
-            //int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
-            //DataRelationships.SendMessage(3, 2, messId3);
+            int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
+            DataRelationships.SendMessage(3, 2, messId3);
 
-            //int messId4 = DataProviderCreate.CreateMessage("Vojo, jebacu ti majkata.", "Rakijestina");
-            //DataRelationships.SendMessage(2, 6, messId4);
+            int messId4 = DataProviderCreate.CreateMessage("Vojo, jebacu ti majkata.", "Rakijestina");
+            DataRelationships.SendMessage(2, 6, messId4);
 
-            //int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
-            //DataRelationships.SendMessageToUser("Mitar", "Pujo",messId5);
+            int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
+            DataRelationships.SendMessageToUser("Mitar", "Pujo",messId5);
 
 
             List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");

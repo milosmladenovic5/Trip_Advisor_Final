@@ -273,7 +273,6 @@ namespace Trip_Advisor_Redis
                     var redisPlaceCounterSetup = redis.As<long>();
                     redisPlaceCounterSetup.SetValue(hashPlaceGlobalVCounter, 0);
 
-
                     SaveTopVisitedPlaces();
                 }
 
@@ -283,7 +282,6 @@ namespace Trip_Advisor_Redis
                 {
                     var redisPlaceCounterSetup = redis.As<long>();
                     redisPlaceCounterSetup.SetValue(hashCountryGlobalVCounter, 0);
-
 
                     SaveTopVisitedCountries();
                 }

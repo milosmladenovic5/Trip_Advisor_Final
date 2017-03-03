@@ -38,7 +38,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("City"));
+                int generatedId = DataProviderGet.GenerateId("City");
 
                 var query = new CypherQuery("CREATE (n:City {CityId:" + generatedId + ", Name:'" + city.Name + "', CenterLatitude:"+city.CenterLatitude+", CenterLongitude:"+city.CenterLongitude+"})",
                     null, CypherResultMode.Set);
@@ -56,7 +56,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("Country"));
+                int generatedId = DataProviderGet.GenerateId("Country");
 
                 var query = new CypherQuery("CREATE (n:Country {CountryId:" + generatedId + ", Name:'" + country.Name + "' , OverallRating:"+country.OverallRating+ ", PromotionalVideoURL:'" + country.PromotionalVideoURL + "' , NationalFlag:'" + country.NationalFlag + "'})",
                     null, CypherResultMode.Set);
@@ -74,7 +74,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("InterestTag"));
+                int generatedId = DataProviderGet.GenerateId("InterestTag");
 
                 var query = new CypherQuery("CREATE (n:InterestTag {InterestTagId:" + generatedId + ", Name:'" + interestTag.Name + "' , FieldOfLife:'" + interestTag.FieldOfLife + "', Type:'" + interestTag.Type +"'})",
                     null, CypherResultMode.Set);
@@ -93,7 +93,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("Place"));
+                int generatedId = DataProviderGet.GenerateId("Place");
 
                 var query = new CypherQuery("CREATE (n:Place {PlaceId:" + generatedId + ", Name:'" + place.Name + "', Type:'" + place.Type + "' , CityCenterDistance: " +place.CityCenterDistance+",Description:'" + place.Description + "' , Rating:" + place.Rating + ", Pictures:[], Longitude:"+place.Longitude+", Latitude:"+place.Latitude+"})",
                     null, CypherResultMode.Set);
@@ -112,7 +112,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("Status"));
+                int generatedId = DataProviderGet.GenerateId("Status");
 
                 var query = new CypherQuery("CREATE (n:Status {StatusId:" + generatedId + ", StatusName:'" + status.StatusName + "', Description:'" + status.Description + "'})",
                     null, CypherResultMode.Set);
@@ -130,7 +130,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("User"));
+                int generatedId = DataProviderGet.GenerateId("User");
 
                 DateTime date = DateTime.Now;
                 long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
@@ -153,7 +153,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                int generatedId = Int32.Parse(DataProviderGet.GenerateId("Message"));
+                int generatedId = DataProviderGet.GenerateId("Message");
 
                 DateTime date = DateTime.Now;
                 long n = long.Parse(date.ToString("yyyyMMddHHmmss"));

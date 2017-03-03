@@ -26,22 +26,20 @@ namespace Trip_Advisor_Neo4j.DataAccess
             return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList().FirstOrDefault();
                 
         } 
-        public static string GenerateId(string entityType)
+        public static int GenerateId(string entityType)
         {
             try
             {
                 int mId = Int32.Parse(GetMaxId(entityType));
-               // Dictionary<string, object> queryDict = new Dictionary<string, object>();
-               // queryDict.Add("Id", mId);
                 var createIdQuery = new CypherQuery("match (n:"+entityType+"Id {Id:"+mId+"}) set n.Id = "+(++mId)+"", null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(createIdQuery);
 
-                return (mId).ToString();
+                return (mId);
             }
             catch
             {
-                return null;
+                return -1;
             }
            
         }
