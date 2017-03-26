@@ -312,7 +312,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="Scripts\UserScripts\AjajCalls.js" />
+    <Content Include="Scripts\TripAdvisorScripts\AjajCalls.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -320,7 +320,7 @@
     </Content>
     <Content Include="Content\Images\GitHub.appref-ms" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\UserScripts\GoogleMaps.js" />
+    <Content Include="Scripts\TripAdvisorScripts\GoogleMaps.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -329,11 +329,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\UserScripts\RecommendationScript.js" />
+    <Content Include="Scripts\TripAdvisorScripts\RecommendationScript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\UserScripts\SearchScript.js" />
-    <Content Include="Scripts\UserScripts\UserPanelScript.js" />
+    <Content Include="Scripts\TripAdvisorScripts\SearchScript.js" />
+    <Content Include="Scripts\TripAdvisorScripts\UserPanelScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
