@@ -50,14 +50,12 @@ namespace Trip_Advisor_Web.Controllers
                 return View("UserPanel", DataMapper.CreateUserModel((int)Session["Id"]));
             }
         }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -94,7 +92,6 @@ namespace Trip_Advisor_Web.Controllers
                 return View("Index", model);
             }
         }
-
 
         [HttpPost]
         public ActionResult ChangeData(UserModel user)
@@ -135,7 +132,6 @@ namespace Trip_Advisor_Web.Controllers
             return View("UserPanel", DataMapper.CreateUserModel((int)Session["Id"]));
         }
 
-
         [HttpPost]
         public ActionResult ChangeDataRequest(UserModel user)
         {
@@ -149,14 +145,11 @@ namespace Trip_Advisor_Web.Controllers
             return View("UserPanel", DataMapper.CreateUserModel((int)Session["Id"]));
         }
 
-
-
         public ActionResult LogOut()
         {
             Session.Clear();
             return View("Index");
         }
-
 
         [HttpPost]
         public JsonResult ReturnAllInterestTags()

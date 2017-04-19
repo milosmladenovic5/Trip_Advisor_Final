@@ -305,7 +305,6 @@
     <Content Include="Content\OblastiStilovi.css" />
     <Content Include="Content\PitanjaIOdgovoriStilovi.css" />
     <Content Include="Content\PredmetStilovi.css" />
-    <Content Include="Content\Styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
