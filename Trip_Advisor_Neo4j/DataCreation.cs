@@ -13,14 +13,18 @@ using Neo4jClient.Cypher;
 using Neo4jClient;
 using System.IO;
 
+/// <summary>
+/// klosarska klasa koja sluzi za kreiranje test podataka
+/// chore: zameni opise i imena na srpskom engleskim verzijama da ne bude klosarski pola pola - PRE PREZENTACIJE
+/// </summary>
 namespace Trip_Advisor_Neo4j
 {
-    public partial class Form1 : Form
+    public partial class DataCreation : Form
     {
         public static int mitarId;
         public static int vojaId;
 
-        public Form1()
+        public DataCreation()
         {
             InitializeComponent();
             DataLayer.Connect();
@@ -358,11 +362,6 @@ namespace Trip_Advisor_Neo4j
 
             // veze
 
-    
-                        
-
-
-
             DataRelationships.Follow(mitar, pujo);
             DataRelationships.Follow(mitar, vucko);
             DataRelationships.Follow(vucko, voja);
@@ -444,6 +443,23 @@ namespace Trip_Advisor_Neo4j
             System.Threading.Thread.Sleep(1000);
             DataRelationships.Recommend(vucko, djavolja_varos, "Sutra se isto sprema.", 6);
 
+
+            DataRelationships.Recommend(mitar, sanMarcoBas, "haha", 3);
+            DataRelationships.Recommend(mitar, colosseum, "hahaa", 4);
+            DataRelationships.Recommend(mitar, forumRomanum, "hahaa", 5);
+            DataRelationships.Recommend(mitar, pantheonRome, "hahaa", 6);
+            DataRelationships.Recommend(mitar, piazzaDD, "hahaa", 7);
+            DataRelationships.Recommend(mitar, piazzaSM, "hahaa", 8);
+            DataRelationships.Recommend(mitar, vatMuseums, "hahaaaa", 9);
+
+            DataRelationships.VisitedPlace(mitar, sanMarcoBas, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, colosseum, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, forumRomanum, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, pantheonRome, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, piazzaDD, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, piazzaSM, DateTime.Now);
+            DataRelationships.VisitedPlace(mitar, vatMuseums, DateTime.Now);
+
             //DataRelationships.HasStatus(mitar, "User");
             //DataRelationships.HasStatus(stojan, "Admin");
             //DataRelationships.HasStatus(voja, "Moderator");
@@ -498,6 +514,8 @@ namespace Trip_Advisor_Neo4j
             this.CreatePlacePictureList("PiazzaSanMarco", 4, piazzaSM);
             this.CreatePlacePictureList("VaticanMuseums", 4, vatMuseums);
 
+         
+
 
 
             DataProviderUpdate.UpdatePlaceRating(medijana);
@@ -520,6 +538,7 @@ namespace Trip_Advisor_Neo4j
             System.Threading.Thread.Sleep(50);
 
             DataProviderUpdate.UpdateCountryRating(serbia);
+            DataProviderUpdate.UpdateCountryRating(italia);
 
         }
 
@@ -565,7 +584,7 @@ namespace Trip_Advisor_Neo4j
 
         private void aditd_1_Click(object sender, EventArgs e)
         {
-            int messId = DataProviderCreate.CreateMessage("Ovo je poruka kojom ce se Mitar napsovati majke Voji.", "Pu, govno");
+            int messId = DataProviderCreate.CreateMessage("Kako je danas Vojislave?.", "Dobra kao dobar dan!");
             DataRelationships.SendMessage(2, 6, 2);
 
             int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
@@ -574,11 +593,11 @@ namespace Trip_Advisor_Neo4j
             int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
             DataRelationships.SendMessage(3, 2, messId3);
 
-            int messId4 = DataProviderCreate.CreateMessage("Vojo, jebacu ti majkata.", "Rakijestina");
+            int messId4 = DataProviderCreate.CreateMessage("Vojo, nemoj tako.", "Rakijestina");
             DataRelationships.SendMessage(2, 6, messId4);
 
             int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
-            DataRelationships.SendMessageToUser("Mitar", "Pujo",messId5);
+            DataRelationships.SendMessageToUser("Mitar", "Pujo", messId5);
 
 
             List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");
@@ -594,6 +613,13 @@ namespace Trip_Advisor_Neo4j
                 MessageBox.Show(m.Text);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Country> t = DataProviderGet.GetTopNVisitedCountries(10);
+            foreach (Country p in t)
+                MessageBox.Show(p.Name);
         }
     }
 }

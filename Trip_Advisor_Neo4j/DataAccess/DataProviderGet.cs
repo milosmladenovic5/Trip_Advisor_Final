@@ -14,6 +14,8 @@ namespace Trip_Advisor_Neo4j.DataAccess
     public class DataProviderGet
     {
 
+        //chore: Dodaj queryDict svuda, Milos je slepcina koja je pisala }} spojeno i zato nije radilo
+
         public static string GetMaxId(string entityType)
         {
 
@@ -232,14 +234,17 @@ namespace Trip_Advisor_Neo4j.DataAccess
             return rating / cp.Count;
         }
 
-        //------------------------------------REDIS-----------------------------------------------------------------
+        //------------------------------------ZA REDIS-----------------------------------------------------------------
 
         public static List<Country> GetTopNRatedCountries(int n)
         {
             try
             {
-                var query = new CypherQuery("match (n:Country) return n order by n.OverallRating desc limit " + n + "",
-                                                            null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("n", n);
+
+                var query = new CypherQuery("match (n:Country) return n order by n.OverallRating desc limit {n}",
+                                                            queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Country>(query).ToList();
             }
@@ -254,8 +259,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
             try
             {
-                var query = new CypherQuery("match (n:Country)-[hs:HASCITY]->(c:City)-[hp:HASPLACE]->(p:Place)<-[v:VISITED]-() with n, count(v) as x return n order by x desc limit " + n + "",
-                                                           null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("n", n);
+
+                var query = new CypherQuery("match (n:Country)-[hs:HASCITY]->(c:City)-[hp:HASPLACE]->(p:Place)<-[v:VISITED]-() with n, count(v) as x return n order by x desc limit {n}",
+                                                           queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Country>(query).ToList();
             }
@@ -269,8 +277,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("match (p:Place) return p order by p.Rating desc limit " + n + "",
-                                                            null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("n", n);
+
+                var query = new CypherQuery("match (p:Place) return p order by p.Rating desc limit {n}",
+                                                            queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
             }   
@@ -283,8 +294,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("match (p:Place)<-[v:VISITED]-() with p, count(v) as x return p order by x desc limit " + n + "",
-                                                         null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("n", n);
+
+                var query = new CypherQuery("match (p:Place)<-[v:VISITED]-() with p, count(v) as x return p order by x desc limit {n}",
+                                                         queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
             }
@@ -302,7 +316,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("countryId", countryId);
                 queryDict.Add("n", n);
 
-                var query = new CypherQuery("match (n:Country {CountryId:{countryId}}) - [hp:HASCITY] -> (c:City) - [hp:HASPLACE] -> (p:Place) return p order by p.Rating desc limit {n}", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("match (n:Country) - [hs:HASCITY] -> (c:City) - [hp:HASPLACE] -> (p:Place) where n.CountryId = {countryId} return p order by p.Rating desc limit {n}", queryDict, CypherResultMode.Set);
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
 
             }
@@ -319,7 +333,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("countryId", countryId);
                 queryDict.Add("n", n);
 
-                var query = new CypherQuery("match (n:Country {CountryId:{countryId}}) - [hp:HASCITY] -> (c:City) - [hp:HASPLACE] -> (p:Place) <- [v:VISITED] - () with n, count(v) as x return p order by x desc limit {n}", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("match (n:Country {CountryId: {countryId} }) - [hs:HASCITY] -> (c:City) - [hp:HASPLACE] -> (p:Place) <- [v:VISITED] - () with p, count(v) as x return p order by x desc limit {n}", queryDict, CypherResultMode.Set);
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
 
             }
@@ -331,7 +345,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
         }
 
-        //-------------------------------------PRIBAVLJANJE ENTITETA------------------------------------------------
+        //-------------------------------------PRIBAVLJANJE POJEDINACNIH ENTITETA------------------------------------------------
 
         public static User GetUser(string username)
         {

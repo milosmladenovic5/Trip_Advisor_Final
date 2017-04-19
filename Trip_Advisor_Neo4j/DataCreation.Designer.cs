@@ -1,6 +1,6 @@
 ﻿namespace Trip_Advisor_Neo4j
 {
-    partial class Form1
+    partial class DataCreation
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             this.placeId = new System.Windows.Forms.TextBox();
             this.tb_1 = new System.Windows.Forms.Button();
             this.aditd_1 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // create_data
@@ -89,17 +90,28 @@
             this.aditd_1.UseVisualStyleBackColor = true;
             this.aditd_1.Click += new System.EventHandler(this.aditd_1_Click);
             // 
-            // Form1
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(637, 233);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // DataCreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 319);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.aditd_1);
             this.Controls.Add(this.tb_1);
             this.Controls.Add(this.placeId);
             this.Controls.Add(this.add_place_pic);
             this.Controls.Add(this.create_data);
-            this.Name = "Form1";
+            this.Name = "DataCreation";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -113,6 +125,7 @@
         private System.Windows.Forms.TextBox placeId;
         private System.Windows.Forms.Button tb_1;
         private System.Windows.Forms.Button aditd_1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
