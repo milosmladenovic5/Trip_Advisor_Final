@@ -388,8 +388,8 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.PlansToVisit(perica, hramSCK);
             DataRelationships.PlansToVisit(pujo, hramSCK);
 
-            DataRelationships.CurrentlyAtPlace(mitar, hramSCK);
-            DataRelationships.CurrentlyAtPlace(pujo, cele_kula);
+            DataRelationships.CurrentlyAt(mitar, beograd);
+            DataRelationships.CurrentlyAt(pujo, nis);
 
             DataRelationships.HasPlace(nis, medijana);
             DataRelationships.HasPlace(nis, cele_kula);
@@ -539,6 +539,8 @@ namespace Trip_Advisor_Neo4j
 
             DataProviderUpdate.UpdateCountryRating(serbia);
             DataProviderUpdate.UpdateCountryRating(italia);
+
+            MessageBox.Show("DONE!");
 
         }
 

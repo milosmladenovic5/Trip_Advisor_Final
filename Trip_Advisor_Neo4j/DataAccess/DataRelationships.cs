@@ -165,11 +165,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-        public static bool CurrentlyAtPlace (int userId, int placeId)
+        public static bool CurrentlyAt (int userId, int cityId)
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:CURRENTLYAT] -> (place)",
+                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}), (city:City {CityId:" + cityId + "}) CREATE (user) - [r:CURRENTLYAT] -> (city)",
                        null, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

@@ -119,7 +119,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool Unrecommend(int recommenderId, int placeId)
         {
             try
@@ -137,7 +136,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-
         public static bool RemoveFromPlansToVisitList(int userId, int placeId)
         {
             try
@@ -154,7 +152,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }               // kada korisnik poseti mesto
-
         public static bool DeleteCurrentPlace (int userId)
         {
             try
@@ -168,7 +165,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-
         public static bool DeleteInterestsOfUser(int userId)
         {
             try

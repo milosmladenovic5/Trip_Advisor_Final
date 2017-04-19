@@ -111,8 +111,10 @@
             this.Controls.Add(this.placeId);
             this.Controls.Add(this.add_place_pic);
             this.Controls.Add(this.create_data);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "DataCreation";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
