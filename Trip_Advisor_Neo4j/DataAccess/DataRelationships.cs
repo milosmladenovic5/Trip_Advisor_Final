@@ -16,8 +16,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (n:User),(m:User) WHERE n.UserId = " + followerId + " AND  m.UserId = " + followingId + " CREATE (n) - [r:FOLLOWS {Name: n.UserId + m.UserId}] -> (m)",
-                    null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("followerId", followerId);
+                queryDict.Add("followingId", followingId);
+                var query = new CypherQuery("MATCH (n:User),(m:User) WHERE n.UserId = {followerId} AND  m.UserId = {followingId} CREATE (n) - [r:FOLLOWS {Name: n.UserId + m.UserId}] -> (m)",
+                    queryDict, CypherResultMode.Set);
 
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -37,9 +40,16 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 DateTime date = DateTime.Now;
                 long n = long.Parse(date.ToString("yyyyMMddHHmmss"));
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id1", recommenderId);
+                queryDict.Add("id2", placeId);
+                queryDict.Add("recId", DataProviderGet.GenerateId("Recommendation"));
+                queryDict.Add("comment", comment);
+                queryDict.Add("rating", rating);
+                queryDict.Add("n", n);
 
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ), (place:Place {PlaceId:" + placeId + "}) CREATE (user) - [r:RECOMMENDS {RecommendationId:"+DataProviderGet.GenerateId("Recommendation")+", UserId:"+recommenderId+", Comment:'" + comment + "' , Rating:" + rating + ", RecommendationTime:" + n + "}] -> (place)",
-                    null, CypherResultMode.Set);
+                var query = new CypherQuery("MATCH (user:User {UserId: {id1} } ), (place:Place {PlaceId: {id2} }) CREATE (user) - [r:RECOMMENDS {RecommendationId: {recId} , UserId: {id1}, Comment: {comment} , Rating: {rating} , RecommendationTime: {n} }] -> (place)",
+                    queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -51,6 +61,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
+
         public static bool HasCity(int countryId, int cityId)
         {
             try
@@ -82,7 +93,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-        public static bool HasInterest( int userId, string interestTagName)             // odnosi se na korisnika, koga interesuje neka oblast
+        public static bool HasInterest( int userId, string interestTagName)            
         {
             try
             {
@@ -98,7 +109,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-        public static bool HasInterestTag (int placeId, string interestTagName)         //odnosi se na mesto koje sadrzi tag
+        public static bool HasInterestTag (int placeId, string interestTagName)         
         {
             try
             {

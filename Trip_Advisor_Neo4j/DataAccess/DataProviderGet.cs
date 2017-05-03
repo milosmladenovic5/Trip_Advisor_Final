@@ -133,6 +133,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
+        //dole imaju dict
         public static List<Place> GetPlaces(int userId, string relationship)        // relationship - VISITED, PLANSTOVISIT
         {
             try
@@ -492,6 +493,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
+
         public static bool HasRelationshipWithaPlace(int userId, int placeId, string relName)
         {
             try
@@ -581,12 +583,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-        public static Place GetCurrentLocation (int userId)
+        public static City GetCurrentLocation (int userId)
         {
             try
             {
-                var query = new CypherQuery("match (user: User { UserId:" + userId + "}) - [:CURRENTLYAT] -> (place) return place", null, CypherResultMode.Set);
-                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).FirstOrDefault();
+                var query = new CypherQuery("match (user: User { UserId:" + userId + "}) - [:CURRENTLYAT] -> (city) return city", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<City>(query).FirstOrDefault();
 
             }
             catch
