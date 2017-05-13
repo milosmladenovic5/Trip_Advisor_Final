@@ -25,6 +25,8 @@
                 ratingText.attr('name', 'ratingValue');
                 ratingText.attr('class', 'submits');
 
+                $('#recommendRequest').toggle();
+
             }
 
         };
@@ -57,11 +59,16 @@
         $('#recommendationRating').val($('#ratingValue').val());
     });
 
-    function DeleteRec(placeId, recId)
+    function deleteRec(recId, placeId)
     {
-        $.post("/User/AddInterestTags", { recommendationId: recId, placeId: placeId }, function (data) {
-          $('#recommendRequest').Show();
-          $('#recommendations').remove('#' + recId);
+        $.post("/Place/DeleteRecommendation", { recommendationId: recId, placeId: placeId}, function (data) {
+            if (data) {
+                $('#recommendRequest').toggle();
+
+                var parent = document.getElementById("recommendations");
+                var child = document.getElementById(recId);
+                parent.removeChild(child);
+            }
         })
     }
 }

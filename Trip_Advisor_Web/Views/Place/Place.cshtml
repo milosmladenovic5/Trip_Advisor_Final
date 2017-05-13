@@ -78,7 +78,7 @@
             <p><b>Location: </b>@Model.PlaceLocation.Name </p>
             <p><b>Distance from the city:</b> @Model.CityCenterDistance</p>
             <p><b>Rating:</b> @Model.Rating</p>
-            @*<p><b>Interest tag:</b> @Html.ActionLink(Model.Tags[0].Name, "GetPlacesByTag", "InterestTag", new { interestTagId = Model.Tags[0].InterestTagId }, null) </p>*@
+
         </div>
     </div>
 </div>
@@ -108,7 +108,7 @@
                         @if (Model.Recommendations[i].RefferedBy.Username == (string)Session["Username"] || (int)Session["Status"] >= 9)
                         {
                             @*@Html.ActionLink("Delete", "DeleteRecommendation", "Place", new { recommendationId = Model.Recommendations[i].RecommendationId, placeId = Model.PlaceId }, new { @class = "btn btn-danger" })*@
-                            <button type="button" name="Delete" id="deleteBtn" onclick="DeleteRec(@Model.Recommendations[i].RecommendationId, @Model.PlaceId)" class="btn btn-danger">Delete</button>
+                            <button type="button" name="Delete" id="deleteBtn" onclick="deleteRec(@Model.Recommendations[i].RecommendationId, @Model.PlaceId)" class="btn btn-danger">Delete</button>
                         }
                     </div>
                 </div>
@@ -116,7 +116,7 @@
         </p>
 
 
-        @if (Model.CurrentUserRecommends)
+        @if (Model.CurrentUserRecommends && (int)Session["Status"] < 9)
         {
             <div id="upl"><label class="nnt"></label><button id="recommendRequest" style="display: none;" class="btn btn-danger"  data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
         }
@@ -153,7 +153,7 @@
                                  </select>
                             </span>
             
-                            <br />
+                            <br />                 
                             <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger fc" onclick="SomeFunction()" />
 
                         </div>
@@ -173,4 +173,4 @@
 </script>
 
 @Scripts.Render("~/Scripts/TripAdvisorScripts/RecommendationScript.js")
-@Scripts.Render("~/Scripts/TripAdvisorScripts/bootstrap-select.js")
+

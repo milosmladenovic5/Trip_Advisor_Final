@@ -94,6 +94,7 @@ namespace Trip_Advisor_Web.Controllers
             int rating = (recommendationRating==10) ? 10 : recommendationRating%10;
             string dateTest = DateTime.Now.ToString();
             DataRelationships.Recommend(userId, placeId, recommendationComment, rating);
+            RedisDataLayer.UpdateRatings(placeId);
           
             return View("Place", DataMapper.CreatePlaceModel(placeId));
         }
@@ -116,12 +117,20 @@ namespace Trip_Advisor_Web.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult DeleteRecommendation(int recommendationId, int placeId)
+        [HttpPost]
+        public JsonResult DeleteRecommendation(int recommendationId, int placeId)
         {
-            DataProviderDelete.DeleteRecommendationById(recommendationId);
-            RedisDataLayer.UpdateRatings(placeId);
-            return View("Place", DataMapper.CreatePlaceModel(placeId));
+            bool result = DataProviderDelete.DeleteRecommendationById(recommendationId);
+            if (result)
+            {
+                RedisDataLayer.UpdateRatings(placeId);
+                //return View("Place", DataMapper.CreatePlaceModel(placeId));
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
