@@ -28,7 +28,7 @@ namespace Trip_Advisor_Web.Controllers
         {
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, cityId, "CURRENTLYAT"))
             {
-                DataProviderDelete.DeleteCurrentPlace(userId);
+                DataProviderDelete.DeleteCurrentLocation(userId);
                 DataRelationships.CurrentlyAt(userId, cityId);
             }
 

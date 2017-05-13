@@ -8,6 +8,7 @@ using Trip_Advisor_Neo4j.DataAccess;
 using Trip_Advisor_Neo4j.DomainModel;
 using Trip_Advisor_Redis;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace Trip_Advisor_Web.Controllers
 {
@@ -104,7 +105,7 @@ namespace Trip_Advisor_Web.Controllers
 
             ViewBag.Change = false;
 
-            if(user.ProfilePicture==null)
+            if(user.ProfilePicture == null)
             {
                 User changedUser = DataProviderGet.GetNode<User>(userForChange.UserId, "User");
                 userForChange.ProfilePicture = changedUser.ProfilePicture;
@@ -150,13 +151,7 @@ namespace Trip_Advisor_Web.Controllers
             return View("Index");
         }
 
-        [HttpPost]
-        public JsonResult ReturnAllInterestTags()
-        {
-            List<string> tags = DataProviderGet.GetAllTags();
-
-            return Json(tags, JsonRequestBehavior.AllowGet);
-        }
+       
 
     }
 

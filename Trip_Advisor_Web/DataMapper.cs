@@ -118,14 +118,15 @@ namespace Trip_Advisor_Web
                 PlaceModel placeMd = new PlaceModel();
                 placeMd.Name = p.Name;
                 placeMd.PlaceId = p.PlaceId;
-                placeMd.Rating = p.Rating;
+                //placeMd.Rating = p.Rating;
+                placeMd.Rating = (float)Math.Round(p.Rating, 2, MidpointRounding.AwayFromZero);
 
                 list.PlacesList.Add(placeMd);
             }
 
             return list;
         }
-        public static PlaceModel CreatePlaceModel  (int placeId)
+        public static PlaceModel CreatePlaceModel (int placeId)
         {
             Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
 
@@ -134,10 +135,10 @@ namespace Trip_Advisor_Web
             placeModel.Description = place.Description;
             placeModel.CityCenterDistance = place.CityCenterDistance;
             placeModel.PlaceId = place.PlaceId;
-            placeModel.Rating = place.Rating;
+            placeModel.Rating =(float)Math.Round(place.Rating, 2, MidpointRounding.AwayFromZero);
             placeModel.Type = place.Type;
             
-            if(place.Pictures!=null)
+            if(place.Pictures != null)
             { 
                     foreach(var pic in place.Pictures)
                     {
@@ -157,6 +158,7 @@ namespace Trip_Advisor_Web
                 recommendationModel.Comment = r.Comment;
                 recommendationModel.Rating = r.Rating;
                 recommendationModel.RefferedById = r.UserId;
+                recommendationModel.RecommendationId = r.RecommendationId;
                 //recommendationModel.RefferedBy = CreateUserModel(r.UserId);
                 UserModel user = new UserModel();
                 User recommender = DataProviderGet.GetNode<User>(r.UserId, "User");
@@ -187,6 +189,8 @@ namespace Trip_Advisor_Web
                 placeModel.Tags.Add(tagMd);
             }
 
+            placeModel.CurrentUserRecommends = DataProviderGet.HasRelationshipWithaPlace((int)HttpContext.Current.Session["Id"], placeModel.PlaceId, "RECOMMENDS");
+         
             return placeModel;
         }
         public static RecommendationModel CreateRecommendationModel (int recommendationId)
@@ -229,7 +233,7 @@ namespace Trip_Advisor_Web
             DateTime time;
 
             if (DateTime.TryParseExact(user.DateJoined.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
-                userModel.DateJoined = time.ToString("MM/dd/yyyy HH:mm");
+                userModel.DateJoined = time.ToString("MM/dd/yyyy");
             else
                 userModel.DateJoined = "Error!";
 

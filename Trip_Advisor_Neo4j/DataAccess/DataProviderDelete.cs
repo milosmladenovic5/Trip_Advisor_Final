@@ -15,8 +15,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (city:City {CityId:" + cityId + "}) OPTIONAL MATCH(city) - [r] - () DELETE r, city",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", cityId);
+
+                var query = new CypherQuery("MATCH (city:City {CityId:{id} }) OPTIONAL MATCH(city) - [r] - () DELETE r, city",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -30,8 +33,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (country:Country {CountryId:" + countryId + "}) OPTIONAL MATCH(country) - [r] - () DELETE r, country",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", countryId);
+
+                var query = new CypherQuery("MATCH (country:Country {CountryId:{id} }) OPTIONAL MATCH(country) - [r] - () DELETE r, country",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -45,8 +51,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (interest:InterestTag {InterestTagId:" + interestTagId + "}) OPTIONAL MATCH(interest) - [r] - () DELETE r, interest",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", interestTagId);
+
+                var query = new CypherQuery("MATCH (interest:InterestTag {InterestTagId:{id} }) OPTIONAL MATCH(interest) - [r] - () DELETE r, interest",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -60,8 +69,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (place:Place {PlaceId:" + placeId + "}) OPTIONAL MATCH(place) - [r] - () DELETE r, place",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", placeId);
+
+                var query = new CypherQuery("MATCH (place:Place {PlaceId:{id} }) OPTIONAL MATCH(place) - [r] - () DELETE r, place",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -75,8 +87,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (status:Status {StatusId:" + statusId + "}) OPTIONAL MATCH(status) - [r] - () DELETE r, status",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", statusId);
+
+                var query = new CypherQuery("MATCH (status:Status {StatusId:{id} }) OPTIONAL MATCH(status) - [r] - () DELETE r, status",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -90,8 +105,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}) OPTIONAL MATCH(user) - [r] - () DELETE r, user",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", userId);
+
+                var query = new CypherQuery("MATCH (user:User {UserId:{userId} }) OPTIONAL MATCH(user) - [r] - () DELETE r, user",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -108,8 +126,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (follower:User {UserId:" + followerId + "}) - [r:FOLLOWS] -> (following:User {UserId:" + followingId + "}) DELETE r",
-                null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId1", followerId);
+                queryDict.Add("userId2", followingId);
+
+                var query = new CypherQuery("MATCH (follower:User {UserId: {userId1} }) - [r:FOLLOWS] -> (following:User {UserId: {userId2} }) DELETE r",
+                queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
@@ -123,8 +145,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + recommenderId + "} ) - [r:RECOMMENDS] ->(place:Place {PlaceId:" + placeId + "}) DELETE r",
-                    null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", recommenderId);
+                queryDict.Add("placeId", placeId);
+                var query = new CypherQuery("MATCH (user:User {UserId:{userId} }) - [r:RECOMMENDS] ->(place:Place {PlaceId:{placeId} }) DELETE r",
+                    queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 
@@ -140,8 +165,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "} ) - [r:PLANSTOVISIT] ->(place:Place {PlaceId:" + placeId + "}) DELETE r",
-                    null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+                queryDict.Add("palceId", placeId);
+
+                var query = new CypherQuery("MATCH (user:User {UserId: {userId} } ) - [r:PLANSTOVISIT] ->(place:Place {PlaceId: {placeId} }) DELETE r",
+                    queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 
@@ -152,11 +181,14 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }               // kada korisnik poseti mesto
-        public static bool DeleteCurrentPlace (int userId)
+        public static bool DeleteCurrentLocation (int userId)
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}) - [r:CURRENTLYAT] -> (place)  DELETE r", null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+
+                var query = new CypherQuery("MATCH (user:User {UserId: {userId} }) - [r:CURRENTLYAT] -> ()  DELETE r", queryDict, CypherResultMode.Set);
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
             }
@@ -169,7 +201,44 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (user:User {UserId:" + userId + "}) - [r:HASINTEREST] -> ()  DELETE r", null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+
+                var query = new CypherQuery("MATCH (user:User {UserId:{userId} }) - [r:HASINTEREST] -> ()  DELETE r", queryDict, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool DeleteRecommendationById(int recommendationId)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", recommendationId);
+
+                var query = new CypherQuery("MATCH () - [r:RECOMMENDS] -> () WHERE r.RecommendationId = {id} DELETE r", queryDict, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        public static bool DeleteRecommendation(int userId, int placeId)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+                queryDict.Add("placeId", placeId);
+
+                var query = new CypherQuery("MATCH (user:User{UserId: {userId} }) - [r:RECOMMENDS] -> (place:Place{PlaceId:{placeId} })  DELETE r", queryDict, CypherResultMode.Set);
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;
             }

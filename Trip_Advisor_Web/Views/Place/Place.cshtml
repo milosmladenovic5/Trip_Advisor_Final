@@ -92,7 +92,7 @@
         <p>
             @for (int i = 0; i < Model.Recommendations.Count; i++)
             {
-                <div class="panel panel-primary ">
+                <div class="panel panel-primary" id=@Model.Recommendations[i].RecommendationId>
                     <div class="panel-heading panel-info recommendation-panel">
                         @Html.ActionLink(@Model.Recommendations[i].RefferedBy.Username, "ReturnUserPanel", "User", new { userId = Model.Recommendations[i].RefferedBy.UserId }, new { @class = "link" })
                     </div>
@@ -103,30 +103,27 @@
                         <b>Rating: </b>@Model.Recommendations[i].Rating
                         <b>Last modified:</b>@Model.Recommendations[i].RecommendationTime
                     </div>
+                    <div>
+                        @*@Html.ActionLink("Modify", "ReturnCity", "City", new { recommendationId = @Model.Recommendations[i].RecommendationId }, null)*@
+                        @if (Model.Recommendations[i].RefferedBy.Username == (string)Session["Username"] || (int)Session["Status"] >= 9)
+                        {
+                            @*@Html.ActionLink("Delete", "DeleteRecommendation", "Place", new { recommendationId = Model.Recommendations[i].RecommendationId, placeId = Model.PlaceId }, new { @class = "btn btn-danger" })*@
+                            <button type="button" name="Delete" id="deleteBtn" onclick="DeleteRec(@Model.Recommendations[i].RecommendationId, @Model.PlaceId)" class="btn btn-danger">Delete</button>
+                        }
+                    </div>
                 </div>
             }
         </p>
 
-        @*<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>*@
 
-        @*//<input type="text" id="ratingValue"/>*@
-
-        @*@using (Html.BeginForm("RecommendPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm" }))
+        @if (Model.CurrentUserRecommends)
         {
-            <div id="recommendationAdd">
-                @Html.Hidden("recommendationComment", "", new { id = "recommendationComment" })
-                @Html.Hidden("recommendationRating", "", new { id = "recommendationRating" })
-                <label>Your comment:                      &nbsp               &nbsp</label><textarea id="recommendationText"></textarea>
-                <br />
-                <br />
-                <label>Your rating (on a scale from 1 to 10):       &nbsp          &nbsp </label><input type="number" id="ratingValue" />
-                <br />
-                <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger" onclick="SomeFunction()" />
-
-            </div>
-        }*@
-
-        <div id="upl"><label class="nnt"></label><button id="upload" class="btn btn-danger" @*onclick="PredloziTag()"*@ data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
+            <div id="upl"><label class="nnt"></label><button id="recommendRequest" style="display: none;" class="btn btn-danger"  data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
+        }
+        else
+        {
+            <div id="upl"><label class="nnt"></label><button id="recommendRequest" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
+        }
 
 
         <div id="mdl" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -140,9 +137,22 @@
                             @Html.Hidden("recommendationRating", "", new { id = "recommendationRating" })
                             <label class="lbl">Comment: &nbsp;</label><textarea id="recommendationText" class="form-control fc"></textarea>
                    
-                            <span> <label class="lbl">Rating (1 to 10)</label><input type="number" id="ratingValue" class="form-control fc" /></span>
+                            @*<span> <label class="lbl">Rating (1 to 10)</label><input type="number" id="ratingValue" class="form-control fc" /></span>*@
+                            <span>
+                                 <select id="ratingValue" form="submitForm">
+                                    <option value=1>1</option>
+                                     <option value=2>2</option>
+                                     <option value=3>3</option>
+                                     <option value=4>4</option>
+                                     <option value=5 selected>5</option>
+                                     <option value=6>6</option>
+                                     <option value=7>7</option>
+                                     <option value=8>8</option>
+                                     <option value=9>9</option>
+                                     <option value=10>10</option>
+                                 </select>
+                            </span>
             
-                            @*<span> <label class="lbl">Date of visit:</label><input type=date step=7 min=2014-09-08 class="form-control fc"></span>*@
                             <br />
                             <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger fc" onclick="SomeFunction()" />
 
@@ -163,3 +173,4 @@
 </script>
 
 @Scripts.Render("~/Scripts/TripAdvisorScripts/RecommendationScript.js")
+@Scripts.Render("~/Scripts/TripAdvisorScripts/bootstrap-select.js")

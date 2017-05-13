@@ -359,7 +359,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("username", username);
 
-                var query = new CypherQuery("match (user:User {Username:{username}}) return user", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("match (user:User {Username:{username} }) return user", queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(query).First();
             }
@@ -450,6 +450,22 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return null;
             }
         }
+        public static List<string> GetInterestsOfUserToStringArray(int userId)
+        {
+            try
+            {
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+                dict.Add("userId", userId);
+
+                var query = new CypherQuery("match (user:User {UserId:{userId}}) - [r:HASINTEREST] -> (tag) return tag.Name", dict, CypherResultMode.Set);
+
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public static City GetPlaceLocation  (int placeId)
         {
             try
@@ -501,15 +517,18 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+                queryDict.Add("placeId", placeId);
+                queryDict.Add("relationship", relName);
+                //var query = new CypherQuery("match (user:User {UserId:{userId} }) - [r:"+relName+"] - > (place:Place {PlaceId:{placeId} }) return EXISTS(r)", queryDict, CypherResultMode.Set);
 
-                var query = new CypherQuery("match (user:User {UserId:"+userId+"}) - [r:"+relName+"] - > (place:Place {PlaceId:"+placeId+"}) return user", null, CypherResultMode.Set);
+                var query = new CypherQuery("match (user:User {UserId:{userId} }), (place:Place {PlaceId:{placeId} }) return EXISTS( (user) - [:" + relName + "] - > (place) )", queryDict, CypherResultMode.Set);
+                return  ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<bool>(query).FirstOrDefault();
 
-
-                User tester =  ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(query).FirstOrDefault();
-
-                if (tester == null)
-                    return false;
-                return true;
+                //if (tester == null)
+                //    return false;
+                //return true;
             }
             catch(Exception ex)
             {
@@ -517,6 +536,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
+
         public static Country GetCitysCountry (int cityId)
         {
             try
@@ -644,7 +664,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
-       
+   
 
     }
     

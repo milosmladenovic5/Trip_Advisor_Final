@@ -41,7 +41,7 @@
                                 <div id="tagContainer">
                                 </div>
                                 <br />
-                                <button type="button" id="recommendPlaceRequest" value="Choose tags" class="btn btn-danger fc" onclick="selectTags()">Select tags</button>
+                                <button type="button" id="recommendPlaceRequest" value="Select tags" class="btn btn-danger fc" onclick="selectTags(@Model.UserId)">Select tags</button>
                             </div>
                         </div>
                     </div>
@@ -57,9 +57,10 @@
     {
         <div id="description" class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
             <label class="usrLbl">Username: &nbsp; </label>@Html.Label(Model.Username, new { @class = "labelsInfo" })<br />
-            <label class="usrLbl">E-mail:&nbsp; </label>@Html.Label(Model.Email, new { @class = "labelsInfo" })<br />
+            @*<label class="usrLbl">E-mail:&nbsp; </label>@Html.Label(Model.Email, new { @class = "labelsInfo" })<br />*@
             <label class="usrLbl">Joined: &nbsp;</label>@Html.Label(Model.DateJoined, new { @class = "labelsInfo" })<br />
-            <label class="usrLbl">Short description:&nbsp;</label>@Html.Display(Model.Description, new { @class = "labelsInfo" })<br />
+            <label class="usrLbl">About @Model.Username:&nbsp; </label> <br /> 
+             @Html.Display(Model.Description)<br />
         </div>
 
     }
@@ -67,7 +68,7 @@
     {    <form method="post" action="@Url.Action("ChangeData", "Home")" enctype="multipart/form-data">
          <div id="user" class="col-lg-6 col-md-7 col-sm-4 col-xs-4">
                <label  class="usrLbl">Username: &nbsp; </label>@Html.TextBoxFor(m => m.Username, new { @class = "form-control", @name = "Username" }) <br />
-               <label class="usrLbl">E-mail:&nbsp; </label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @name = "E-mail" })<br />
+               @*<label class="usrLbl">E-mail:&nbsp; </label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @name = "E-mail" })<br />*@
                <label class="usrLbl">About me: &nbsp;</label>@Html.TextAreaFor(m=>m.Description, new { @class = "form-control", @name = "Description" })<br/>
 
                <label class="usrLbl">Add profile picture: &nbsp;</label>@Html.TextBoxFor(m => m.PictureFile, new { @type = "file", @name = "PictureFile", @class = "form-control" })
@@ -75,7 +76,7 @@
              <br />
              <br />
              <br />
-            <button id="change" type="submit" class="btn btn-danger">Change user info</button>
+            <button id="change" type="submit" class="btn btn-danger">Submit</button>
            
             <br />
         </div>
@@ -125,12 +126,12 @@
                 if (!Model.FollowingHim)
                 {
 
-                    <button type="button" name="Follow" id="followBtn" class="btn btn-primary">Follow</button>
+                    <button type="button" name="Follow" id="followBtn" onclick ="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Follow</button>
 
                 }
                 else
                 {
-                    <button type="button" name="Unfollow" id="followBtn" class="btn btn-primary">Unfollow</button>
+                    <button type="button" name="Unfollow" id="followBtn" onclick ="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Unfollow</button>
                 }
             }
         </span>
@@ -171,6 +172,6 @@
     </div>
 </div>
 
-@Html.Hidden("userIdHid", Model.UserId)
+
 
 @Scripts.Render("~/Scripts/TripAdvisorScripts/UserPanelScript.js")

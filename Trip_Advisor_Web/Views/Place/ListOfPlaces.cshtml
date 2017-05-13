@@ -7,21 +7,22 @@
 
 <div class="container">
     
-    @if(ViewBag.CurrentlyAt == true)
+    @if (Model.PlacesList == null || Model.PlacesList.Count == 0)
     {
-        <h2>We also recommend that you visit:</h2>
-        <br />
+        <h2>No results..</h2>
     }
-
-    @for (int i = 0; i < Model.PlacesList.Count; i++)
+    else
     {
-        <div class="panel panel-primary">
-            <div class="panel-heading panel-info">
-                @Html.ActionLink(@Model.PlacesList[i].Name, "GetPlace", "Place", new { placeId = Model.PlacesList[i].PlaceId }, new { @class = "link" })
+        for (int i = 0; i < Model.PlacesList.Count; i++)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-info">
+                    @Html.ActionLink(@Model.PlacesList[i].Name, "GetPlace", "Place", new { placeId = Model.PlacesList[i].PlaceId }, new { @class = "link" })
+                </div>
+                <div class="panel-body">
+                    @Model.PlacesList[i].Rating
+                </div>
             </div>
-            <div class="panel-body">
-                @Model.PlacesList[i].Rating
-            </div>
-        </div>
+        }
     }
 </div>

@@ -20,6 +20,9 @@ namespace Trip_Advisor_Web.Models
         public List<RecommendationModel> Recommendations { get; set; }
         public CityModel PlaceLocation { get; set; }
 
+        public bool CurrentUserRecommends { get; set; }
+       
+
         public PlaceModel()
         {
             this.Tags = new List<InterestTagModel>();

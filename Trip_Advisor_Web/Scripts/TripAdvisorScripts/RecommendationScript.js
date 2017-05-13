@@ -57,5 +57,11 @@
         $('#recommendationRating').val($('#ratingValue').val());
     });
 
-
+    function DeleteRec(placeId, recId)
+    {
+        $.post("/User/AddInterestTags", { recommendationId: recId, placeId: placeId }, function (data) {
+          $('#recommendRequest').Show();
+          $('#recommendations').remove('#' + recId);
+        })
+    }
 }
