@@ -45,17 +45,21 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
-        public static List<Place> GetSimilarPlacesIds(int userId, int placeId)
+        public static List<Place> GetSimilarPlaces(int userId, int placeId)
         {
             try
-            {//ova funkcija je menjana
-                var query = new CypherQuery("match (user:User {UserId:" + userId + "}) - [:PLANSTOVISIT] -> (place:Place {PlaceId:" + placeId + "}), (city) - [:HASPLACE] -> (place) - [:HASINTERESTTAG] -> (tag), (city) - [:HASPLACE] -> (places) - [:HASINTERESTTAG] -> (tag) return  places", null, CypherResultMode.Set);
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("placeId", placeId);  // VISAK - ALI NEKA GA ZA SADA!
+                queryDict.Add("userId", userId);
+                var query = new CypherQuery("match (place:Place {PlaceId: {placeId} }), (places) <- [:HASPLACE] - (city) - [:HASPLACE] -> (place) - [:HASINTERESTTAG] -> (tag) <- [:HASINTERESTTAG] - (places) return places", queryDict, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
 
             }
-            catch
+            catch(Exception ex)
             {
+                Console.Write(ex.Message);
                 return null;
             }
         }
@@ -486,9 +490,8 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList();
             }
-            catch (Exception ex)
-            {
-               
+            catch 
+            {    
                 return null;
             }
 

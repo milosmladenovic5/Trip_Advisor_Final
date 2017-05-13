@@ -18,11 +18,11 @@
 
 <div class="container action-group">
     <div class="btn-group">      
-        @Html.ActionLink("I  plan to visit", "UserPlansToVisitPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("I plan to visit", "UserPlansToVisitPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
       
         @Html.ActionLink("I visited", "UserVisitedPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Currently at", "UserCurrentlyAtPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Show nearby similar", "GetSimilarPlaces", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
     </div>
 </div>
 

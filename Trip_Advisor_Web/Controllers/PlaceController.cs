@@ -39,16 +39,11 @@ namespace Trip_Advisor_Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult UserCurrentlyAtPlace(int userId, int placeId)
+        public ActionResult GetSimilarPlaces(int userId, int placeId)
         {
-            if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "CURRENTLYAT"))
-            {
-                DataProviderDelete.DeleteCurrentPlace(userId);
-                DataRelationships.CurrentlyAtPlace(userId, placeId);
-            }
-        
-            List<Place> recommendedPlaces = DataProviderGet.GetSimilarPlacesIds(userId, placeId);
-            ViewBag.CurrentlyAt = true;
+   
+            List<Place> recommendedPlaces = DataProviderGet.GetSimilarPlaces(userId, placeId);
+            //ViewBag.CurrentlyAt = true;
             return View("ListOfPlaces", DataMapper.CreateListOfPlacesModel(recommendedPlaces));
         }
 

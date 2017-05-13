@@ -14,11 +14,11 @@ namespace Trip_Advisor_Web.Controllers
     public class HomeController : Controller
     {
         public bool checks = false;
-        public List<Place> topRatedPlaces;
-        public List<Place> topVisitedPlaces;
+        //public List<Place> topRatedPlaces;
+        //public List<Place> topVisitedPlaces;
 
-        public List<Country> topRatedCountries;
-        public List<Country> topVisitedCountries;
+        //public List<Country> topRatedCountries;
+        //public List<Country> topVisitedCountries;
 
         public ActionResult Index()
         {
@@ -52,9 +52,7 @@ namespace Trip_Advisor_Web.Controllers
         }
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View("About"); 
         }
         public ActionResult Contact()
         {
@@ -77,6 +75,7 @@ namespace Trip_Advisor_Web.Controllers
                 Session["Username"] = user.Username;
                 Session["Password"] = user.Password;
                 Session["Picture"] = user.ProfilePicture;
+                Session["Status"] = user.UserStatusFLAG;
                 ViewBag.Change = false;
 
 

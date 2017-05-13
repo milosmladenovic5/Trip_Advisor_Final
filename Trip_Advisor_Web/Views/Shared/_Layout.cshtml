@@ -27,9 +27,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>
-                        @Html.ActionLink("Trip advisor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    @if (Session["Id"] != null && (int)Session["Status"] == 10)
+                    {
+                        <li>
+                            @Html.ActionLink("Administration", "AdministratorPanel", "Administrator")
+                        </li>
+                    }
                     <li>
                         @if (Session["Id"] != null)
                         {

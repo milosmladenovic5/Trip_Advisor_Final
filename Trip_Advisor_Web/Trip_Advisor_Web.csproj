@@ -228,7 +228,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CardsStyles.css" />
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\background2.jpeg" />
     <Content Include="Content\Images\BasilicaSanMarco\1.jpg" />
@@ -302,10 +301,6 @@
     <Content Include="Content\Images\travel7.jpeg" />
     <Content Include="Content\Images\User-Default.jpg" />
     <Content Include="Content\UserPanelStyles.css" />
-    <Content Include="Content\NovoPitanjeStilovi.css" />
-    <Content Include="Content\OblastiStilovi.css" />
-    <Content Include="Content\PitanjaIOdgovoriStilovi.css" />
-    <Content Include="Content\PredmetStilovi.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -363,10 +358,10 @@
     <Content Include="Views\Place\ListOfPlaces.cshtml" />
     <Content Include="Views\City\City.cshtml" />
     <Content Include="Views\Country\Country.cshtml" />
+    <Content Include="Views\Administrator\AdministratorPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Administrator\" />
     <Folder Include="Views\InterestTag\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

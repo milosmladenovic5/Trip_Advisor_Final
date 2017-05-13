@@ -17,5 +17,6 @@ namespace Trip_Advisor_Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+ 
     }
 }

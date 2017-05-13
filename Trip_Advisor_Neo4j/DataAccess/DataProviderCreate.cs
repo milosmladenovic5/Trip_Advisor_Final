@@ -172,6 +172,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
                 //((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 
+                user.Description = "No description.";
                 user.UserId = generatedId;
                 user.DateJoined = n;
                 DataLayer.Client.Cypher

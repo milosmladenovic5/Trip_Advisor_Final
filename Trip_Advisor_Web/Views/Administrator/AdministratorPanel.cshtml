@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "AdministratorPanel";
+}
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+            {
+    <h2>AdministratorPanel</h2>
+}
+else
+{
+    <h1>Access denied!</h1>
+}
+
+

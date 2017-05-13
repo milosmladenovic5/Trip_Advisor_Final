@@ -13,5 +13,10 @@ namespace Trip_Advisor_Web.Controllers
         {
             return View();
         }
+
+        public ActionResult AdministratorPanel()
+        {
+            return View("AdministratorPanel");
+        }
     }
 }

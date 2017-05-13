@@ -14,8 +14,6 @@ namespace Trip_Advisor_Web
 {
     public static class DataMapper
     {
-
-
         public static CityModel CreateCityModel(int cityId)
         {
  
@@ -237,22 +235,23 @@ namespace Trip_Advisor_Web
 
 
 
-            Place currentLocation = DataProviderGet.GetCurrentLocation(userId);
+            City currentLocation = DataProviderGet.GetCurrentLocation(userId);
             if (currentLocation != null)
             {
-                PlaceModel placeMdl = new PlaceModel()
+                CityModel cityMdl = new CityModel()
                 {
                     Name = currentLocation.Name,
-                    PlaceId = currentLocation.PlaceId,
-                    Description = currentLocation.Description
+                    CityId = currentLocation.CityId,
+                    CenterLatitude = currentLocation.CenterLatitude,
+                    CenterLongitude = currentLocation.CenterLongitude                    
                 };
 
-                for (int pic = 0; pic < 1; pic++)
-                {
-                    placeMdl.Pictures.Add(currentLocation.Pictures[pic]);
-                }
+                //for (int pic = 0; pic < 1; pic++)
+                //{
+                //    placeMdl.Pictures.Add(currentLocation.Pictures[pic]);
+                //}
 
-                userModel.CurrentLocation = placeMdl;
+                userModel.CurrentLocation = cityMdl;
             }
            
 

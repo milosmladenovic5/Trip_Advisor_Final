@@ -43,7 +43,9 @@ namespace Trip_Advisor_Neo4j
 
             System.Threading.Thread.Sleep(150);
 
-            
+            //MATCH(n)
+            //OPTIONAL MATCH (n) -[r] - ()
+            //DELETE n, r
 
             User u1 = new User();
             u1.Username = "Perica";
@@ -499,20 +501,23 @@ namespace Trip_Advisor_Neo4j
 
 
 
-            this.CreatePlacePictureList("Bubanj", 4, bubanj);
-            this.CreatePlacePictureList("CeleKula", 4, cele_kula);
-            this.CreatePlacePictureList("SCK", 4, hramSCK);
-            this.CreatePlacePictureList("Medijana", 4, medijana);
-            this.CreatePlacePictureList("Sumarice", 4, sumarice);
-            this.CreatePlacePictureList("DjavoljaVaros", 4, djavolja_varos);
+            //this.CreatePlacePictureList("Bubanj", 4, bubanj);
+            //this.CreatePlacePictureList("CeleKula", 4, cele_kula);
+            //this.CreatePlacePictureList("SCK", 4, hramSCK);
+            //this.CreatePlacePictureList("Medijana", 4, medijana);
+            //this.CreatePlacePictureList("Sumarice", 4, sumarice);
+            //this.CreatePlacePictureList("DjavoljaVaros", 4, djavolja_varos);
 
-            this.CreatePlacePictureList("BasilicaSanMarco", 4, sanMarcoBas);
-            this.CreatePlacePictureList("Colosseum", 4, colosseum);
-            this.CreatePlacePictureList("ForumRomanum", 5, forumRomanum);
-            this.CreatePlacePictureList("Pantheon", 3, pantheonRome);
-            this.CreatePlacePictureList("PiazaDuomo", 4, piazzaDD);
-            this.CreatePlacePictureList("PiazzaSanMarco", 4, piazzaSM);
-            this.CreatePlacePictureList("VaticanMuseums", 4, vatMuseums);
+            //this.CreatePlacePictureList("BasilicaSanMarco", 4, sanMarcoBas);
+            //this.CreatePlacePictureList("Colosseum", 4, colosseum);
+            //this.CreatePlacePictureList("ForumRomanum", 5, forumRomanum);
+            //this.CreatePlacePictureList("Pantheon", 3, pantheonRome);
+            //this.CreatePlacePictureList("PiazaDuomo", 4, piazzaDD);
+            //this.CreatePlacePictureList("PiazzaSanMarco", 4, piazzaSM);
+            //this.CreatePlacePictureList("VaticanMuseums", 4, vatMuseums);
+
+            for (int i = 1; i <= 13; i++)
+                this.CreatePlacePictureList("Place" + i, 4, i);
 
          
 
