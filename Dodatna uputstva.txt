@@ -13,9 +13,5 @@ Kratka dodatna uputstva:
 		- TonusHleb
 	- Šifra je svima: "123"
 
-5. Ne zamerite ukoliko su nam u kodu negde ostali neki glupi komentari koje nismo stigli ili zaboravili da uklonimo
-
-6. Ukoliko bilo koji deo projekta - kod ili funkcionalnost nisu baš najjasniji, doci ce neko od nas dvojice ili obojica da zajedno pogledamo
-
 
 

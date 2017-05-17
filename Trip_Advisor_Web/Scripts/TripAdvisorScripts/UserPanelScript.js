@@ -102,7 +102,6 @@
     });
 
     $('#mdl').on('hidden.bs.modal', function () {
-        window.alert('closing modal event fired!');
         $('#tagContainer').empty();
     });
 }

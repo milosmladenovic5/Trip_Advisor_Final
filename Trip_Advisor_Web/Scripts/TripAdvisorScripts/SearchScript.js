@@ -20,10 +20,12 @@
 
 
     function ajaxCallFillOptions() {
+        $("#nameList").empty();
         var selectedItem = $('#searchInput').attr("placeholder");
         var afterBlanko = selectedItem.substr(selectedItem.indexOf(" ") + 1);
 
         if (afterBlanko == "User") {
+           
             if (($('#searchInput').val().length == 1)) {
                 var firstLetter = $('#searchInput').val()[0];
 

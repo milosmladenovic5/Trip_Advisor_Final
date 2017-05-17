@@ -60,7 +60,7 @@
             @*<label class="usrLbl">E-mail:&nbsp; </label>@Html.Label(Model.Email, new { @class = "labelsInfo" })<br />*@
             <label class="usrLbl">Joined: &nbsp;</label>@Html.Label(Model.DateJoined, new { @class = "labelsInfo" })<br />
             <label class="usrLbl">About @Model.Username:&nbsp; </label> <br /> 
-             @Html.Display(Model.Description)<br />
+            <p id="description">@Model.Description </p><br />
         </div>
 
     }
