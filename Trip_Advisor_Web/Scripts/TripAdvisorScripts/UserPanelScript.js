@@ -45,13 +45,16 @@
 
         var children = parentContainter.children;
 
-        for (var i = 0; i < children.length; i++) {
-            if (children[i].getAttribute("type") == "checkbox") {
-                if (children[i].checked == true) {
-                    interestTagNames.push(children[i].getAttribute("value"));
+        for (var j = 0; j < children.length; j++) {
+            for (var i = 0; i < children[j].children.length; i++) {
+                if (children[j].children[i].getAttribute("type") == "checkbox") {
+                    if (children[j].children[i].checked == true) {
+                        interestTagNames.push(children[j].children[i].getAttribute("value"));
+                    }
                 }
             }
         }
+       
 
         var userId = useridH;
 
@@ -80,7 +83,9 @@
                 input.checked = data[index].userHasIt;
                 label.id = "check" + index;
 
-               
+                var li = document.createElement("li");
+                li.appendChild(input);
+                li.appendChild(label);
 
                 //var option = document.createElement("option");
                 //option.value = data[index].tagName;
@@ -89,12 +94,13 @@
                 
 
                 var parent = document.getElementById("tagContainer");
-                parent.appendChild(input);
-                parent.appendChild(label);
-                if ((index + 1) % 2 == 0) { // ruzno i dalje, popravi ili kgjb vec
-                    var br = document.createElement("br");
-                    parent.appendChild(br);
-                }
+
+                parent.appendChild(li);
+                //parent.appendChild(label);
+                //if ((index + 1) % 2 == 0) { // ruzno i dalje, popravi ili kgjb vec
+                //    var br = document.createElement("br");
+                //    parent.appendChild(br);
+                //}
 
             });
         });

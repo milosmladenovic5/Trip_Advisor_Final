@@ -1,0 +1,32 @@
+﻿.panel{
+    height:100px;
+}
+
+.panel-heading{
+    height:50%;
+    font-size:1vw;
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+.panel-body{
+    height:50%;
+    text-align:center;
+    font-size:1vw;
+}
+
+.head{
+   background-color:rgba(0, 0, 0,0.5);
+}
+
+.cityPlaces{
+    padding-top:10px;
+}
+
+.panel-body{
+    background-color:rgba(0, 0, 0,0.5);
+    color:white;
+}
+
+.panel{
+    background-color:rgba(0, 0, 0,0.5);
+}

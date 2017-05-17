@@ -78,7 +78,13 @@
             <p><b>Location: </b>@Model.PlaceLocation.Name </p>
             <p><b>Distance from the city:</b> @Model.CityCenterDistance</p>
             <p><b>Rating:</b> @Model.Rating</p>
-
+            
+                @foreach (var tag in Model.Tags)
+                {
+                    <div id="interestTags">
+                        @Html.Raw("#" + tag.Name)
+                    </div>
+                }
         </div>
     </div>
 </div>
@@ -91,44 +97,27 @@
         <h1>Recommendations</h1>
             @for (int i = 0; i < Model.Recommendations.Count; i++)
             {
-                @*<div class="panel panel-primary" id=@Model.Recommendations[i].RecommendationId>
-                    <div class="panel-heading panel-info recommendation-panel">
-                        @Html.ActionLink(@Model.Recommendations[i].RefferedBy.Username, "ReturnUserPanel", "User", new { userId = Model.Recommendations[i].RefferedBy.UserId }, new { @class = "link" })
-                    </div>
-                    <div class="panel-body ">
-                        @Model.Recommendations[i].Comment
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <b>Rating: </b>@Model.Recommendations[i].Rating
-                        <b>Last modified:</b>@Model.Recommendations[i].RecommendationTime
-                    </div>
-                    <div>
-                        @*@@*Html.ActionLink("Modify", "ReturnCity", "City", new { recommendationId = @Model.Recommendations[i].RecommendationId }, null)*@
-                       // @if (Model.Recommendations[i].RefferedBy.Username == (string)Session["Username"] || (int)Session["Status"] >= 9)
-                      //  {
-                        //    @*@Html.ActionLink("Delete", "DeleteRecommendation", "Place", new { recommendationId = Model.Recommendations[i].RecommendationId, placeId = Model.PlaceId }, new { @class = "btn btn-danger" })*@
-                          //  <button type="button" name="Delete" id="deleteBtn" onclick="deleteRec(@Model.Recommendations[i].RecommendationId, @Model.PlaceId)" class="btn btn-danger">Delete</button>
-                      //  }
-                   // </div>
-               // </div>*@
                 <table class="recommendation" id=@Model.Recommendations[i].RecommendationId>
                     <tr id="recommendationInfo">
                           <td id="recommendationAuthor">
                               @Html.ActionLink(@Model.Recommendations[i].RefferedBy.Username, "ReturnUserPanel", "User", new { userId = Model.Recommendations[i].RefferedBy.UserId }, new { @class = "link" })
                           </td>
+                        <td id="recommendationRating">
+                            <div id="starContainer">
+                                <span class="glyphicon glyphicon-star">@Model.Recommendations[i].Rating</span>                               
+                            </div>
+                        </td>
                         <td id="recommendationDate">
                             @Model.Recommendations[i].RecommendationTime
                         </td>
                     </tr>
                     <tr id="recommendationText">
-                        <td id="text">
+                        <td id="text" colspan="3">
                             @Html.DisplayTextFor(m => m.Recommendations[i].Comment)
                         </td>
                     </tr>
                     <tr id="additionalInfo">
-                        <td id="recommendationRating">
-                            @Model.Recommendations[i].Rating
-                        </td>
+                        <td colspan="2"></td>
                         <td id="delete">
                            @if (Model.Recommendations[i].RefferedBy.Username == (string)Session["Username"] || (int)Session["Status"] >= 9)
                            {

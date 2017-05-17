@@ -38,9 +38,9 @@
                             <br />
 
                             <div id="recommendationAdd">
-                                <div id="tagContainer">
-                                </div>
-                                <br />
+                                <ul id="tagContainer"  style="list-style-type:none">
+                                   
+                                </ul>
                                 <button type="button" id="recommendPlaceRequest" value="Select tags" class="btn btn-danger fc" onclick="selectTags(@Model.UserId)">Select tags</button>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
 
     @if (ViewBag.Change != true)
     {
-        <div id="description" class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+        <div id="descriptions" class="col-lg-6 col-md-8 col-sm-8 col-xs-6 desc">
             <label class="usrLbl">Username: &nbsp; </label>@Html.Label(Model.Username, new { @class = "labelsInfo" })<br />
             @*<label class="usrLbl">E-mail:&nbsp; </label>@Html.Label(Model.Email, new { @class = "labelsInfo" })<br />*@
             <label class="usrLbl">Joined: &nbsp;</label>@Html.Label(Model.DateJoined, new { @class = "labelsInfo" })<br />

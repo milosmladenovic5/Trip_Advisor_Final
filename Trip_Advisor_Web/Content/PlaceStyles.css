@@ -1,20 +1,31 @@
 ﻿body {
-    background:url("Images/pattern1.jpg");
+    background:url("Images/travel1.jpeg");
 }
 
+.placeDescription{
+   max-height:15%;
+   font-size:1vw;
+}
 
+h1{
+    font-size:1vw;
+}
 
 .recommendation{
-     border-color:#2bb27d;
-    min-width:95%;
-    background-color:rgba(240, 255, 255, 0.77);
+     border-color:rgb(1,1,1);
+    min-width:80%;
+   background-color:rgba(1, 1, 1, 0.57);   
+   color:white;
     border-radius:3px;
-    min-height:200px;
+    min-height:130px;
     border-right:none;
     border-left:none;
     margin:5px;
     padding:5px;
     margin-bottom:10px;
+    table-layout:fixed;
+    margin-left:8%;
+
 }
 
 
@@ -31,7 +42,6 @@
 
 td {
     text-align: center;
-    
 }   
 
 
@@ -58,4 +68,39 @@ a{
 
 #text{
     width:100%;
+}
+
+.starContainer {
+    width:25px;
+    height:25px;
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+}
+
+#interestTags{
+    padding:3px;
+    box-shadow:2px 2px 2px rgba(1, 1, 1, 0.89);
+    display:inline-block;
+}
+
+#deleteBtn{
+    color:none;
+    border-color:none;
+    box-shadow:2px 2px 2px rgba(1, 104, 131, 0.89);
+}
+
+.recommCont{
+    background:rgba(0, 0,0,0.5);
+
+}
+
+.recommCont > h1{
+    color:white;
+}
+
+
+.panel{
+    background:rgba(0, 0,0,0.5);
+    color:white;
 }
