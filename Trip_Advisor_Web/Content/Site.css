@@ -58,7 +58,7 @@ textarea {
 }
 #selectSearch
 {
-    margin-left:500px;
+    margin-left:450px;
 }
 #searchInput
 {
@@ -218,6 +218,12 @@ textarea {
 
 }
 
+.about{
+    display:inline-block;
+    background:rgba(0,0,0,0.5);
+    color:white;
+    padding:10px;
+}
 
 .formaPrijavaPocetna{
     margin-top:10%;
@@ -340,4 +346,59 @@ textarea {
 #indexPage > p{
     font-family:Tahoma;
     font-style:normal;
+}
+
+
+.inboxModal{
+    background:white;
+}
+
+.messageListCont{
+    width:40%;
+    float:left;
+    box-shadow:2px 2px 2px black;
+    height:100%;
+    text-align:center;
+}
+
+.message{
+    width:59%;
+    float:right;
+    height:100%;
+
+}
+
+.modal-body{
+    min-height: 100px;
+    overflow: hidden;
+}
+
+#listOfMessages{
+    border:1px rgba(1, 104, 131, 0.49);
+}
+
+ul{
+    padding-left:1px;
+}
+
+td{
+    text-align:center;
+}
+
+.message{
+}
+
+tr{
+  margin-top:1px;
+  margin-bottom:2px;
+}
+
+.messageCard{
+    box-shadow:1px 1px 1px black;
+}
+
+
+
+.messageDetails{
+    box-shadow:1px 1px 1px black;
 }

@@ -24,12 +24,22 @@
                
 
             </div>
+           
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                        @if (Session["Id"] != null)
+                        {
+                            <li>
+                              <a href="#" onclick="inboxClick(@Session["Id"])" data-toggle="modal" data-target="#modalInbox">Inbox</a>
+                              
+                             </li>
+
+                        }
                     @if (Session["Id"] != null && (int)Session["Status"] == 10)
                     {
+
                         <li>
                             @Html.ActionLink("Administration", "AdministratorPanel", "Administrator")
                         </li>
@@ -54,7 +64,7 @@
                     <li>
                      
 
-                        <form action="@Url.Action("ReturnEntity","Search")" method="post">
+                        <form action="@Url.Action("ReturnEntity", "Search")" method="post">
                             @if (Session["Id"] != null)
                             {
                                 @Html.Hidden("entityType", "Search", new { id = "entityType" });
@@ -74,15 +84,73 @@
             </div>
         </div>
     </div>
+
+
+
     <div class="container body-content">
         @RenderBody()
-      
-        <footer>
-      
-        </footer>
+
+        <footer></footer>
     </div>
 
+    @if (Session["Id"] != null)
+    {
+        <div id="modalInbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+                        <div class="messageListCont">
+                            <label>Inbox</label>
+                            <ul id="listOfMessages" style="list-style: none;">
+                             
+                            </ul>
+                        </div>
+                        <div id="messageDetails" class="message">
+                            <table id="messageTable">
+                                <tr id="usern" class="messageDetails">
+                                    <td id="to">
+                                        <label>From: </label>
+                                    </td>
+                                    <td id="fromContainer">
+
+                                    </td>
+                                </tr>
+                                <tr id="subj" class="messageDetails">
+                                    <td><label>Subject: </label></td>
+                                    <td id="subjectContainer">
+
+                                    </td>
+                                </tr>
+                                <tr id="messageDate" class="messageDetails">
+                                    <td><label>Date: </label></td>
+                                    <td id="dateContainer">
+
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="messageTable">
+                                <tr class="messageDetails">
+                                    <td><label>Message text:</label></td>
+                                </tr>
+                                <tr class="messageDetails">
+                                    <td id="messageContainer"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
     @Scripts.Render("~/Scripts/TripAdvisorScripts/SearchScript.js")
+    @Scripts.Render("~/Scripts/TripAdvisorScripts/MessagesScript.js")
 </body>
 </html>
 

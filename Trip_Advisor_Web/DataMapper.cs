@@ -54,6 +54,29 @@ namespace Trip_Advisor_Web
             return cityModel;
 
         }
+
+        public static MessageModel CreateMessageModel(Message message)
+        {
+            MessageModel messageModel = new MessageModel();
+            messageModel.MessageId = message.MessageId;
+            messageModel.ReceiverUsername = message.ReceiverUsername;
+            messageModel.ReceiverId = message.ReceiverId;
+            messageModel.SenderId = message.SenderId;
+            messageModel.SenderUsername = message.SenderUsername;
+            messageModel.Subject = message.Subject;
+            messageModel.Text = message.Text;
+           // messageModel.SendingDate = message.SendingDate;
+
+            DateTime time;
+            if (DateTime.TryParseExact(message.SendingDate.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
+                messageModel.SendingDate = time.ToString("MM/dd/yyyy");
+            else
+                messageModel.SendingDate = "Error!";
+
+            return messageModel;
+        }
+
+
         public static CountryModel CreateCountryModel(int countryId)
         {
 

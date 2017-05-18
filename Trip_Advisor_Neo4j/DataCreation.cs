@@ -591,34 +591,34 @@ namespace Trip_Advisor_Neo4j
 
         private void aditd_1_Click(object sender, EventArgs e)
         {
-            int messId = DataProviderCreate.CreateMessage("Kako je danas Vojislave?.", "Dobra kao dobar dan!");
-            DataRelationships.SendMessage(2, 6, 2);
+            //int messId = DataProviderCreate.CreateMessage("Kako je danas Vojislave?.", "Dobra kao dobar dan!");
+            //DataRelationships.SendMessage(2, 6, 2);
 
-            int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
-            DataRelationships.SendMessage(1, 6, 2);
+            //int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
+            //DataRelationships.SendMessage(1, 6, 2);
 
-            int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
-            DataRelationships.SendMessage(3, 2, messId3);
+            //int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
+            //DataRelationships.SendMessage(3, 2, messId3);
 
-            int messId4 = DataProviderCreate.CreateMessage("Vojo, nemoj tako.", "Rakijestina");
-            DataRelationships.SendMessage(2, 6, messId4);
+            //int messId4 = DataProviderCreate.CreateMessage("Vojo, nemoj tako.", "Rakijestina");
+            //DataRelationships.SendMessage(2, 6, messId4);
 
-            int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
-            DataRelationships.SendMessageToUser("Mitar", "Pujo", messId5);
+            //int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
+            //DataRelationships.SendMessageToUser("Mitar", "Pujo", messId5);
 
 
-            List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");
+            //List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");
 
-            foreach(var m  in mitrovePoruke)
-            {
-                MessageBox.Show(m.Text);
-            }
+            //foreach(var m  in mitrovePoruke)
+            //{
+            //    MessageBox.Show(m.Text);
+            //}
 
-            List<DomainModel.Message> mitrovePrimljene = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "RECEIVED");
-            foreach(var m in mitrovePrimljene)
-            {
-                MessageBox.Show(m.Text);
-            }
+            //List<DomainModel.Message> mitrovePrimljene = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "RECEIVED");
+            //foreach(var m in mitrovePrimljene)
+            //{
+            //    MessageBox.Show(m.Text);
+            //}
 
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Trip_Advisor_Neo4j.DataAccess;
-
+using Trip_Advisor_Web.Models;
 
 namespace Trip_Advisor_Web.Controllers
 {
@@ -85,7 +85,7 @@ namespace Trip_Advisor_Web.Controllers
         public JsonResult SendMessage(string receiver, string subject, string body)
         {
 
-            int messageId = DataProviderCreate.CreateMessage(body, subject);
+            int messageId = DataProviderCreate.CreateMessage(body, (string)Session["Username"], receiver, subject);
 
             if(messageId != 0)
             {
@@ -93,7 +93,20 @@ namespace Trip_Advisor_Web.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpPost]
+        public JsonResult GetAllReceivedMessagesOfUser(int userId)
+        {
+            List<Trip_Advisor_Neo4j.DomainModel.Message> messages = DataProviderGet.GetAllMessagesSentOrReceivedByUser(userId, "RECEIVED");
+
+            List<MessageModel> messagesList = new List<MessageModel>();
+            foreach(var mess in messages)
+            {
+                messagesList.Add(DataMapper.CreateMessageModel(mess));
+            }
+
+            return Json(messagesList, JsonRequestBehavior.AllowGet);
         }
     }
 }

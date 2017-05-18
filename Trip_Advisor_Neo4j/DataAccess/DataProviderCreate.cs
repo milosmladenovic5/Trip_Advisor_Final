@@ -189,7 +189,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
-        public static int CreateMessage(string text, string subject)
+        public static int CreateMessage(string text, string sender, string receiver, string subject)
         {
             try
             {
@@ -204,8 +204,10 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("sub", subject);
                 queryDict.Add("n", n);
                 queryDict.Add("seen", false);
+                queryDict.Add("sender", sender);
+                queryDict.Add("receiver", receiver);
 
-                var query = new CypherQuery("CREATE (m:Message {MessageId: {id}, Text: {text} , Subject: {sub}, SendingDate: {n}, Seen: {seen} })", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("CREATE (m:Message {MessageId: {id}, Text: {text} , Subject: {sub}, SendingDate: {n}, SenderUsername: {sender}, ReceiverUsername: {receiver}, Seen: {seen} })", queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 

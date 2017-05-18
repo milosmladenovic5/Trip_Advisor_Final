@@ -152,3 +152,16 @@ legend{
  
 }
 
+
+#messageTable{
+    table-layout:fixed;
+    width: 100%;
+}
+
+#to{
+    width:35%;
+}
+
+#user{
+    margin-left:
+}
