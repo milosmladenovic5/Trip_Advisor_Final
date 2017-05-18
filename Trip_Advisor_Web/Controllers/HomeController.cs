@@ -80,9 +80,7 @@ namespace Trip_Advisor_Web.Controllers
                 ViewBag.Change = false;
 
 
-                //sada ovde treba da inicijalizujemo elemente korisnickog modela svim podacima iz baze
-
-                //DataMapper.Context = 
+      
                 return View("UserPanel", DataMapper.CreateUserModel(user.UserId));
 
             }

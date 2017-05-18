@@ -14,7 +14,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
     public class DataProviderGet
     {
 
-        //chore: Dodaj queryDict svuda, Milos je slepcina koja je pisala }} spojeno i zato nije radilo
+     
 
         public static string GetMaxId(string entityType)
         {
@@ -502,6 +502,9 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
+                //Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                //queryDict.Add("search", firstLetter);
+
                 var query = new CypherQuery("match (n:"+entity+") where n."+attributeName+" =~ '"+firstLetter+".*' return n."+attributeName+"", null, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<string>(query).ToList();

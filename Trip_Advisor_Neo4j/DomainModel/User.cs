@@ -13,10 +13,10 @@ namespace Trip_Advisor_Neo4j.DomainModel
         public long DateJoined { get; set; }
         public int UserStatusFLAG { get; set; }
 
-        // 0 - registrovan 
-        // 1 - redovan korisnik
-        // 2 - muted
-        // 3 - suspendovan
+        // 0 - suspendovan 
+        // 1 - registrovan
+        // 2 - REDOVAN
+    
         // 9 - moderator
         // 10 - admin
 

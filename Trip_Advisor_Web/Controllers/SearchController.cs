@@ -19,7 +19,7 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public JsonResult ReturnAllUsersByFirstLetter(string firstLetter)
         {
-            string[] UsersByFirstLetterArray = DataProviderGet.GetEntityByFirstLetter(firstLetter.ToString(), "User", "Username").ToArray();
+           string[] UsersByFirstLetterArray = DataProviderGet.GetEntityByFirstLetter(firstLetter.ToString(), "User", "Username").ToArray();
 
             return Json(UsersByFirstLetterArray, JsonRequestBehavior.AllowGet);
         }
@@ -27,7 +27,6 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public JsonResult ReturnAllPlacesByName(string firstLetter)
         {
-            //da ga ne mrcimo, neka mesto bude jedinstveno, tj. ime mesta
             string[] PlacesByFirstLetter = DataProviderGet.GetEntityByFirstLetter(firstLetter, "Place", "Name").ToArray();
 
             return Json(PlacesByFirstLetter, JsonRequestBehavior.AllowGet);

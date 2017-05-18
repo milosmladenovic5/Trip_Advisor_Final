@@ -26,14 +26,15 @@
 
         if (afterBlanko == "User") {
            
-            if (($('#searchInput').val().length == 1)) {
-                var firstLetter = $('#searchInput').val()[0];
+            if (($('#searchInput').val().length != 0)) {
+                var firstLetter = $('#searchInput').val();
 
                 $.post("/Search/ReturnAllUsersByFirstLetter", { firstLetter: firstLetter }, function (data) {
-                    // $('#nameList').empty();
+                    $('#nameList').empty();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
+                       
 
                         var parent = document.getElementById("nameList");
                         parent.appendChild(option);
@@ -42,11 +43,11 @@
             }
         }
         else if (afterBlanko == "Place") {
-            if (($('#searchInput').val().length == 1)) {
-                var firstLetter = $('#searchInput').val()[0];
+            if (($('#searchInput').val().length != 0)) {
+                var firstLetter = $('#searchInput').val();
 
                 $.post("/Search/ReturnAllPlacesByName", { firstLetter: firstLetter }, function (data) {
-                    // $('#nameList').empty();
+                    $('#nameList').empty();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -58,11 +59,11 @@
             }
         }
         else if (afterBlanko == "Country") {
-            if (($('#searchInput').val().length == 1)) {
-                var firstLetter = $('#searchInput').val()[0];
+            if (($('#searchInput').val().length != 0)) {
+                var firstLetter = $('#searchInput').val();
 
                 $.post("/Search/ReturnAllCountriesByName", { firstLetter: firstLetter }, function (data) {
-                    // $('#nameList').empty();
+                    $('#nameList').empty();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -74,11 +75,11 @@
             }
         }
         else if (afterBlanko == "City") {
-            if (($('#searchInput').val().length == 1)) {
-                var firstLetter = $('#searchInput').val()[0];
+            if (($('#searchInput').val().length != 0)) {
+                var firstLetter = $('#searchInput').val();
 
                 $.post("/Search/ReturnAllCitiesByName", { firstLetter: firstLetter }, function (data) {
-                    // $('#nameList').empty();
+                    $('#nameList').empty();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -90,4 +91,6 @@
             }
         }
     }
+
+ 
 }
