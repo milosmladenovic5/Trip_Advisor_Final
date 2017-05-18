@@ -111,20 +111,10 @@ legend{
 }
 
 
-#slikaKorisnikaa{
-    width:100%;
-    height:100%;
+
 }
 
 
-#grupa{
-    text-align:center;
-}
-
-#postaviPanel{
-    position:relative;
-    left:7%;
-}
 
 
 .body-content{
@@ -155,3 +145,10 @@ legend{
 #userPanelList{
     margin-left:3%;
 }
+
+
+
+#modalCompose{
+ 
+}
+

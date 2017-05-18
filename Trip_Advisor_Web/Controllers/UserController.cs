@@ -54,14 +54,6 @@ namespace Trip_Advisor_Web.Controllers
             return Json("Added" + interestTagNames.Length + "new tags", JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult SendMessage(int senderId, int receiverId, string messageText, string subject)
-        {
-            int messId = DataProviderCreate.CreateMessage(messageText, subject);
-            bool success = DataRelationships.SendMessage(senderId, receiverId, messId);
-           
-            return Json(success);
-        }
 
         [HttpPost]
         public JsonResult ReturnInterestTags()
@@ -87,6 +79,21 @@ namespace Trip_Advisor_Web.Controllers
             }
 
             return Json(pairs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SendMessage(string receiver, string subject, string body)
+        {
+
+            int messageId = DataProviderCreate.CreateMessage(body, subject);
+
+            if(messageId != 0)
+            {
+                DataRelationships.SendMessageToUser((string)Session["Username"], receiver, messageId);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

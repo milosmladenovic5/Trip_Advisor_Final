@@ -110,4 +110,55 @@
     $('#mdl').on('hidden.bs.modal', function () {
         $('#tagContainer').empty();
     });
+
+    $('#modalCompose').on('hidden.bs.modal', function () {
+        $('#inputSubject').val('');
+        $('#inputBody').val('');
+        $('#warnings').empty();
+    });
+
+
+
+    function SendMessage()
+    {
+        $('#warnings').empty();
+        var sub = $('#inputSubject').val();
+        var bd = $('#inputBody').val();
+        var rec = $('#receiver').val();
+
+        var warnings = document.getElementById('warnings');  
+        var div = document.createElement('div');
+        var strong = document.createElement('strong');
+
+        if (sub === "" || bd === "")
+        {
+            div.classList.add("alert");
+            div.classList.add("alert-danger");
+            strong.innerHTML = "Empty field!";
+            div.appendChild(strong);
+            warnings.appendChild(div);
+            return;
+        }
+
+        $.post("/User/SendMessage", { receiver: rec, subject: sub, body: bd }, function (data) {
+
+            if (data) {
+                div.classList.add("alert");
+                div.classList.add("alert-success");
+                strong.innerHTML = "Message sent!";
+                div.appendChild(strong);
+                warnings.appendChild(div);
+                //$('#modalCompose').modal('hide');
+
+            }
+            else {
+                div.classList.add("alert");
+                div.classList.add("alert-danger");
+                strong.innerHTML = "Error sending your message!";
+                div.appendChild(strong);
+                warnings.appendChild(div);
+
+            }
+        });
+    }
 }

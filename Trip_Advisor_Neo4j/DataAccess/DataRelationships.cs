@@ -195,6 +195,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         }
 
 
+
         public static bool SendMessage(int senderId, int receiverId, int messageId)
         {
             try
@@ -217,8 +218,13 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("MATCH (sender:User {Username:'" + senderUsername + "'}), (receiver:User {Username:'" + receiverUsername + "'}), (message:Message {MessageId:" + messageId + "}) CREATE (sender) - [r:SENT] -> (message) <- [h:RECEIVED] - (receiver)",
-                        null, CypherResultMode.Set);
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("sU", senderUsername);
+                queryDict.Add("rU", receiverUsername);
+                queryDict.Add("id", messageId);
+
+                var query = new CypherQuery("MATCH (sender:User {Username: {sU} }), (receiver:User {Username: {rU} }), (message:Message {MessageId: {id} }) CREATE (sender) - [r:SENT] -> (message) <- [h:RECEIVED] - (receiver)",
+                        queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
                 return true;

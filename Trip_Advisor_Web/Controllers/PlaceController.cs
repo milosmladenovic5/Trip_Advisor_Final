@@ -89,11 +89,11 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult RecommendPlace(int userId, int placeId, string recommendationComment, int recommendationRating)
+        public ActionResult RecommendPlace(int placeId, string recommendationComment, int recommendationRating)
         {
             int rating = (recommendationRating==10) ? 10 : recommendationRating%10;
             string dateTest = DateTime.Now.ToString();
-            DataRelationships.Recommend(userId, placeId, recommendationComment, rating);
+            DataRelationships.Recommend((int)Session["Id"], placeId, recommendationComment, rating);
             RedisDataLayer.UpdateRatings(placeId);
           
             return View("Place", DataMapper.CreatePlaceModel(placeId));

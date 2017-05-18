@@ -203,8 +203,9 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("text", text);
                 queryDict.Add("sub", subject);
                 queryDict.Add("n", n);
+                queryDict.Add("seen", false);
 
-                var query = new CypherQuery("CREATE (m:Message {MessageId: {id}, Text: {text} , Subject: {sub}, SendingDate: {n} })", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("CREATE (m:Message {MessageId: {id}, Text: {text} , Subject: {sub}, SendingDate: {n}, Seen: {seen} })", queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 

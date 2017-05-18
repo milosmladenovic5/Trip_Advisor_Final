@@ -144,21 +144,23 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content form-horizontal">
                     <br />
-                    @using (Html.BeginForm("RecommendPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm", @class="form-horizonta" }))
-                    {
+                 
+                    <form role="form" class="form-horizontal" id="submitForm" action="/Place/RecommendPlace" method="post">
+                        <input type="hidden" value=@Model.PlaceId name ="placeId" id="placeId">
+                    
+
                         <div id="recommendationAdd">
-                            @Html.Hidden("recommendationComment", "", new { id = "recommendationComment" })
-                            @Html.Hidden("recommendationRating", "", new { id = "recommendationRating" })
-                            <label class="lbl">Comment: &nbsp;</label><textarea id="recommendationText" class="form-control fc"></textarea>
+                       
+                            <label class="lbl">Comment: &nbsp;</label>
+                            <textarea id="recommendationText" name="recommendationComment" class="form-control fc"></textarea>
                    
-                            @*<span> <label class="lbl">Rating (1 to 10)</label><input type="number" id="ratingValue" class="form-control fc" /></span>*@
                             <span>
-                                 <select id="ratingValue" form="submitForm">
-                                    <option value=1>1</option>
+                                 <select id="ratingValue" form="submitForm" name="recommendationRating">
+                                    <option value=1 selected>1</option>
                                      <option value=2>2</option>
                                      <option value=3>3</option>
                                      <option value=4>4</option>
-                                     <option value=5 selected>5</option>
+                                     <option value=5>5</option>
                                      <option value=6>6</option>
                                      <option value=7>7</option>
                                      <option value=8>8</option>
@@ -168,10 +170,11 @@
                             </span>
             
                             <br />                 
-                            <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger fc" onclick="SomeFunction()" />
 
+                            <input type="submit" id="recommendPlaceRequest" value="Recommend" class="btn btn-danger fc"  />
                         </div>
-                    }
+                        </form>
+                 
                 </div>
             </div>
         </div>
