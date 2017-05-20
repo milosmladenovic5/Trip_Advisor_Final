@@ -18,6 +18,7 @@ namespace Trip_Advisor_Web.Models
         public bool FollowingHim { get; set; }
         public string Description { get; set; }
         public string DateJoined { get; set; }
+        public int UserStatusFLAG { get; set; }
 
         public StatusModel UserStatus { get; set; }
         public List<UserModel> Followers { get; set; }

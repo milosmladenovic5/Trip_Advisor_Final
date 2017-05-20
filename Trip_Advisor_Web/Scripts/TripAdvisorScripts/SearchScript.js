@@ -6,6 +6,8 @@
             var selected = $(this).html();
             $('#searchInput').attr("placeholder", "Search " + selected);
             $('#entityType').val(selected);
+            $("#nameList").empty();
+            $("#nameList").removeData();
         });    
      }
     
@@ -21,6 +23,7 @@
 
     function ajaxCallFillOptions() {
         $("#nameList").empty();
+        $("#nameList").removeData();
         var selectedItem = $('#searchInput').attr("placeholder");
         var afterBlanko = selectedItem.substr(selectedItem.indexOf(" ") + 1);
 
@@ -31,6 +34,7 @@
 
                 $.post("/Search/ReturnAllUsersByFirstLetter", { firstLetter: firstLetter }, function (data) {
                     $('#nameList').empty();
+                    $("#nameList").removeData();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -48,6 +52,7 @@
 
                 $.post("/Search/ReturnAllPlacesByName", { firstLetter: firstLetter }, function (data) {
                     $('#nameList').empty();
+                    $("#nameList").removeData();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -64,6 +69,7 @@
 
                 $.post("/Search/ReturnAllCountriesByName", { firstLetter: firstLetter }, function (data) {
                     $('#nameList').empty();
+                    $("#nameList").removeData();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];
@@ -80,6 +86,7 @@
 
                 $.post("/Search/ReturnAllCitiesByName", { firstLetter: firstLetter }, function (data) {
                     $('#nameList').empty();
+                    $("#nameList").removeData();
                     $.each(data, function (index) {
                         var option = document.createElement("option");
                         option.value = data[index];

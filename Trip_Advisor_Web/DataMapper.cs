@@ -253,6 +253,7 @@ namespace Trip_Advisor_Web
             userModel.Email = user.Email;
             userModel.UserId = user.UserId;
             userModel.Description = user.Description;
+            userModel.UserStatusFLAG = user.UserStatusFLAG;
 
             DateTime time;
 
