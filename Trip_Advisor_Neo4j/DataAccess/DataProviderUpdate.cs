@@ -164,8 +164,8 @@ namespace Trip_Advisor_Neo4j.DataAccess
             {
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("PlaceId", placeId);
-                queryDict.Add("Rating", DataProviderGet.CalculatePlaceRating(placeId));     // ovo mozda moze optimalnije
-                // funkcija apdejtuje rejting mesta kada se skupi "odredjen broj" novih preporuka
+                queryDict.Add("Rating", DataProviderGet.CalculatePlaceRating(placeId));     
+               
 
 
                 var query = new CypherQuery("match (n:Place {PlaceId: {PlaceId} }) set n.Rating = {Rating} ",
@@ -191,6 +191,28 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
 
                 var query = new CypherQuery("match (n:Country {CountryId: {CountryId} }) set n.OverallRating = {OverallRating} ",
+                    queryDict, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool UpdatePlaceDescription(int placeId, string newDesc)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("placeId", placeId);
+                queryDict.Add("newDesc", newDesc);
+
+
+                var query = new CypherQuery("match (n:Place {PlaceId: {placeId} }) set n.Description = {newDesc}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

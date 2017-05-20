@@ -10,38 +10,43 @@
                 var tdSubject = document.createElement("td");
                // tdSubject.innerHTML = data[index].Subject;
                 tdSubject.colSpan = 2;
-                tdSubject.classList = "messageCard";
+                tdSubject.innerHTML = data[index].Subject;
+               // tdSubject.classList = "messageCard";
 
-                var aSubject = document.createElement("a");
-                aSubject.innerHTML = data[index].Subject;
-                aSubject.onclick = function ()
-                {
+                var viewMoreBtn = document.createElement("button");
+                viewMoreBtn.classList = "btn btn-danger";
+                viewMoreBtn.innerHTML = "View more";
+                viewMoreBtn.onclick = function () {
                     var text = data[index].Text;
                     var sender = data[index].SenderUsername;
                     var date = data[index].SendingDate;
                     var subject = data[index].Subject;
-                    
-                    displayMessage(text, sender, subject, date);
-                };
 
-                aSubject.href = "#";
+                    displayMessage(text, sender, subject, date);
+                }
+
+                var aSender = document.createElement("a");
+                aSender.innerHTML = data[index].SenderUsername;
+                aSender.href = "/User/ReturnUserPanelByUsername?username=" + data[index].SenderUsername;
+
                 
-                tdSubject.appendChild(aSubject);
+                //tdSubject.appendChild(aSubject);
 
                 var tdDate = document.createElement("td");
                 tdDate.innerHTML = data[index].SendingDate;
-                tdDate.classList = "messageCard";
+                //tdDate.classList = "messageCard";
 
                 var tdSender = document.createElement("td");
-                tdSender.innerHTML = data[index].SenderUsername;
-                tdSender.classList = "messageCard";
+                tdSender.appendChild(aSender);
+                //tdSender.classList = "messageCard";
 
                 var table = document.createElement("table");
                 table.style.tableLayout = "fixed";
                 table.style.width = "100%";
                 table.style.marginBottom = "10px";
                 table.style.marginTop = "10px";
-                table.style.border = "1px dashed black";
+                table.style.border = "1px solid #dddddd";
+                table.classList = "table table-striped";        
 
                 var trUp = document.createElement("tr");
                 trUp.appendChild(tdSubject);
@@ -51,8 +56,18 @@
                 trDown.appendChild(tdDate);
                 trDown.appendChild(tdSender);
 
-                table.appendChild(trUp);
-                table.appendChild(trDown);
+                var trBottom = document.createElement("tr");
+                var tdButton = document.createElement("td");
+                tdButton.colSpan = 2;
+                tdButton.appendChild(viewMoreBtn);
+                trBottom.appendChild(tdButton);
+
+                var tbody = document.createElement("tbody");
+                tbody.appendChild(trUp);
+                tbody.appendChild(trDown);
+                tbody.appendChild(trBottom);
+
+                table.appendChild(tbody);
 
                 li.appendChild(table);
 

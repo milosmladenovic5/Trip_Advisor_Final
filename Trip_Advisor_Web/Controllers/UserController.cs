@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Trip_Advisor_Neo4j.DataAccess;
+using Trip_Advisor_Neo4j.DomainModel;
 using Trip_Advisor_Web.Models;
 
 namespace Trip_Advisor_Web.Controllers
@@ -20,6 +21,14 @@ namespace Trip_Advisor_Web.Controllers
         public ActionResult ReturnUserPanel(int userId)
         {
             return View("~/Views/Home/UserPanel.cshtml", DataMapper.CreateUserModel(userId));
+        }
+
+        [AllowAnonymous]
+        public ActionResult ReturnUserPanelByUsername(string username)
+        {
+            User us = DataProviderGet.GetUser(username);
+
+            return View("~/Views/Home/UserPanel.cshtml", DataMapper.CreateUserModel(us.UserId));
         }
 
         [HttpPost]

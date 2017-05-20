@@ -219,24 +219,34 @@ namespace Trip_Advisor_Neo4j.DataAccess
             List<Recommendation> rl = GetPlaceRecommendations(placeId);
 
             float rating = 0.0f;
-            foreach(Recommendation r in rl)
+            if (rl.Count > 0)
             {
-                rating += (float)r.Rating;
-            }
+                foreach (Recommendation r in rl)
+                {
+                    rating += (float)r.Rating;
+                }
 
-            return rating / rl.Count;
+                return rating / rl.Count;
+            }
+            else
+                return rating;
         }
         public static float CalculateCountryRating(int countryId)
         {
             List<Place> cp = GetCountryPlaces(countryId);
 
             float rating = 0.0f;
-            foreach (Place p in cp)
+            if (cp.Count > 0)
             {
-                rating += p.Rating;
-            }
+                foreach (Place p in cp)
+                {
+                    rating += p.Rating;
+                }
 
-            return rating / cp.Count;
+                return rating / cp.Count;
+            }
+            else
+                return rating;
         }
 
         //------------------------------------ZA REDIS-----------------------------------------------------------------

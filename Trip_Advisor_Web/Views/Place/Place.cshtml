@@ -7,6 +7,8 @@
 
 
 @Styles.Render("~/Content/PlaceStyles.css")
+@Scripts.Render("~/Scripts/TripAdvisorScripts/RecommendationScript.js")
+
 
 <div class="placeDescription jumbotron ">
     <h1>@Model.Name</h1>
@@ -23,6 +25,11 @@
         @Html.ActionLink("I visited", "UserVisitedPlace", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
 
         @Html.ActionLink("Show nearby similar", "GetSimilarPlaces", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
+
+        @if ((int)Session["Status"] >= 9)
+        {
+          <button id="recommendRequest" class="btn btn-danger" data-toggle="modal" data-target="#mdl2">Update</button>
+        }
     </div>
 </div>
 
@@ -75,7 +82,7 @@
             Additional info
         </div>
         <div class="panel-body">
-            <p><b>Location: </b>@Model.PlaceLocation.Name </p>
+            <p><b>Location: </b>@Html.ActionLink(@Model.PlaceLocation.Name, "ReturnCity", "City", new { cityId = Model.PlaceLocation.CityId }, new { @class = "link" }) </p>
             <p><b>Distance from the city:</b> @Model.CityCenterDistance</p>
             <p><b>Rating:</b> @Model.Rating</p>
             
@@ -132,11 +139,11 @@
 
         @if (Model.CurrentUserRecommends && (int)Session["Status"] < 9)
         {
-            <div id="upl"><label class="nnt"></label><button id="recommendRequest" style="display: none;" class="btn btn-danger"  data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
+            <div id="upl"><label class="nnt"></label><button id="recommendRequest" style="display: none;" class="btn btn-danger"  data-toggle="modal" data-target="#mdl">Recommend</button></div>
         }
         else
         {
-            <div id="upl"><label class="nnt"></label><button id="recommendRequest" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Recommend</button></div>
+            <div id="upl"><label class="nnt"></label><button id="recommendRequest" class="btn btn-danger" data-toggle="modal" data-target="#mdl">Recommend</button></div>
         }
 
 
@@ -181,13 +188,33 @@
 
 
 
+        <div id="mdl2" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content form-horizontal">
+                    
+
+                    <form role="form" class="form-horizontal" id="descForm" action="/Place/UpdateDescription" method="post">
+                        <input type="hidden" value=@Model.PlaceId name="placeId" id="placeId">
+                        <label class="lbl">Description: &nbsp;</label>
+                        <textarea id="newDescText" name="descText" class="form-control fc">@Model.Description</textarea>
+                        <input type="submit" id="descButton" value="Submit" class="btn btn-danger fc" />
+                    </form>
+
+                    <form role="form" class="form-horizontal" id="picForm" action="/Place/AddPicture" method="post" enctype = "multipart/form-data">
+                        <input type="hidden" value=@Model.PlaceId name="placeId" id="placeId">
+                        <label class="lbl">Add new picture: &nbsp;</label>
+                        <input type="file" name="file" id="file" />
+                        <input type="submit" id="picButton" value="Submit" class="btn btn-danger fc" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </div>
 
-<script>
-  
 
-</script>
-
-@Scripts.Render("~/Scripts/TripAdvisorScripts/RecommendationScript.js")
 

@@ -16,7 +16,7 @@ namespace Trip_Advisor_Web
     {
         public static CityModel CreateCityModel(int cityId)
         {
- 
+
             City city = DataProviderGet.GetNode<City>(cityId, "City");
 
             CityModel cityModel = new CityModel()
@@ -65,7 +65,7 @@ namespace Trip_Advisor_Web
             messageModel.SenderUsername = message.SenderUsername;
             messageModel.Subject = message.Subject;
             messageModel.Text = message.Text;
-           // messageModel.SendingDate = message.SendingDate;
+            // messageModel.SendingDate = message.SendingDate;
 
             DateTime time;
             if (DateTime.TryParseExact(message.SendingDate.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
@@ -89,7 +89,7 @@ namespace Trip_Advisor_Web
             countryModel.OverallRating = country.OverallRating;
 
 
-            List<Place> ratedPlaces = DataProviderGet.GetTopNRatedPlacesByCountry(10, countryId);
+            List<Place> ratedPlaces = DataProviderGet.GetTopNRatedPlacesByCountry(3, countryId);
             if (ratedPlaces != null)
             {
                 foreach (Place p in ratedPlaces)
@@ -109,11 +109,11 @@ namespace Trip_Advisor_Web
 
             }
 
-            List<Place> visitedPlaces = DataProviderGet.GetTopNVisitedPlacesByCountry(10, countryId);
+            List<Place> visitedPlaces = DataProviderGet.GetTopNVisitedPlacesByCountry(3, countryId);
 
             if (visitedPlaces != null)
             {
-                foreach (Place p in ratedPlaces)
+                foreach (Place p in visitedPlaces)
                 {
                     PlaceModel place = new PlaceModel()
                     {
@@ -125,14 +125,14 @@ namespace Trip_Advisor_Web
                         Rating = p.Rating
                     };
 
-                    countryModel.TopRatedPlaces.Add(place);
+                    countryModel.TheMostVisitedPlaces.Add(place);
                 }
             }
 
 
             return countryModel;
         }
-        public static ListOfPlacesModel CreateListOfPlacesModel (List<Place> places)
+        public static ListOfPlacesModel CreateListOfPlacesModel(List<Place> places)
         {
             ListOfPlacesModel list = new ListOfPlacesModel();
 
@@ -149,7 +149,7 @@ namespace Trip_Advisor_Web
 
             return list;
         }
-        public static PlaceModel CreatePlaceModel (int placeId)
+        public static PlaceModel CreatePlaceModel(int placeId)
         {
             Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
 
@@ -158,24 +158,25 @@ namespace Trip_Advisor_Web
             placeModel.Description = place.Description;
             placeModel.CityCenterDistance = place.CityCenterDistance;
             placeModel.PlaceId = place.PlaceId;
-            placeModel.Rating =(float)Math.Round(place.Rating, 2, MidpointRounding.AwayFromZero);
+            placeModel.Rating = (float)Math.Round(place.Rating, 2, MidpointRounding.AwayFromZero);
             placeModel.Type = place.Type;
-            
-            if(place.Pictures != null)
-            { 
-                    foreach(var pic in place.Pictures)
-                    {
-                        placeModel.Pictures.Add(pic);
-                    }
+
+            if (place.Pictures != null)
+            {
+                foreach (var pic in place.Pictures)
+                {
+                    placeModel.Pictures.Add(pic);
+                }
             }
 
             City placeLocation = DataProviderGet.GetPlaceLocation(placeId);
             placeModel.PlaceLocation.Name = placeLocation.Name;
-     
+            placeModel.PlaceLocation.CityId = placeLocation.CityId;
 
-            List<Recommendation> recommendations = DataProviderGet.GetPlaceRecommendationsByTime(placeId, false); 
 
-            foreach(Recommendation r in recommendations)
+            List<Recommendation> recommendations = DataProviderGet.GetPlaceRecommendationsByTime(placeId, false);
+
+            foreach (Recommendation r in recommendations)
             {
                 RecommendationModel recommendationModel = new RecommendationModel();
                 recommendationModel.Comment = r.Comment;
@@ -189,7 +190,7 @@ namespace Trip_Advisor_Web
                 user.Username = recommender.Username;
 
                 recommendationModel.RefferedBy = user;
-            
+
 
                 DateTime time;
                 if (DateTime.TryParseExact(r.RecommendationTime.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out time))
@@ -213,10 +214,10 @@ namespace Trip_Advisor_Web
             }
 
             placeModel.CurrentUserRecommends = DataProviderGet.HasRelationshipWithaPlace((int)HttpContext.Current.Session["Id"], placeModel.PlaceId, "RECOMMENDS");
-         
+
             return placeModel;
         }
-        public static RecommendationModel CreateRecommendationModel (int recommendationId)
+        public static RecommendationModel CreateRecommendationModel(int recommendationId)
         {
             //Recommendation recomm = DataProviderGet.GetNode<Recommendation>(recommendationId, "Recommendation");
 
@@ -227,7 +228,7 @@ namespace Trip_Advisor_Web
 
             return null;
         }
-        public static InterestTagModel CreateInterestTagModel (int interestTagId)
+        public static InterestTagModel CreateInterestTagModel(int interestTagId)
         {
             InterestTag intTag = DataProviderGet.GetNode<InterestTag>(interestTagId, "InterestTag");
 
@@ -239,7 +240,7 @@ namespace Trip_Advisor_Web
 
             return intTagModel;
         }
-        public static UserModel CreateUserModel (int userId)
+        public static UserModel CreateUserModel(int userId)
         {
             HttpContext context = HttpContext.Current;
 
@@ -270,7 +271,7 @@ namespace Trip_Advisor_Web
                     Name = currentLocation.Name,
                     CityId = currentLocation.CityId,
                     CenterLatitude = currentLocation.CenterLatitude,
-                    CenterLongitude = currentLocation.CenterLongitude                    
+                    CenterLongitude = currentLocation.CenterLongitude
                 };
 
                 //for (int pic = 0; pic < 1; pic++)
@@ -280,9 +281,9 @@ namespace Trip_Advisor_Web
 
                 userModel.CurrentLocation = cityMdl;
             }
-           
 
-           
+
+
 
             List<Place> PlacesThatWantsToVisit = DataProviderGet.GetPlaces(user.UserId, "PLANSTOVISIT");
             foreach (var place in PlacesThatWantsToVisit)
@@ -329,7 +330,7 @@ namespace Trip_Advisor_Web
             }
 
             List<User> SamePlaceUsers = DataProviderGet.GetFollowingThatAreCurrentlyAtTheSameCity(userId);
-            foreach(var p in SamePlaceUsers)
+            foreach (var p in SamePlaceUsers)
             {
                 UserModel us = new UserModel()
                 {
@@ -361,13 +362,31 @@ namespace Trip_Advisor_Web
                 userMd.Username = friend.Username;
                 userMd.ProfilePicture = friend.ProfilePicture;
                 userMd.UserId = friend.UserId;
-                                    
+
                 userModel.Following.Add(userMd);
             }
-            
+
             return userModel;
         }
 
+        public static ListOfCountriesModel CreateListOfCountriesModel(List<Country> countries)
+        {
+            ListOfCountriesModel list = new ListOfCountriesModel();
 
+            foreach (Country c in countries)
+            {
+                CountryModel cm = new CountryModel();
+                cm.Name = c.Name;
+                cm.NationalFlag = c.NationalFlag;
+                cm.OverallRating = (float)Math.Round(c.OverallRating, 2, MidpointRounding.AwayFromZero);
+                cm.CountryId = c.CountryId;
+
+                list.CountriesList.Add(cm);
+            }
+
+            return list;
+
+
+        }
     }
 }

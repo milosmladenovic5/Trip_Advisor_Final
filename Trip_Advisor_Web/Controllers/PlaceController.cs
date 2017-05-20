@@ -7,6 +7,7 @@ using Trip_Advisor_Neo4j.DomainModel;
 using Trip_Advisor_Neo4j.DataAccess;
 using Trip_Advisor_Web.Models;
 using Trip_Advisor_Redis;
+using System.IO;
 
 namespace Trip_Advisor_Web.Controllers
 {
@@ -131,6 +132,30 @@ namespace Trip_Advisor_Web.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateDescription(int placeId, string descText)
+        {
+            DataProviderUpdate.UpdatePlaceDescription(placeId, descText);
+            return View("Place", DataMapper.CreatePlaceModel(placeId));
+        }
+
+        [HttpPost]
+        public ActionResult AddPicture(int placeId, HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/Images/Place" + placeId + "/"), fileName);
+
+
+                file.SaveAs(path);
+                string picturePath = "/Content/Images/Place" + placeId + "/" + fileName;
+                DataProviderUpdate.AddPictureOfPlace(picturePath, placeId);
+            }
+
+            return View("Place", DataMapper.CreatePlaceModel(placeId));
         }
     }
 }

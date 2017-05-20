@@ -49,7 +49,7 @@ namespace Trip_Advisor_Neo4j
 
             User u1 = new User();
             u1.Username = "Perica";
-            u1.UserStatusFLAG = 1;
+            u1.UserStatusFLAG = 2;
             u1.Email = u1.Username + "@gmail.com";
             u1.Password = "123";
             u1.ProfilePicture = this.defaultUserPicture;
@@ -57,7 +57,7 @@ namespace Trip_Advisor_Neo4j
             int perica = Int32.Parse(DataProviderGet.GetMaxId("User"));
        
             u1.Username = "Mitar";
-            u1.UserStatusFLAG = 1;
+            u1.UserStatusFLAG = 2;
             u1.Password = "123";
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
@@ -67,7 +67,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Pujo";
             u1.Password = "123";
-            u1.UserStatusFLAG = 1;
+            u1.UserStatusFLAG = 2;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -84,7 +84,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "TonusHleb";
             u1.Password = "123";
-            u1.UserStatusFLAG = 1;
+            u1.UserStatusFLAG = 2;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -93,7 +93,7 @@ namespace Trip_Advisor_Neo4j
 
             u1.Username = "Vojislav";
             u1.Password = "123";
-            u1.UserStatusFLAG = 9;
+            u1.UserStatusFLAG = 2;
             u1.Email = u1.Username + "@gmail.com";
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
@@ -104,7 +104,7 @@ namespace Trip_Advisor_Neo4j
             u1.Username = "Vucko";
             u1.Password = "123";
             u1.Email = u1.Username + "@gmail.com";
-            u1.UserStatusFLAG = 1;
+            u1.UserStatusFLAG = 2;
             u1.ProfilePicture = this.defaultUserPicture;
             DataProviderCreate.CreateUser(u1);
             int vucko = Int32.Parse(DataProviderGet.GetMaxId("User"));
@@ -312,7 +312,7 @@ namespace Trip_Advisor_Neo4j
             //nove drzave 
             ct.Name = "Italy";
             ct.OverallRating = 0.0f;
-            ct.NationalFlag = "/Content/Images/it.svg";
+            ct.NationalFlag = "/Content/Images/it.jpg";
             ct.PromotionalVideoURL = "https://www.youtube.com/watch?v=TeVs1FeRDAw";
             DataProviderCreate.CreateCountry(ct);
             int italia = Int32.Parse(DataProviderGet.GetMaxId("Country"));
@@ -557,7 +557,7 @@ namespace Trip_Advisor_Neo4j
             {
                 string f_name = Path.GetFileName(ofd.FileName);
 
-                string path = "/Content/Images/" + f_name;      // ovo vidi kako ti vec treba
+                string path = "/Content/Images/" + f_name;     
 
                 int id = 0;
                 if (Int32.TryParse(this.placeId.Text, out id))
@@ -591,34 +591,7 @@ namespace Trip_Advisor_Neo4j
 
         private void aditd_1_Click(object sender, EventArgs e)
         {
-            //int messId = DataProviderCreate.CreateMessage("Kako je danas Vojislave?.", "Dobra kao dobar dan!");
-            //DataRelationships.SendMessage(2, 6, 2);
-
-            //int messId2 = DataProviderCreate.CreateMessage("Ti nemas srce, nemas dusu.", "Klington");
-            //DataRelationships.SendMessage(1, 6, 2);
-
-            //int messId3 = DataProviderCreate.CreateMessage("Klinton nije sluzio vojsku.", "Suntavilo");
-            //DataRelationships.SendMessage(3, 2, messId3);
-
-            //int messId4 = DataProviderCreate.CreateMessage("Vojo, nemoj tako.", "Rakijestina");
-            //DataRelationships.SendMessage(2, 6, messId4);
-
-            //int messId5 = DataProviderCreate.CreateMessage("Ok?", "Ok.");
-            //DataRelationships.SendMessageToUser("Mitar", "Pujo", messId5);
-
-
-            //List<DomainModel.Message> mitrovePoruke = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "SENT");
-
-            //foreach(var m  in mitrovePoruke)
-            //{
-            //    MessageBox.Show(m.Text);
-            //}
-
-            //List<DomainModel.Message> mitrovePrimljene = DataProviderGet.GetAllMessagesSentOrReceivedByUser(2, "RECEIVED");
-            //foreach(var m in mitrovePrimljene)
-            //{
-            //    MessageBox.Show(m.Text);
-            //}
+            
 
         }
 

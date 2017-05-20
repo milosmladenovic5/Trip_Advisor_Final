@@ -214,6 +214,7 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterestTagModel.cs" />
+    <Compile Include="Models\ListOfCountriesModel.cs" />
     <Compile Include="Models\ListOfPlacesModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Views\City\City.cshtml" />
     <Content Include="Views\Country\Country.cshtml" />
     <Content Include="Views\Administrator\AdministratorPanel.cshtml" />
+    <Content Include="Views\Country\ListOfCountries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

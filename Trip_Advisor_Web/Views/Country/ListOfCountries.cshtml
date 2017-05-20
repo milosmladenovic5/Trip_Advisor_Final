@@ -1,0 +1,28 @@
+﻿@model Trip_Advisor_Web.Models.ListOfCountriesModel
+@{
+    ViewBag.Title = "ListOfCountries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+
+    @if (Model.CountriesList == null || Model.CountriesList.Count == 0)
+    {
+        <h2>No results..</h2>
+    }
+    else
+    {
+        for (int i = 0; i < Model.CountriesList.Count; i++)
+        {
+            <div class="panel panel-warning">
+                <div class="panel-heading panel-info">
+                    @Html.ActionLink(@Model.CountriesList[i].Name, "ReturnCountry", "Country", new { countryId = Model.CountriesList[i].CountryId }, new { @class = "link" })
+                </div>
+                <div class="panel-body">
+                    @Model.CountriesList[i].OverallRating
+                </div>
+            </div>
+
+        }
+    }

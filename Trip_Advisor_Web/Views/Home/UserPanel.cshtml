@@ -19,7 +19,7 @@
             @Html.HiddenFor(m => m.ProfilePicture, new { })
             @if (ViewBag.Change != true && (int)Session["Id"] == @Model.UserId)
             {
-                <button id="changeInfoButton" type="submit" class="btn btn-danger">Change user info</button>
+                <button id="changeInfoButton" type="submit" class="btn btn-danger">Update profile</button>
             }
             else
             {
@@ -29,7 +29,8 @@
 
             @if (Model.UserId == (int)Session["Id"])
             {
-                <div id="upl"><label class="nnt"></label><button id="interests" class="btn btn-danger" @*onclick="PredloziTag()"*@ data-toggle="modal" data-target="#mdl">Modify interests</button></div>
+                <div id="upl"><label class="nnt"></label><button id="interests" class="btn btn-danger"  data-toggle="modal" data-target="#mdl">Modify interests</button></div>
+                <div id="upl"><label class="nnt"></label><button id="inboxBtn" onclick="inboxClick(@Session["Id"])" class="btn btn-warning" data-toggle="modal" data-target="#modalInbox">Inbox</button></div>
 
 
                 <div id="mdl" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -110,8 +111,12 @@
             {
 
                 @Html.ActionLink("View popular places", "GetTopVisitedPlaces", "Place", null, new { @class = "popPlc usrBtns btn btn-info" })
-              
+          
                 @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info usrBtns" })
+              
+                @Html.ActionLink("View top popular countries", "ReturnTopVisitedCountries", "Country", null, new { @class = "btn btn-info usrBtns" })
+            
+                @Html.ActionLink("View top rated countries", "ReturnTopRatedCountries", "Country", null, new { @class = "btn btn-info usrBtns" })
             }
            
          
@@ -223,7 +228,59 @@
         }
 
     </div>
+
+
+    @if (Session["Id"] != null)
+    {
+        <div id="modalInbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+                        <div class="messageListCont">
+                            <label>Inbox</label>
+                            <ul id="listOfMessages" style="list-style: none;"></ul>
+                        </div>
+                        <div id="messageDetails" class="message">
+                            <table id="messageTable" class="table table-striped">
+                                <tbody>
+                                    <tr id="usern" class="messageDetails">
+                                        <td id="to">
+                                            <label>From: </label>
+                                        </td>
+                                        <td id="fromContainer"></td>
+                                    </tr>
+                                    <tr id="subj" class="messageDetails">
+                                        <td><label>Subject: </label></td>
+                                        <td id="subjectContainer"></td>
+                                    </tr>
+                                    <tr id="messageDate" class="messageDetails">
+                                        <td><label>Date: </label></td>
+                                        <td id="dateContainer"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table id="messageTable">
+                                <tr class="messageDetails">
+                                    <td><label>Message text:</label></td>
+                                </tr>
+                                <tr class="messageDetails">
+                                    <td id="messageContainer"></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
 </div>
 
 
 @Scripts.Render("~/Scripts/TripAdvisorScripts/UserPanelScript.js")
+@Scripts.Render("~/Scripts/TripAdvisorScripts/MessagesScript.js")

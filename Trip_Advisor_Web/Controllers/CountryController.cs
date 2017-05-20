@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Trip_Advisor_Neo4j.DataAccess;
 using Trip_Advisor_Neo4j.DomainModel;
+using Trip_Advisor_Redis;
 using Trip_Advisor_Web.Models;
 
 namespace Trip_Advisor_Web.Controllers
@@ -21,5 +22,18 @@ namespace Trip_Advisor_Web.Controllers
         {
             return View("Country", DataMapper.CreateCountryModel(countryId));
         }
+
+        public ActionResult ReturnTopVisitedCountries()
+        {
+            List<Country> cl = RedisDataLayer.GetTopCountriesByVisitors();
+            return View("ListOfCountries", DataMapper.CreateListOfCountriesModel(cl));
+        }
+
+        public ActionResult ReturnTopRatedCountries()
+        {
+            List<Country> cl = RedisDataLayer.GetTopCountriesByRating();
+            return View("ListOfCountries", DataMapper.CreateListOfCountriesModel(cl));
+        }
+
     }
 }
