@@ -17,19 +17,22 @@
                 <img src="@Model.ProfilePicture" class="img-thumbnail" />
             }
             @Html.HiddenFor(m => m.ProfilePicture, new { })
-            @if (ViewBag.Change != true && (int)Session["Id"] == @Model.UserId)
-            {
-                <button id="changeInfoButton" type="submit" class="btn btn-primary">Update profile</button>
-            }
-            else
-            {
-
-            }
+            
 
 
             @if (Model.UserId == (int)Session["Id"])
             {
-                <div id="upl"><label class="nnt"></label><button id="interests" class="btn btn-primary"  data-toggle="modal" data-target="#mdl">Modify interests</button></div>
+                <div id="upl">
+                    <label class="nnt"></label><button id="interests" class="btn btn-primary"  data-toggle="modal" data-target="#mdl">Modify interests</button>
+                @if (ViewBag.Change != true && (int)Session["Id"] == @Model.UserId)
+                {
+                    <button id="changeInfoButton" type="submit" class="btn btn-primary">Update profile</button>
+                }
+                else
+                {
+
+                }
+                </div>
                 <div id="upl"><label class="nnt"></label><button id="inboxBtn" onclick="inboxClick(@Session["Id"])" class="btn btn-warning" data-toggle="modal" data-target="#modalInbox">Inbox</button></div>
 
 
@@ -104,78 +107,83 @@
         </div>
 
     }
-    <div class="btnCont col-lg-6 col-md-2 col-sm-1">
+    <div class="btnCont controls col-lg-6 col-md-2 col-sm-1">
         <br />
         <div>
+            <label id="controlsLbl">Links</label>
             @if (Model.UserId == (int)Session["Id"])
             {
 
                 @Html.ActionLink("View popular places", "GetTopVisitedPlaces", "Place", null, new { @class = "popPlc usrBtns btn btn-info" })
           
-                @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "btn btn-info usrBtns" })
+                @Html.ActionLink("View top rated places", "GetTopRatedPlaces", "Place", null, new { @class = "usrBtns btn btn-info link " })
               
-                @Html.ActionLink("View top popular countries", "ReturnTopVisitedCountries", "Country", null, new { @class = "btn btn-info usrBtns" })
+                @Html.ActionLink("View top popular countries", "ReturnTopVisitedCountries", "Country", null, new { @class = "usrBtns btn btn-info link" })
             
-                @Html.ActionLink("View top rated countries", "ReturnTopRatedCountries", "Country", null, new { @class = "btn btn-info usrBtns" })
+                @Html.ActionLink("View top rated countries", "ReturnTopRatedCountries", "Country", null, new { @class = "usrBtns btn btn-info link " })
             }
            
          
             @Html.ActionLink("User visited", "UserVisited", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
-
-           
+                       
             @Html.ActionLink("User plans to visit", "UserPlansToVisit", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
-
 
             @if (Model.UserId != (int)Session["Id"])
             {
-                if ((int)Session["Status"] >= 9)
-                {
-                    if (Model.UserStatusFLAG >= 2)
+                <div class="btnCont controls">
+                    <label id="controlsLbl">Controls</label>
+                    <br />
+
+                    @if ((int)Session["Status"] >= 9)
                     {
-                        <button type="button" name="Suspend" id="suspendBtn" onclick="suspend(@Model.UserId)" class="btn btn-danger">Suspend</button>
+                        if (Model.UserStatusFLAG >= 2)
+                        {
+                            <button type="button" name="Suspend" id="suspendBtn" onclick="suspend(@Model.UserId)" class="usrBtns btn btn-danger">Suspend</button>
+                        }
+                        else
+                        {
+                            <button type="button" name="Unsuspend" id="unsuspendBtn" onclick="unsuspend(@Model.UserId)" class="btn btn-primary">Unsuspend</button>
+                        }
+                    }
+
+
+                    @if (!Model.FollowingHim)
+                    {
+
+                        <button type="button" name="Follow" id="followBtn" onclick="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Follow</button>
+
                     }
                     else
                     {
-                        <button type="button" name="Unsuspend" id="unsuspendBtn" onclick="unsuspend(@Model.UserId)" class="btn btn-primary">Unsuspend</button>
+                        <button type="button" name="Unfollow" id="followBtn" onclick="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Unfollow</button>
                     }
-                }
 
-                if ((int)Session["Status"] == 10)
-                {
-                    if (Model.UserStatusFLAG < 9)
+
+                    @if ((int)Session["Status"] == 10)
                     {
-                        <button type="button" name="mod" id="modBtn" onclick="mod(@Model.UserId)" class="btn btn-primary">Promote to moderator</button>
+                        if (Model.UserStatusFLAG < 9)
+                        {
+                            <button type="button" name="mod" id="modBtn" onclick="mod(@Model.UserId)" class="btn btn-primary">Promote to moderator</button>
+                        }
+                        else
+                        {
+                            <button type="button" name="mod" id="unmodBtn" onclick="unmod(@Model.UserId)" class="btn btn-danger">Demote</button>
+
+                        }
                     }
-                    else
-                    {
-                        <button type="button" name="mod" id="unmodBtn" onclick="unmod(@Model.UserId)" class="btn btn-danger">Demote</button>
-
-                    }
-                }
-
-                if (!Model.FollowingHim)
-                {
-
-                    <button type="button" name="Follow" id="followBtn" onclick ="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Follow</button>
-
-                }
-                else
-                { 
-                    <button type="button" name="Unfollow" id="followBtn" onclick ="followOrUnfollow(@Model.UserId)" class="btn btn-primary">Unfollow</button>
-                }
 
 
-                <div id="SendModalToggle"><label class="nnt"></label><button id="sendMsgModal" class="btn btn-primary" data-toggle="modal" data-target="#modalCompose" >Send message</button></div>
+                    <div id="SendModalToggle"><label class="nnt"></label><button id="sendMsgModal" class="btn btn-primary" data-toggle="modal" data-target="#modalCompose">Send message</button></div>
 
-                @*<div class="modal show" id="modalCompose">*@
-                <div id="modalCompose" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Compose Message</h4>
-                            </div>
-                            <div class="modal-body">
+                    @*<div class="modal show" id="modalCompose">*@
+                    <div id="modalCompose" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Compose Message</h4>
+                                </div>
+                                <div class="modal-body">
 
                                     <table id="messageTable">
                                         <tr id="usern">
@@ -189,7 +197,7 @@
                                         </tr>
                                         <tr id="subj">
                                             <td><label>Subject: </label></td>
-                                            <td> 
+                                            <td>
                                                 <input type="text" class="form-control" id="inputSubject" placeholder="subject" name="subject">
                                             </td>
                                         </tr>
@@ -200,27 +208,30 @@
                                             </td>
                                         </tr>
                                     </table>
-                                  
-                                @*</form>*@
-                            </div>
-                            <div class="modal-footer" id="sendMdlFooter">
-                                <button type="button" onclick="ClearSendModal()" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-                                @*<button type="button" class="btn btn-warning pull-left">Save Draft</button>*@
-                                @*<button type="submit" form="sendForm" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>*@
-                                <button type="button"  class="btn btn-primary" onclick="SendMessage()">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
-                                <div id="warnings">
 
+                                    @*</form>*@
+                                </div>
+                                <div class="modal-footer" id="sendMdlFooter">
+                                    <button type="button" onclick="ClearSendModal()" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                                    @*<button type="button" class="btn btn-warning pull-left">Save Draft</button>*@
+                                    @*<button type="submit" form="sendForm" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>*@
+                                    <button type="button" class="btn btn-primary" onclick="SendMessage()">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                                    <div id="warnings">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             }
+           
         </div>
 
         <br />
     </div>
+    
+       
 </div>
 
 

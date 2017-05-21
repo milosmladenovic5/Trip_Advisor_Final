@@ -16,6 +16,7 @@ namespace Trip_Advisor_Web.Models
         public string NationalFlag { get; set; }
         public List<PlaceModel> TopRatedPlaces { get; set; }
         public List<PlaceModel> TheMostVisitedPlaces { get; set; }
+        public string PromotionalVideoURL { get; set; }
 
 
         public CountryModel()

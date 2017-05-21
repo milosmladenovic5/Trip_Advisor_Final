@@ -32,7 +32,8 @@ namespace Trip_Advisor_Web
             {
                 Name = country.Name,
                 CountryId = country.CountryId,
-                NationalFlag = country.NationalFlag
+                NationalFlag = country.NationalFlag,
+                PromotionalVideoURL = country.PromotionalVideoURL
             };
 
             cityModel.Country = countryModel;
@@ -87,6 +88,7 @@ namespace Trip_Advisor_Web
             countryModel.Name = country.Name;
             countryModel.NationalFlag = country.NationalFlag;
             countryModel.OverallRating = country.OverallRating;
+            countryModel.PromotionalVideoURL = country.PromotionalVideoURL;
 
 
             List<Place> ratedPlaces = DataProviderGet.GetTopNRatedPlacesByCountry(3, countryId);

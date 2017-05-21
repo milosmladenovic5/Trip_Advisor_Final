@@ -130,8 +130,16 @@ legend{
 }
 
 .btnCont{
-    padding-left:15%;
-    padding-top:15%;
+    padding:10px;
+    margin-top:1%;
+    background:rgba(0,0,0,0.5);
+    display: inline-block;
+    color:white;
+    margin-top:5px;
+}
+
+#controlsLbl{
+    color:white;
 }
 
 .popPlc{
@@ -164,4 +172,20 @@ legend{
 
 #user{
  
+}
+
+
+.controls{
+        /*background:rgba(0,0,0,0.5);
+    position:absolute;
+    padding:5px;
+    color:white;*/
+}
+
+#modBtn, #unsuspendBtn, #followBtn, #sendMsgModal{
+    margin-top:2px;
+}
+
+#modBtn, #sendMsgModal{
+    width:79%;
 }

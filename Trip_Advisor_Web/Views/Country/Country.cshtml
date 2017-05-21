@@ -6,9 +6,19 @@
 }
 
 
-<div class="container">
-    <h1>@Model.Name</h1>
-    <img class="thumbnail" src="@Model.NationalFlag" />
+<div class="flag col-lg-6 col-sm-12 col-md-6">
+    <h1 class="lbls">@Model.Name</h1>
+    <img class="flagTh thumbnail" src="@Model.NationalFlag" />
+    <!-- 16:9 aspect ratio -->
+</div>
+
+<div class="promVideo col-lg-6 col-sm-12 col-md-6">
+    <!-- 16:9 aspect ratio -->
+    <h1 class="lbls">Promotional video</h1>
+
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="@Model.PromotionalVideoURL"></iframe>
+    </div>
 </div>
 
 <div class="container">
