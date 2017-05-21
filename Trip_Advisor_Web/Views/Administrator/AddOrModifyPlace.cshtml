@@ -1,0 +1,78 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.PlaceAdminModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    if (Model != null)
+    {
+         <form role="form" class="form-horizontal" id="placeForm" action= @(Model.Update? "/Administrator/UpdatePlace" : "/Administrator/CreatePlace") method="post">
+            @if (Model.Update)
+            {
+                <input type="hidden" name="placeId" value=@Model.Place.PlaceId />
+                <input type="hidden" name="oldName" value=@Model.Place.Name />
+            }
+            <div class="form-group">
+                <label for="placeName">Name</label>
+                <input type="text" value=@Model.Place.Name class="form-control fc" id="placeName" name="pName" aria-describedby="emailHelp" placeholder="Name">
+                <small id="nameHelp" class="form-text text-muted">Must be unique!</small>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="descriptionText" rows="4" name="desc" class="form-control fc">@Model.Place.Description</textarea>
+            </div>
+            <div class="form-group">
+                <label for="belongsTo">Belongs to city</label>
+                <select class="form-control fc" id="belongsTo" name="selectCity">
+                    @for (int i = 0; i < Model.AllCities.Count; i++)
+                    {
+                        if (Model.AllCities[i].CityId == Model.SelectedID)
+                        {
+                            <option selected value=@Model.AllCities[i].CityId>@Model.AllCities[i].Name</option>
+                        }
+                        else
+                        {
+                            <option value=@Model.AllCities[i].CityId>@Model.AllCities[i].Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectTags">Interest tags</label>
+                <select multiple class="form-control fc" id="selectT" name="selectTags">
+                    @for (int i = 0; i < Model.AllTags.Count; i++)
+                    {
+                        if (Model.SelectedTags.Contains(Model.AllTags[i]))
+                        {
+                            <option selected value=@Model.AllTags[i]>@Model.AllTags[i]</option>
+                        }
+                        else
+                        {
+                            <option value=@Model.AllTags[i]>@Model.AllTags[i]</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Latitude">Latitude</label>
+                <input type="number" value=@Model.Place.Latitude step="0.01" name="lat" placeholder="Latitude">
+            </div>
+            <div class="form-group">
+                <label for="Longitude">Longitude</label>
+                <input type="number" value=@Model.Place.Longitude step="0.01" name="lon" placeholder="Longitude">
+            </div>
+            <div class="form-group">
+                <label for="Distance from the city center">Distance from the city center</label>
+                <input type="number" value=@Model.Place.CityCenterDistance name="ccd" placeholder="CCD">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+}
+else
+{
+    <h1>Access denied!</h1>
+}

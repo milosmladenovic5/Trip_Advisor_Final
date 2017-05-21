@@ -1,0 +1,59 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.ListOfPlacesModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    <div class="row">
+            @Html.ActionLink("New place", "AddNewPlaceRequest", "Administrator", null, new { @class = "btn btn-info link " })   
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        @if (Model != null)
+        {
+            <table class="col-lg-6 table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Rating</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>CityCenterDistance</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var place in Model.PlacesList)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(@place.Name, "GetPlace", "Place", new { placeId = place.PlaceId }, new { @class = "link" })</td>
+                            <td>@Html.ActionLink(@place.PlaceLocation.Name, "ReturnCity", "City", new { cityId = place.PlaceLocation.CityId }, new { @class = "link" })</td>
+                            <td>@place.Rating</td>
+                            <td>@place.Latitude</td>
+                            <td>@place.Longitude</td>
+                            <td>@place.CityCenterDistance</td>
+                            <td>@Html.ActionLink("Update", "UpdatePlaceRequest", "Administrator", new { placeId = place.PlaceId }, new { @class = "btn btn-warning" })</td>
+                            <td><button type="button" name="deletePlace" id="deletePlace" class="btn btn-danger" onclick="deletePlace(@place.PlaceId)">Delete</button></td>
+                        
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="col-lg-6">No places in the database.</p>
+        }
+        <div class="col-lg-3"></div>
+    </div>
+
+}
+else
+{
+    <h1>Access denied!</h1>
+}
+
