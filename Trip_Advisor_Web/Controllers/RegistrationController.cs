@@ -31,7 +31,8 @@ namespace Trip_Advisor_Web.Controllers
                     Email = model.Email,
                     Password = model.Password,
                     UserStatus = null,
-                    ProfilePicture = "/Content/Images/User-Default.jpg"
+                    ProfilePicture = "/Content/Images/User-Default.jpg",
+                    UserStatusFLAG = 1
                 };
                
                 

@@ -69,7 +69,7 @@ namespace Trip_Advisor_Web.Controllers
             Trip_Advisor_Neo4j.DataLayer.Connect();
 
             User user = DataProviderGet.GetUser(model.Username);
-            if (ModelState.IsValid && user != null && user.Password == model.Password)
+            if (ModelState.IsValid && user != null && user.Password == model.Password && user.UserStatusFLAG >= 2)
             {
 
                 Session["Id"] = user.UserId;

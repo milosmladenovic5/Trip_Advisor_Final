@@ -224,5 +224,26 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
+        public static bool UpdateUserStatusFLAG(int userId, int newFLAG)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("userId", userId);
+                queryDict.Add("newFLAG", newFLAG);
+
+
+                var query = new CypherQuery("match (n:User {UserId: {userId} }) set n.UserStatusFLAG = {newFLAG}",
+                    queryDict, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

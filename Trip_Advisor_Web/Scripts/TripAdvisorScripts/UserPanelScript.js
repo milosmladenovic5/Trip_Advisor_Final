@@ -37,6 +37,71 @@
         }
     }
 
+    function suspendOrUns(userIdH) {
+        var action = $('#suspendBtn').attr("name");
+
+        if (action == "Suspend") {
+            $.post("/Administrator/UpdateUserStatusFLAG", { userId: userIdH, newFlag: 0 }, function (data) {
+                if (data) {
+                    $('#suspendBtn').attr("name", "Unsuspend");
+                    $('#suspendBtn').text("Unsuspend");
+                    $('#suspendBtn').removeClass("btn-danger");
+                    $('#suspendBtn').addClass("btn-primary");
+                    if($('#modBtn').attr("name") == "Unmod")
+                    {
+                        $('#modBtn').attr("name", "Mod");
+                        $('#modBtn').text("Promote to moderator");
+                        $('#modBtn').removeClass("btn-danger");
+                        $('#modBtn').addClass("btn-primary");
+                    }
+                }
+            });
+        }
+        else {
+            $.post("/Administrator/UpdateUserStatusFLAG", { userId: userIdH, newFlag: 2 }, function (data) {
+                if (data) {
+                    $('#suspendBtn').attr("name", "Suspend");
+                    $('#suspendBtn').text("Suspend");
+                    $('#suspendBtn').removeClass("btn-primary")
+                    $('#suspendBtn').addClass("btn-danger");
+                }
+            });
+        }
+    }
+
+    function modOrUnmod(userIdH) {
+        var action = $('#modBtn').attr("name");
+
+        if (action == "Mod") {
+            $.post("/Administrator/UpdateUserStatusFLAG", { userId: userIdH, newFlag: 9 }, function (data) {
+                if (data) {
+                    $('#modBtn').attr("name", "Unmod");
+                    $('#modBtn').text("Demote");
+                    $('#modBtn').removeClass("btn-primary")
+                    $('#modBtn').addClass("btn-danger");
+
+                    if ($('#suspendBtn').attr("name") == "Unsuspend") {
+                        $('#suspendBtn').attr("name", "Suspend");
+                        $('#suspendBtn').text("Suspend");
+                        $('#suspendBtn').removeClass("btn-primary");
+                        $('#suspendBtn').addClass("btn-danger");
+                    }
+
+                }
+            });
+        }
+        else {
+            $.post("/Administrator/UpdateUserStatusFLAG", { userId: userIdH, newFlag: 2 }, function (data) {
+                if (data) {
+                    $('#modBtn').attr("name", "Mod");
+                    $('#modBtn').text("Promote to moderator");
+                    $('#modBtn').removeClass("btn-danger");
+                    $('#modBtn').addClass("btn-primary");
+                }
+            });
+        }
+    }
+
     function selectTags(useridH) {
         //var userIdH = Math.floor($('#userIdHid').val());
 

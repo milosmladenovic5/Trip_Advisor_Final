@@ -117,5 +117,8 @@ namespace Trip_Advisor_Web.Controllers
 
             return Json(messagesList, JsonRequestBehavior.AllowGet);
         }
+
+
+        
     }
 }

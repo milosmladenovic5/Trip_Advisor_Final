@@ -124,9 +124,9 @@
             }
            
          
-            @Html.ActionLink("User visited", "UserVisited", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
+            @Html.ActionLink(Model.Username+" visited", "UserVisited", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
                        
-            @Html.ActionLink("User plans to visit", "UserPlansToVisit", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
+            @Html.ActionLink(Model.Username+" plans to visit", "UserPlansToVisit", "Place", new { userId = Model.UserId }, new { @class = "usrBtns btn btn-info link" })
 
             @if (Model.UserId != (int)Session["Id"])
             {
@@ -138,11 +138,11 @@
                     {
                         if (Model.UserStatusFLAG >= 2)
                         {
-                            <button type="button" name="Suspend" id="suspendBtn" onclick="suspend(@Model.UserId)" class="usrBtns btn btn-danger">Suspend</button>
+                            <button type="button" name="Suspend" id="suspendBtn" onclick="suspendOrUns(@Model.UserId)" class="btn btn-danger">Suspend</button>
                         }
                         else
                         {
-                            <button type="button" name="Unsuspend" id="unsuspendBtn" onclick="unsuspend(@Model.UserId)" class="btn btn-primary">Unsuspend</button>
+                            <button type="button" name="Unsuspend" id="suspendBtn" onclick="suspendOrUns(@Model.UserId)" class="btn btn-primary">Unsuspend</button>
                         }
                     }
 
@@ -163,11 +163,11 @@
                     {
                         if (Model.UserStatusFLAG < 9)
                         {
-                            <button type="button" name="mod" id="modBtn" onclick="mod(@Model.UserId)" class="btn btn-primary">Promote to moderator</button>
+                            <button type="button" name="Mod" id="modBtn" onclick="modOrUnmod(@Model.UserId)" class="btn btn-primary">Promote to moderator</button>
                         }
                         else
                         {
-                            <button type="button" name="mod" id="unmodBtn" onclick="unmod(@Model.UserId)" class="btn btn-danger">Demote</button>
+                            <button type="button" name="Unmod" id="modBtn" onclick="modOrUnmod(@Model.UserId)" class="btn btn-danger">Demote</button>
 
                         }
                     }
