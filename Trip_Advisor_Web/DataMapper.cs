@@ -77,7 +77,6 @@ namespace Trip_Advisor_Web
             return messageModel;
         }
 
-
         public static CountryModel CreateCountryModel(int countryId)
         {
 
@@ -134,6 +133,7 @@ namespace Trip_Advisor_Web
 
             return countryModel;
         }
+
         public static ListOfPlacesModel CreateListOfPlacesModel(List<Place> places)
         {
             ListOfPlacesModel list = new ListOfPlacesModel();
@@ -151,6 +151,7 @@ namespace Trip_Advisor_Web
 
             return list;
         }
+
         public static PlaceModel CreatePlaceModel(int placeId)
         {
             Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
@@ -190,6 +191,8 @@ namespace Trip_Advisor_Web
                 User recommender = DataProviderGet.GetNode<User>(r.UserId, "User");
                 user.UserId = recommender.UserId;
                 user.Username = recommender.Username;
+                placeModel.Latitude = place.Latitude;
+                placeModel.Longitude = place.Longitude;
 
                 recommendationModel.RefferedBy = user;
 
@@ -219,6 +222,7 @@ namespace Trip_Advisor_Web
 
             return placeModel;
         }
+
         public static RecommendationModel CreateRecommendationModel(int recommendationId)
         {
             //Recommendation recomm = DataProviderGet.GetNode<Recommendation>(recommendationId, "Recommendation");
@@ -230,6 +234,7 @@ namespace Trip_Advisor_Web
 
             return null;
         }
+
         public static InterestTagModel CreateInterestTagModel(int interestTagId)
         {
             InterestTag intTag = DataProviderGet.GetNode<InterestTag>(interestTagId, "InterestTag");
@@ -242,6 +247,7 @@ namespace Trip_Advisor_Web
 
             return intTagModel;
         }
+
         public static UserModel CreateUserModel(int userId)
         {
             HttpContext context = HttpContext.Current;
@@ -390,6 +396,89 @@ namespace Trip_Advisor_Web
             return list;
 
 
+        }
+
+        //------------------------------------ ADMINISTRATOR -----------------------------------------------
+
+        public static PlaceAdminModel CreatePlaceAdminModel(int placeId)
+        {
+            PlaceAdminModel pam = new PlaceAdminModel();
+            pam.Update = false;
+            pam.SelectedID = 0; // za dodaj novi
+            if (placeId != 0)
+            {
+                pam.Update = true;
+                Place place = DataProviderGet.GetNode<Place>(placeId, "Place");
+
+                PlaceModel placeModel = new PlaceModel();
+                placeModel.Name = place.Name;
+                placeModel.Description = place.Description;
+                placeModel.CityCenterDistance = place.CityCenterDistance;
+                placeModel.PlaceId = place.PlaceId;
+                placeModel.Rating = (float)Math.Round(place.Rating, 2, MidpointRounding.AwayFromZero);
+                placeModel.Latitude = place.Latitude;
+                placeModel.Longitude = place.Longitude;
+
+
+                City placeLocation = DataProviderGet.GetPlaceLocation(placeId);
+                placeModel.PlaceLocation.Name = placeLocation.Name;
+                placeModel.PlaceLocation.CityId = placeLocation.CityId;
+                pam.SelectedID = placeLocation.CityId;
+                pam.Place = placeModel;
+
+
+
+                List<InterestTag> tags = DataProviderGet.GetInterestTagsOfPlace(placeId);
+
+                foreach (var tag in tags)
+                {
+                    //InterestTagModel tagMd = new InterestTagModel();
+                    //tagMd = CreateInterestTagModel(tag.InterestTagId);
+
+                    //placeModel.Tags.Add(tagMd);
+
+                    pam.SelectedTags.Add(tag.Name);
+                }
+            }
+
+            List<City> cities = DataProviderGet.GetAllCities();
+            foreach(City c in cities)
+            {
+                CityModel cm = new CityModel();
+                cm.Name = c.Name;
+                cm.CityId = c.CityId;
+                pam.AllCities.Add(cm);
+            }
+
+
+            pam.AllTags = DataProviderGet.GetAllTags();
+
+                
+            return pam;
+        }
+
+        public static ListOfPlacesModel CreateListOfPlacesAdminModel(List<Place> places)
+        {
+            ListOfPlacesModel list = new ListOfPlacesModel();
+
+            foreach (Place p in places)
+            {
+                PlaceModel placeMd = new PlaceModel();
+                placeMd.Name = p.Name;
+                placeMd.PlaceId = p.PlaceId;
+                placeMd.CityCenterDistance = p.CityCenterDistance;
+                placeMd.Description = p.Description;
+                placeMd.Latitude = p.Latitude;
+                placeMd.Longitude = p.Longitude;
+                City location = DataProviderGet.GetPlaceLocation(p.PlaceId);
+                placeMd.PlaceLocation = new CityModel() { Name = location.Name, CityId = location.CityId };
+
+                placeMd.Rating = (float)Math.Round(p.Rating, 2, MidpointRounding.AwayFromZero);
+
+                list.PlacesList.Add(placeMd);
+            }
+
+            return list;
         }
     }
 }

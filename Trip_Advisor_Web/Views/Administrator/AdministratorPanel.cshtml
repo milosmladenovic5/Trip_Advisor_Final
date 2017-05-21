@@ -4,8 +4,27 @@
 }
 
 @if (Session["Id"] != null && (int)Session["Status"] == 10)
-            {
-    <h2>AdministratorPanel</h2>
+ {
+    <h1 class="center">Administrator panel</h1>
+
+    <ul class="nav nav-tabs nav-stacked">
+        <li>
+            <a class="col-lg-4" href="/Administrator/PlaceAdministration">Place administration</a>
+            <p class="col-lg-8">Add, update or delete places.</p>
+        </li>
+        <li>
+            <a class="col-lg-4" href="/Administrator/CityAdministration">City administration</a>
+            <p class="col-lg-8">Add, update or delete cities.</p>
+        </li>
+        <li>
+            <a class="col-lg-4" href="/Administrator/CountryAdministration">Country administration</a>
+            <p class="col-lg-8">Add, update or delete countries.</p>
+        </li>
+        <li>
+            <a class="col-lg-4" href="/Administracija/AdministracijaTagova">Administracija tagova</a>
+            <p class="col-lg-8">Mogućnost dodavanja novih tagova iz liste predloženih.</p>
+        </li>
+    </ul>
 }
 else
 {

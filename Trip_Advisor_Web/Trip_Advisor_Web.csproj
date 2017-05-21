@@ -220,6 +220,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\PlaceModel.cs" />
+    <Compile Include="Models\PlaceAdminModel.cs" />
     <Compile Include="Models\RecommendationModel.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
@@ -358,6 +359,8 @@
     <Content Include="Views\Country\Country.cshtml" />
     <Content Include="Views\Administrator\AdministratorPanel.cshtml" />
     <Content Include="Views\Country\ListOfCountries.cshtml" />
+    <Content Include="Views\Administrator\PlaceAdministration.cshtml" />
+    <Content Include="Views\Administrator\AddOrModifyPlace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

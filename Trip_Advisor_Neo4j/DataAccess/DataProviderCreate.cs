@@ -106,12 +106,13 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-        public static bool CreatePlace(Place place)
+        public static int CreatePlace(Place place)
         {
             try
             {
                 int generatedId = DataProviderGet.GenerateId("Place");
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                place.Rating = 0.0f;
                 queryDict.Add("id", generatedId);
                 queryDict.Add("name", place.Name);
                 queryDict.Add("type", place.Type);
@@ -132,12 +133,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 //.WithParam("newPlace", place)
                 //.ExecuteWithoutResults();
 
-                return true;
+                return generatedId;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return false;
+                return 0;
             }
         }
         public static bool CreateStatus(Status status)

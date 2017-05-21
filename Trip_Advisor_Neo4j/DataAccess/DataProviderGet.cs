@@ -677,7 +677,59 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
-   
+// ------------------------------------------- ADMINISTRATOR ----------------------------------------------------------------------
+        public static List<InterestTag> GetAllTags2()
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:InterestTag) return n", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<InterestTag>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<Place> GetAllPlaces()
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:Place) return n", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<City> GetAllCities()
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:City) return n", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<City>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<Country> GetAllCountries()
+        {
+            try
+            {
+                var query = new CypherQuery("match (n:Country) return n", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Country>(query).ToList();
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
     

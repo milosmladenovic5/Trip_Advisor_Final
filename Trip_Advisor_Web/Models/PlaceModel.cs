@@ -22,6 +22,8 @@ namespace Trip_Advisor_Web.Models
 
         public bool CurrentUserRecommends { get; set; }
        
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public PlaceModel()
         {
@@ -31,5 +33,13 @@ namespace Trip_Advisor_Web.Models
             this.Pictures = new List<string>();
         }
 
+        public bool ContainsTag(string tag)
+        {
+            foreach(InterestTagModel itm in this.Tags)
+            {
+                if (itm.Name == tag) return true;
+            }
+            return false;
+        }
     }
 }

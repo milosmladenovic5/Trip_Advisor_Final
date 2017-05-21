@@ -146,12 +146,21 @@ namespace Trip_Advisor_Web.Controllers
         {
             if (file.ContentLength > 0)
             {
+                //Directory.CreateDirectory("~/Content/Images/Place" + placeId + "/");
+                //var fileName = Path.GetFileName(file.FileName);
+                //var path = Path.Combine(Server.MapPath("~/Content/Images/Place" + placeId + "/"), fileName);
+
+
+                //file.SaveAs(path);
+                //string picturePath = "/Content/Images/Place" + placeId + "/" + fileName;
+
+               
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/Content/Images/Place" + placeId + "/"), fileName);
+                var path = Path.Combine(Server.MapPath("~/Content/Images/Places/"), fileName);
 
 
                 file.SaveAs(path);
-                string picturePath = "/Content/Images/Place" + placeId + "/" + fileName;
+                string picturePath = "/Content/Images/Places/"+ fileName;
                 DataProviderUpdate.AddPictureOfPlace(picturePath, placeId);
             }
 

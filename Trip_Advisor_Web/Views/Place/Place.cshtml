@@ -35,14 +35,18 @@
 
 <br />
 
+@if (Model.Pictures.Count > 0)
+{
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        @for (int i = 1; i < Model.Pictures.Count; i++)
-        {
-            <li data-target="#myCarousel" data-slide-to="@i"></li>
-        }
+       
+            @for (int i = 1; i < Model.Pictures.Count; i++)
+            {
+                <li data-target="#myCarousel" data-slide-to="@i"></li>
+            }
+        
     </ol>
 
     <!-- Wrapper for slides -->
@@ -60,6 +64,7 @@
             }
         }
     </div>
+ 
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -71,7 +76,7 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
+}
 <br />
 <br />
 <br />

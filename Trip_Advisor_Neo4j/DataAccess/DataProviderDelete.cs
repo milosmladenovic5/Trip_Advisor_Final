@@ -247,5 +247,38 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
+
+        public static bool DeletePlaceTags(int placeId)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("placeId", placeId);
+
+                var query = new CypherQuery("MATCH (place:Place{PlaceId: {placeId} }) - [r:HASINTERESTTAG] -> ()  DELETE r", queryDict, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool DeletePlaceLocation(int placeId)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("placeId", placeId);
+
+                var query = new CypherQuery("MATCH (place:Place{PlaceId: {placeId} }) <- [r:HASPLACE] - ()  DELETE r", queryDict, CypherResultMode.Set);
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
