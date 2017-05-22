@@ -28,13 +28,12 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Id</th>
-                       
+                        <th>Id</th>                  
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tgc">
                     <tr>
                         <td><input type="text" class="form-control fc" id="newTag" name="newTagN" aria-describedby="emailHelp" placeholder="New tag name"></td>
                         <td></td>
@@ -42,7 +41,7 @@
                     </tr>
                     @foreach (var tag in Model.List)
                     {
-                        <tr id="Cont"@tag.InterestTagId>
+                        <tr id="@string.Concat("cont", @tag.InterestTagId)">
                             <td><input type="text" value=@tag.Name class="form-control fc" id=@tag.InterestTagId name=@tag.Name aria-describedby="emailHelp" placeholder="Name"></td>
                             <td>@tag.InterestTagId</td>
                  

@@ -39,6 +39,18 @@
         }
     }
 
+    function deleteTag(tagId)
+    {
+        $.post("/Administrator/DeleteTag", { id: tagId }, function (data) {
+            if (data) {
+                var parent = document.getElementById("tgc");
+                var child = document.getElementById("cont" + tagId);
+                parent.removeChild(child);
+            }
+         
+        });
+    }
+
     $('#newTag').keyup(function () {
 
         $("#ntLink").attr('href', '/Administrator/CreateTag/?newTag=' + $(this).val());
