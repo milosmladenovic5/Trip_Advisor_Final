@@ -5,24 +5,33 @@
 
 @if (Session["Id"] != null && (int)Session["Status"] == 10)
  {
-    <h1 class="center">Administrator panel</h1>
+    <h1 class="center" style="color:lavenderblush">Administrator panel</h1>
 
-    <ul class="nav nav-tabs nav-stacked">
-        <li>
-            <a class="col-lg-4" href="/Administrator/PlaceAdministration">Place administration</a>
-            <p class="col-lg-8">Add, update or delete places.</p>
+    <ul class="nav nav-tabs nav-stacked adminNav">
+        <li class="liItem">
+            <a class="col-lg-8 adminLinks" href="/Administrator/PlaceAdministration">
+                Place administration<br />
+            <label class="adminInfo"> ( Add, update or delete places. ) </label></a>
+            <br />
+            <label class="col-lg-8 adminInfo"></label>
         </li>
-        <li>
-            <a class="col-lg-4" href="/Administrator/CityAdministration">City administration</a>
-            <p class="col-lg-8">Add, update or delete cities.</p>
+        <li class="liItem">
+            <a class="col-lg-8 adminLinks" href="/Administrator/CityAdministration">
+                City administration <br />
+                <label class="adminInfo">Add, update or delete cities.</label>
+            </a>
         </li>
-        <li>
-            <a class="col-lg-4" href="/Administrator/CountryAdministration">Country administration</a>
-            <p class="col-lg-8">Add, update or delete countries.</p>
+        <li class="liItem">
+            <a class="col-lg-8 adminLinks" href="/Administrator/CountryAdministration">
+                Country administration <br />
+                <label class="adminInfo">Add, update or delete countries.</label>
+            </a>
         </li>
-        <li>
-            <a class="col-lg-4" href="/Administracija/AdministracijaTagova">Administracija tagova</a>
-            <p class="col-lg-8">Mogućnost dodavanja novih tagova iz liste predloženih.</p>
+        <li class="liItem">
+            <a class="col-lg-8 adminLinks" href="/Administracija/AdministracijaTagova">
+                Administracija tagova <br />
+                <label class="adminInfo">Mogućnost dodavanja novih tagova iz liste predloženih.</label>
+            </a>
         </li>
     </ul>
 }

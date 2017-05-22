@@ -6,14 +6,14 @@
 @if (Session["Id"] != null && (int)Session["Status"] == 10)
 {
     <div class="row">
-            @Html.ActionLink("New place", "AddNewPlaceRequest", "Administrator", null, new { @class = "btn btn-info link " })   
+            @Html.ActionLink("New place", "AddNewPlaceRequest", "Administrator", null, new { @id = "newPlcBtn", @class = "btn btn-success link " })   
     </div>
 
     <div class="row">
         <div class="col-lg-3"></div>
         @if (Model != null)
         {
-            <table class="col-lg-6 table">
+            <table class="col-lg-6 table adminTables">
                 <thead>
                     <tr>
                         <th>Name</th>

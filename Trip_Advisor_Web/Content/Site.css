@@ -424,3 +424,64 @@ tr{
 .lbls{
     color:white;
 }
+
+.adminTables{
+    background-color:rgba(0,0,0,0.65);
+}
+
+.adminTables > tbody > tr > td{
+    color:white;
+}
+
+.adminTables > thead > tr > th{
+    color:sandybrown;
+    text-align  :center;
+}
+
+#newPlcBtn{
+    margin-bottom:5px;
+}
+
+.adminNav{
+    background:rgba(0,0,0,0.6);
+    text-align:center;
+    
+}
+.nav-tabs{
+    text-align:center;
+    align-content:center;
+}
+
+.adminLinks{
+    text-align:center;
+    margin-left:14%;
+}
+
+.adminInfo{
+    color:wheat;
+}
+
+.liItem{
+    /*background:rgba(0,0,0,0.5);
+    display:inline-block;*/
+    display:inline-block;
+    height:auto;
+    text-align:center;
+align-content:center;   
+ min-height:100px;
+}
+
+li{
+
+}
+
+
+#placeForm{
+    background:rgba(0,0,0,0.65);
+    text-align:center;
+    color:greenyellow;
+    padding:10px;
+}
+#placeForm > .form-group > label{
+    color:lightgreen;
+}
