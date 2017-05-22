@@ -1,0 +1,56 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.CityAdminModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    if (Model != null)
+    {
+        <form role="form" class="form-horizontal" id="cityForm" action=@(Model.Update? "/Administrator/UpdateCity" : "/Administrator/CreateCity") method="post">
+            @if (Model.Update)
+            {
+                <input type="hidden" name="cityId" value=@Model.City.CityId />
+                <input type="hidden" name="oldName" value=@Model.City.Name />
+            }
+            <div class="form-group">
+                <label for="cityName">Name</label>
+                <input type="text" value=@Model.City.Name class="form-control fc" id="cityName" name="cName" aria-describedby="emailHelp" placeholder="Name">
+                <small id="nameHelp" class="form-text text-muted">Must be unique!</small>
+            </div>
+      
+            <div class="form-group">
+                <label for="belongsTo">Belongs to country</label>
+                <select class="form-control fc" id="belongsTo" name="selectCountry">
+                    @for (int i = 0; i < Model.AllCountries.CountriesList.Count; i++)
+                    {
+                        if (Model.AllCountries.CountriesList[i].CountryId == Model.SelectedID)
+                        {
+                            <option selected value=@Model.AllCountries.CountriesList[i].CountryId>@Model.AllCountries.CountriesList[i].Name</option>
+                        }
+                        else
+                        {
+                            <option value=@Model.AllCountries.CountriesList[i].CountryId>@Model.AllCountries.CountriesList[i].Name</option>
+                        }
+                    }
+                </select>
+           </div>
+            <div class="form-group">
+                <label for="Latitude">Latitude</label>
+                <input type="number" value=@Model.City.CenterLatitude step="0.01" name="lat" placeholder="Latitude">
+            </div>
+            <div class="form-group">
+                <label for="Longitude">Longitude</label>
+                <input type="number" value=@Model.City.CenterLongitude step="0.01" name="lon" placeholder="Longitude">
+            </div>
+              
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+}
+else
+{
+    <h1>Access denied!</h1>
+}

@@ -210,12 +210,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="JSON\UserTagPair.cs" />
+    <Compile Include="Models\CityAdminModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterestTagModel.cs" />
+    <Compile Include="Models\ListOfCitiesModel.cs" />
     <Compile Include="Models\ListOfCountriesModel.cs" />
     <Compile Include="Models\ListOfPlacesModel.cs" />
+    <Compile Include="Models\ListOfTagsModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageModel.cs" />
@@ -311,6 +314,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\TripAdvisorScripts\AdminTagScript.js" />
     <Content Include="Scripts\TripAdvisorScripts\AjajCalls.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -361,6 +365,11 @@
     <Content Include="Views\Country\ListOfCountries.cshtml" />
     <Content Include="Views\Administrator\PlaceAdministration.cshtml" />
     <Content Include="Views\Administrator\AddOrModifyPlace.cshtml" />
+    <Content Include="Views\Administrator\CityAdministration.cshtml" />
+    <Content Include="Views\Administrator\AddOrModifyCity.cshtml" />
+    <Content Include="Views\Administrator\CountryAdministration.cshtml" />
+    <Content Include="Views\Administrator\AddOrModifyCountry.cshtml" />
+    <Content Include="Views\Administrator\TagAdministration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

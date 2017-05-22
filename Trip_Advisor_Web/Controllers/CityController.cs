@@ -22,7 +22,7 @@ namespace Trip_Advisor_Web.Controllers
             return View("City", DataMapper.CreateCityModel(cityId));
         }
 
-        [HttpGet]
+        
         [AllowAnonymous]
         public ActionResult UserCurrentlyAt(int userId, int cityId)
         {

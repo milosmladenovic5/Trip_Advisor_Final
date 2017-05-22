@@ -1,0 +1,73 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.ListOfTagsModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+   
+
+    <div class="row" id="warnings">
+       @if (ViewBag.Warning)
+        {
+            <div class="row">
+                <div class="alert alert-warning alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Warning!</strong> Tag already exists or name is invalid.
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        @if (Model != null)
+        {
+            <table class="col-lg-6 table adminTables">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Id</th>
+                       
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control fc" id="newTag" name="newTagN" aria-describedby="emailHelp" placeholder="New tag name"></td>
+                        <td></td>
+                        <td><a id="ntLink" class="btn btn-primary link" href="/Administrator/CreateTag/?newTag= ">Add</a></td>
+                    </tr>
+                    @foreach (var tag in Model.List)
+                    {
+                        <tr id="Cont"@tag.InterestTagId>
+                            <td><input type="text" value=@tag.Name class="form-control fc" id=@tag.InterestTagId name=@tag.Name aria-describedby="emailHelp" placeholder="Name"></td>
+                            <td>@tag.InterestTagId</td>
+                 
+                            <td><button type="button" class="btn btn-warning" onclick="updateTag(@tag.InterestTagId)">Update</button></td>
+                            <td><button type="button" class="btn btn-danger" onclick="deleteTag(@tag.InterestTagId)">Delete</button></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="col-lg-6">No tags in the database.</p>
+        }
+        <div class="col-lg-3"></div>
+    </div>
+
+   
+   
+
+}
+else
+{
+    <h1>Access denied!</h1>
+}
+
+@Scripts.Render("~/Scripts/TripAdvisorScripts/AdminTagScript.js")

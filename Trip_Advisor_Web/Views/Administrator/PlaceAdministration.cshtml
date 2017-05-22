@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Id</th>
                         <th>Location</th>
                         <th>Rating</th>
                         <th>Latitude</th>
@@ -31,13 +32,15 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(@place.Name, "GetPlace", "Place", new { placeId = place.PlaceId }, new { @class = "link" })</td>
+                            <td>@place.PlaceId</td>
                             <td>@Html.ActionLink(@place.PlaceLocation.Name, "ReturnCity", "City", new { cityId = place.PlaceLocation.CityId }, new { @class = "link" })</td>
                             <td>@place.Rating</td>
                             <td>@place.Latitude</td>
                             <td>@place.Longitude</td>
                             <td>@place.CityCenterDistance</td>
                             <td>@Html.ActionLink("Update", "UpdatePlaceRequest", "Administrator", new { placeId = place.PlaceId }, new { @class = "btn btn-warning" })</td>
-                            <td><button type="button" name="deletePlace" id="deletePlace" class="btn btn-danger" onclick="deletePlace(@place.PlaceId)">Delete</button></td>
+                            @*<td><button type="button" name="deletePlace" id="deletePlace" class="btn btn-danger" onclick="deletePlace(@place.PlaceId)">Delete</button></td>*@
+                            <td>@Html.ActionLink("Delete", "DeletePlace", "Administrator", new { placeId = place.PlaceId }, new { @class = "btn btn-danger" })</td>
                         
                         </tr>
                     }

@@ -39,7 +39,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult GetSimilarPlaces(int userId, int placeId)
         {
    
@@ -49,7 +48,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult UserPlansToVisitPlace(int userId, int placeId)
         {
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "PLANSTOVISIT"))
@@ -61,7 +59,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult UserVisitedPlace(int userId, int placeId)
         {
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "VISITED"))
@@ -73,7 +70,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult UserVisited (int userId)
         {
             List<Place> plansToVisit = DataProviderGet.GetPlaces(userId, "VISITED");
@@ -81,7 +77,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult UserPlansToVisit(int userId)
         {
             List<Place> plansToVisit = DataProviderGet.GetPlaces(userId, "PLANSTOVISIT");
@@ -101,7 +96,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult GetTopVisitedPlaces()
         {
             List<Place> topVisitedPlaces = RedisDataLayer.GetTopPlacesByVisitors();
@@ -110,7 +104,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult GetTopRatedPlaces()
         {
             List<Place> topRatedPlaces = RedisDataLayer.GetTopPlacesByRating();

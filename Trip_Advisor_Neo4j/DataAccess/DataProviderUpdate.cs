@@ -65,7 +65,6 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("PlaceId", place.PlaceId);
                 queryDict.Add("Name", place.Name);
-                queryDict.Add("Rating", place.Rating);
                 queryDict.Add("Type", place.Type);
                 queryDict.Add("Description", place.Description);
                 queryDict.Add("CityCenterDistance", place.CityCenterDistance);
@@ -73,7 +72,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("Longitude", place.Longitude);
 
 
-                var query = new CypherQuery("match (n:Place {PlaceId: {PlaceId} }) set n.Name = {Name}, n.Type = {Type}, n.Description = {Description}, n.CityCenterDistance = {CityCenterDistance}, n.Rating = {Rating}, n.Longitude = {Longitude}, n.Latitude = {Latitude}",
+                var query = new CypherQuery("match (n:Place {PlaceId: {PlaceId} }) set n.Name = {Name}, n.Type = {Type}, n.Description = {Description}, n.CityCenterDistance = {CityCenterDistance}, n.Longitude = {Longitude}, n.Latitude = {Latitude}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -92,12 +91,11 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("CountryId", country.CountryId);
                 queryDict.Add("Name", country.Name);
-                queryDict.Add("OverallRating", country.OverallRating);
                 queryDict.Add("PromotionalVideoURL", country.PromotionalVideoURL);
+                queryDict.Add("NationalFlag", country.NationalFlag);
 
 
-
-                var query = new CypherQuery("match (n:Country {CountryId: {CountryId} }) set n.Name = {Name}, n.OverallRating = {OverallRating}, n.PromotionalVideoURL = {PromotionalVideoURL}",
+                var query = new CypherQuery("match (n:Country {CountryId: {CountryId} }) set n.Name = {Name}, n.PromotionalVideoURL = {PromotionalVideoURL}, n.NationalFlag = {NationalFlag} ",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
@@ -234,6 +232,28 @@ namespace Trip_Advisor_Neo4j.DataAccess
 
 
                 var query = new CypherQuery("match (n:User {UserId: {userId} }) set n.UserStatusFLAG = {newFLAG}",
+                    queryDict, CypherResultMode.Set);
+
+                ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool UpdateTag(InterestTag tag)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("id", tag.InterestTagId);
+                queryDict.Add("name", tag.Name);
+             
+
+                var query = new CypherQuery("match (n:InterestTag {InterestTagId: {id} }) set n.Name = {name}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

@@ -96,7 +96,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
         {
             try
             {
-                var query = new CypherQuery("match (country:Country {CountryId:" + countryId + "}) - [r:HASCITY] -> (cities)  return users", null, CypherResultMode.Set);
+                var query = new CypherQuery("match (country:Country {CountryId:" + countryId + "}) - [r:HASCITY] -> (cities)  return cities", null, CypherResultMode.Set);
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<City>(query).ToList();
             }

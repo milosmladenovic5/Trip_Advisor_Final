@@ -387,6 +387,7 @@ namespace Trip_Advisor_Web
                 CountryModel cm = new CountryModel();
                 cm.Name = c.Name;
                 cm.NationalFlag = c.NationalFlag;
+                cm.PromotionalVideoURL = c.PromotionalVideoURL;
                 cm.OverallRating = (float)Math.Round(c.OverallRating, 2, MidpointRounding.AwayFromZero);
                 cm.CountryId = c.CountryId;
 
@@ -442,7 +443,7 @@ namespace Trip_Advisor_Web
             }
 
             List<City> cities = DataProviderGet.GetAllCities();
-            foreach(City c in cities)
+            foreach (City c in cities)
             {
                 CityModel cm = new CityModel();
                 cm.Name = c.Name;
@@ -453,7 +454,7 @@ namespace Trip_Advisor_Web
 
             pam.AllTags = DataProviderGet.GetAllTags();
 
-                
+
             return pam;
         }
 
@@ -479,6 +480,82 @@ namespace Trip_Advisor_Web
             }
 
             return list;
+        }
+
+        public static ListOfCitiesModel CreateListOfCitiesAdminModel(List<City> cities)
+        {
+            ListOfCitiesModel lc = new ListOfCitiesModel();
+
+            foreach (City c in cities)
+            {
+                CityModel cm = new CityModel();
+                cm.Name = c.Name;
+                cm.CityId = c.CityId;
+                Country cn = DataProviderGet.GetCitysCountry(c.CityId);
+                cm.Country = new CountryModel() { Name = cn.Name, CountryId = cn.CountryId };
+                cm.CenterLatitude = c.CenterLatitude;
+                cm.CenterLongitude = c.CenterLongitude;
+                lc.CitiesList.Add(cm);
+            }
+
+            return lc;
+        }
+
+        public static CityAdminModel CreateCityAdminModel(int cityId)
+        {
+            CityAdminModel cam = new CityAdminModel();
+            if (cityId != 0)
+            {
+                cam.Update = true;
+                City c = DataProviderGet.GetNode<City>(cityId, "City");
+                cam.City.Name = c.Name;
+                cam.City.CenterLatitude = c.CenterLatitude;
+                cam.City.CenterLongitude = c.CenterLongitude;
+                cam.City.CityId = c.CityId;
+                Country country = DataProviderGet.GetCitysCountry(cityId);
+                CountryModel countryModel = new CountryModel()
+                {
+                    Name = country.Name,
+                    CountryId = country.CountryId,
+
+                };
+                cam.SelectedID = countryModel.CountryId;
+                cam.City.Country = countryModel;
+            }
+
+            cam.AllCountries = CreateListOfCountriesModel(DataProviderGet.GetAllCountries());
+            return cam;
+        }
+
+        public static CountryModel CreateCountryAdminModel(int countryId)
+        {
+
+            Country country = DataProviderGet.GetNode<Country>(countryId, "Country");
+
+            CountryModel countryModel = new CountryModel();
+            countryModel.CountryId = country.CountryId;
+            countryModel.Name = country.Name;
+            countryModel.NationalFlag = country.NationalFlag;
+            countryModel.OverallRating = country.OverallRating;
+            countryModel.PromotionalVideoURL = country.PromotionalVideoURL;
+
+            return countryModel;
+
+        }
+
+        public static ListOfTagsModel CreateListOfTagsModel(List<InterestTag> tags)
+        {
+            ListOfTagsModel result = new ListOfTagsModel();
+
+            foreach(InterestTag tag in tags)
+            {
+                InterestTagModel it = new InterestTagModel();
+                it.Name = tag.Name;
+                it.InterestTagId = tag.InterestTagId;
+                result.List.Add(it);
+            }
+
+            return result;
         }
     }
 }

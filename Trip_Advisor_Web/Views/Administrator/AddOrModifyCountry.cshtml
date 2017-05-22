@@ -1,0 +1,43 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.CountryModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    if (Model != null)
+    {
+        <form role="form" class="form-horizontal" id="countryForm" enctype = "multipart/form-data" action=@(ViewBag.Update? "/Administrator/UpdateCountry" : "/Administrator/CreateCountry") method="post" >
+            @if (ViewBag.Update)
+            {
+                <input type="hidden" name="countryId" value=@Model.CountryId />
+                <input type="hidden" name="oldName" value=@Model.Name />
+                <input type="hidden" name="oldFlag" value=@Model.NationalFlag />
+            }
+            <div class="form-group">
+                <label for="countryName">Name</label>
+                <input type="text" value=@Model.Name class="form-control fc" id="countryName" name="cName" aria-describedby="emailHelp" placeholder="Name">
+                <small id="nameHelp" class="form-text text-muted">Must be unique!</small>
+            </div>
+
+       
+            <div class="form-group">
+                <label for="PromoVideoURL">Promo video URL</label>
+                <input type="text" name="url" placeholder="PromoVideoURL" value=@Model.PromotionalVideoURL  >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Flag image</label>
+                <input type="file" class="form-control-file fc" id="InputFile" name="file" aria-describedby="fileHelp">
+                <small id="fileHelp" class="form-text text-muted">Upload country flag picture.</small>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+}
+else
+{
+    <h1>Access denied!</h1>
+}

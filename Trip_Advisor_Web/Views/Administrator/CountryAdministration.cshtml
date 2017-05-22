@@ -1,0 +1,64 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.ListOfCountriesModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    if (ViewBag.DeletionWarning)
+    {
+        <div class="row">
+            <div class="alert alert-warning alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong> To delete country you must first delete all it's cities or move them to another country.
+            </div>
+        </div>
+    }
+    <div class="row">
+        @Html.ActionLink("New country", "AddNewCountryRequest", "Administrator", null, new { @id = "newCityBtn", @class = "btn btn-success link " })
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        @if (Model != null)
+        {
+            <table class="col-lg-6 table adminTables">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Id</th>
+                        <th>Rating</th>
+                        <th>Promotional video URL</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var country in Model.CountriesList)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(@country.Name, "ReturnCountry", "Country", new { countryId = country.CountryId }, new { @class = "link" })</td>
+                            <td>@country.CountryId</td>
+                            <td>@country.OverallRating</td>
+                            <td>@country.PromotionalVideoURL</td>
+                            <td>@Html.ActionLink("Update", "UpdateCountryRequest", "Administrator", new { countryId = country.CountryId }, new { @class = "btn btn-warning" })</td>
+                            <td>@Html.ActionLink("Delete", "DeleteCountry", "Administrator", new { countryId = country.CountryId }, new { @class = "btn btn-danger" })</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="col-lg-6">No places in the database.</p>
+        }
+        <div class="col-lg-3"></div>
+    </div>
+
+}
+else
+{
+    <h1>Access denied!</h1>
+}
+

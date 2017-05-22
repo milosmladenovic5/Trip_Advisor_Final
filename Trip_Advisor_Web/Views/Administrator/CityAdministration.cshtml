@@ -1,0 +1,66 @@
+﻿@{
+    @model Trip_Advisor_Web.Models.ListOfCitiesModel
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Id"] != null && (int)Session["Status"] == 10)
+{
+    if (ViewBag.DeletionWarning)
+    {
+        <div class="row">
+            <div class="alert alert-warning alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong> To delete city you must first delete all it's places or move them to another city.
+            </div>
+        </div>
+    }
+    <div class="row">
+        @Html.ActionLink("New city", "AddNewCityRequest", "Administrator", null, new { @id = "newCityBtn", @class = "btn btn-success link " })
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        @if (Model != null)
+        {
+            <table class="col-lg-6 table adminTables">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Id</th>
+                        <th>Country</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>                     
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var city in Model.CitiesList)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(@city.Name, "ReturnCity", "City", new { cityId = city.CityId }, new { @class = "link" })</td>
+                            <td>@city.CityId</td>
+                            <td>@Html.ActionLink(@city.Country.Name, "ReturnCountry", "Country", new { countryId = city.Country.CountryId }, new { @class = "link" })</td>
+                            <td>@city.CenterLatitude</td>
+                            <td>@city.CenterLongitude</td>
+                            <td>@Html.ActionLink("Update", "UpdateCityRequest", "Administrator", new { cityId = city.CityId }, new { @class = "btn btn-warning" })</td>
+                            <td>@Html.ActionLink("Delete", "DeleteCity", "Administrator", new { cityId = city.CityId }, new { @class = "btn btn-danger" })</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="col-lg-6">No places in the database.</p>
+        }
+        <div class="col-lg-3"></div>
+    </div>
+
+}
+else
+{
+    <h1>Access denied!</h1>
+}
+

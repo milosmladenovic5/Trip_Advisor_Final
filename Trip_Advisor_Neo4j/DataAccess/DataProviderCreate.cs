@@ -34,7 +34,7 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 return false;
             }
         }
-        public static bool CreateCity(City city)
+        public static int CreateCity(City city)
         {
             try
             {
@@ -51,14 +51,14 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 .WithParam("newCity", city)
                 .ExecuteWithoutResults();
 
-                return true;
+                return generatedId;
             }
             catch 
             {
-                return false;
+                return 0;
             }
         }
-        public static bool CreateCountry(Country country)
+        public static int CreateCountry(Country country)
         {
             try
             {
@@ -70,16 +70,17 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 //((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);
 
                 country.CountryId = generatedId;
+                country.OverallRating = 0.0f;
                 DataLayer.Client.Cypher
                 .Create("(country:Country {newCountry})")
                 .WithParam("newCountry", country)
                 .ExecuteWithoutResults();
 
-                return true;
+                return generatedId;
             }
             catch
             {
-                return false;
+                return 0;
             }
         }
         public static bool CreateInterestTag(InterestTag interestTag)

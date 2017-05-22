@@ -438,7 +438,7 @@ tr{
     text-align  :center;
 }
 
-#newPlcBtn{
+#newPlcBtn , newCityBtn{
     margin-bottom:5px;
 }
 
@@ -476,12 +476,20 @@ li{
 }
 
 
-#placeForm{
+#placeForm , #cityForm , #countryForm{
     background:rgba(0,0,0,0.65);
     text-align:center;
     color:greenyellow;
     padding:10px;
 }
 #placeForm > .form-group > label{
+    color:lightgreen;
+}
+
+ #cityForm > .form-group > label {
+        color: lightgreen;
+    }
+
+ #countryForm > .form-group > label{
     color:lightgreen;
 }
