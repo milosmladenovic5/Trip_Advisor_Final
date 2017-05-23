@@ -25,7 +25,7 @@ namespace Trip_Advisor_Web.Models
         public List<UserModel> Following { get; set; }
         public List<InterestTagModel> Interests { get; set; }
         public List<RecommendationModel> Recommended { get; set; }
-        public CityModel CurrentLocation { get; set; }
+        public PlaceModel CurrentLocation { get; set; }
         public List<PlaceModel> PlansToVisit { get; set; }
         public List<PlaceModel> Visited { get; set; }
         

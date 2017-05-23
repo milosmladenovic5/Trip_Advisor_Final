@@ -48,6 +48,14 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult CurrentlyAt(int userId, int placeId)
+        {
+            DataRelationships.CurrentlyAt(userId, placeId);
+            List<Place> recommendedPlaces = DataProviderGet.GetSimilarPlaces(userId, placeId);
+            return View("ListOfPlaces", DataMapper.CreateListOfPlacesModel(recommendedPlaces));
+        }
+
+        [HttpGet]
         public ActionResult UserPlansToVisitPlace(int userId, int placeId)
         {
             if (!DataProviderGet.HasRelationshipWithaPlace(userId, placeId, "PLANSTOVISIT"))

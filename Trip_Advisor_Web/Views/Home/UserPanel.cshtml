@@ -94,10 +94,10 @@
    
     @if (Model.CurrentLocation != null)
     {
-        <div class="col-lg-4 col-md-4 col-sm-4 currentLocation">
+        <div class="currentLocation col-lg-4 col-md-4 col-sm-4 ">
             <h4>Current location</h4><br />
-            @*<img class="thumbnail" src="@Model.CurrentLocation.Pictures[0]" />*@
-            <h4>@Html.ActionLink(@Model.CurrentLocation.Name, "ReturnCity", "City", new { cityId = @Model.CurrentLocation.CityId }, null)</h4>
+            <img class="thumbnail" src="@Model.CurrentLocation.Pictures[0]" />
+            <h4>@Html.ActionLink(@Model.CurrentLocation.Name, "GetPlaceById", "Place", new { placeId = @Model.CurrentLocation.PlaceId }, null)</h4>
         </div>
     }
     else

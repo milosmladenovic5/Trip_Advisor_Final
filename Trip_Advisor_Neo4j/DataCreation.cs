@@ -390,8 +390,8 @@ namespace Trip_Advisor_Neo4j
             DataRelationships.PlansToVisit(perica, hramSCK);
             DataRelationships.PlansToVisit(pujo, hramSCK);
 
-            DataRelationships.CurrentlyAt(mitar, beograd);
-            DataRelationships.CurrentlyAt(pujo, nis);
+            DataRelationships.CurrentlyAt(mitar, pantheonRome);
+            DataRelationships.CurrentlyAt(pujo, pantheonRome);
 
             DataRelationships.HasPlace(nis, medijana);
             DataRelationships.HasPlace(nis, cele_kula);

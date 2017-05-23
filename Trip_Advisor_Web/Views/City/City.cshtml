@@ -8,6 +8,7 @@
 
 <h2>@Model.Name</h2>
 
+
 <div class="col-lg-5 col-md-5 col-sm-5">
     <div id="map">
         @Html.Hidden("centLat", @Model.CenterLatitude);
@@ -17,7 +18,19 @@
 
 
 
-<div class="jumbotron col-lg-6 cityPlaces">
+<div class="col-lg-6 cityPlaces">
+    <div class="tagSearch">
+        <label>Search by tags: </label>
+        <form action="@Url.Action("SearchPlacesByTags","Search")" method="post">
+            <input list="tagList" type="text" size="18" name="tags" class="form-control" placeholder="Tag search" id="tagSearch" onkeyup="searchByTags()" />
+            <datalist id="tagList">
+
+            </datalist>
+            @*<button class="btn btn-default" id="btnsrch"><span class="glyphicon glyphicon-search"></span></button>*@
+        </form>
+
+    </div>
+
     <h4>All the places in:  @Model.Name</h4>
     
    
@@ -39,6 +52,8 @@
 </div>
 
 @Scripts.Render("~/Scripts/TripAdvisorScripts/GoogleMaps.js")
+@Scripts.Render("~/Scripts/TripAdvisorScripts/CityScript.js")
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB81Hi8JPgzPCSDdjLbQ0XULeb0b_lSy34&callback=initMap">
 </script>

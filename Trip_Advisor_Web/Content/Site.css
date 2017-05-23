@@ -475,6 +475,12 @@ li{
 
 }
 
+.tagSearch{
+    background:rgba(0,0,0,0.5);
+    display:inline-block;
+    color:white;
+}
+
 
 #placeForm , #cityForm , #countryForm{
     background:rgba(0,0,0,0.65);

@@ -26,6 +26,8 @@
 
         @Html.ActionLink("Show nearby similar", "GetSimilarPlaces", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-primary" })
 
+        @Html.ActionLink("Currently at", "CurrentlyAt", "Place", new { userId = (int)Session["Id"], placeId = Model.PlaceId }, new { @class = "btn btn-info"})
+
         @if ((int)Session["Status"] >= 9)
         {
           <button id="recommendRequest" class="btn btn-danger" data-toggle="modal" data-target="#mdl2">Update</button>

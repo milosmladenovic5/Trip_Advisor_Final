@@ -272,23 +272,27 @@ namespace Trip_Advisor_Web
 
 
 
-            City currentLocation = DataProviderGet.GetCurrentLocation(userId);
+            Place currentLocation = DataProviderGet.GetCurrentLocation(userId);
             if (currentLocation != null)
             {
-                CityModel cityMdl = new CityModel()
+                PlaceModel plcMdl = new PlaceModel()
                 {
                     Name = currentLocation.Name,
-                    CityId = currentLocation.CityId,
-                    CenterLatitude = currentLocation.CenterLatitude,
-                    CenterLongitude = currentLocation.CenterLongitude
+                    PlaceId = currentLocation.PlaceId,
+                    CityCenterDistance = currentLocation.CityCenterDistance,
+                    Description = currentLocation.Description,
+                    Latitude = currentLocation.Latitude,
+                    Longitude = currentLocation.Longitude,
                 };
+
+                plcMdl.Pictures.Add(currentLocation.Pictures[0]);
 
                 //for (int pic = 0; pic < 1; pic++)
                 //{
                 //    placeMdl.Pictures.Add(currentLocation.Pictures[pic]);
                 //}
 
-                userModel.CurrentLocation = cityMdl;
+                userModel.CurrentLocation = plcMdl;
             }
 
 

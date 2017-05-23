@@ -45,6 +45,26 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
            
         }
+
+        public static List<Place> GetPlacesWithTag(string tagName)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("tagName", tagName);
+
+                var query = new CypherQuery("match (place), (place) - [:HASINTERESTTAG] -> (tag:InterestTag {Name: {tagName} }) return place", queryDict, CypherResultMode.Set);
+
+
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                return null;
+            }
+        }
+
         public static List<Place> GetSimilarPlaces(int userId, int placeId)
         {
             try
@@ -619,12 +639,12 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
 
         }
-        public static City GetCurrentLocation (int userId)
+        public static Place GetCurrentLocation (int userId)
         {
             try
             {
-                var query = new CypherQuery("match (user: User { UserId:" + userId + "}) - [:CURRENTLYAT] -> (city) return city", null, CypherResultMode.Set);
-                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<City>(query).FirstOrDefault();
+                var query = new CypherQuery("match (user: User { UserId:" + userId + "}) - [:CURRENTLYAT] -> (place) return place", null, CypherResultMode.Set);
+                return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).FirstOrDefault();
 
             }
             catch

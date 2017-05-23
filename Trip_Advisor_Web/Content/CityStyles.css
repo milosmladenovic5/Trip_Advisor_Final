@@ -30,3 +30,22 @@
 .panel{
     background-color:rgba(0, 0, 0,0.5);
 }
+
+
+
+.tagSearch{
+    background:rgba(0,0,0,0.5);
+    display:inline-block;
+    color:white;
+    padding:10px;
+}
+
+
+.tagSearch > input{
+    display:inline-block;
+}
+
+.tagSearch > label{
+    color:white;
+    display:inline-block;
+}
