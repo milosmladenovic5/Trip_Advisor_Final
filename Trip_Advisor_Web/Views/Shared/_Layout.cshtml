@@ -60,7 +60,7 @@
                             {
                                 @Html.Hidden("entityType", "Search", new { id = "entityType" });
                                 <div class="inp">
-                                    <input list="nameList" id="searchInput" name="searchInput" type="text" size="18" class="kontrola form-control" onkeyup="if (event.keyCode!=13) ajaxCallFillOptions()" placeholder="Search" />
+                                    <input list="nameList" id="searchInput" name="searchInput" type="text" size="18" class="kontrola form-control" onkeyup="if (event.keyCode!=13) ajaxCallFillOptions()" placeholder="Search" autocomplete="off"/>
                                     <datalist id="nameList"></datalist>
                                     <button class="btn btn-default" id="btnsrch" style="display:none;"><span class="glyphicon glyphicon-search"></span></button>
                                 </div>

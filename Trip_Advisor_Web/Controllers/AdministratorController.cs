@@ -183,9 +183,9 @@ namespace Trip_Advisor_Web.Controllers
                         DataRelationships.HasInterestTag(placeId, tag);
                 }
 
-                //List<Place> allPlaces = DataProviderGet.GetAllPlaces();
-                //return View("PlaceAdministration", DataMapper.CreateListOfPlacesAdminModel(allPlaces));
-                return RedirectToAction("GetPlaceById", "Place", new { placeId = placeId });
+
+                //return RedirectToAction("GetPlaceById", "Place", new { placeId = placeId });
+                return RedirectToAction("PlaceAdministration");
 
             }
             else
@@ -224,8 +224,9 @@ namespace Trip_Advisor_Web.Controllers
                         DataRelationships.HasInterestTag(placeId, tag);
                 }
 
-               
-                return RedirectToAction("GetPlaceById", "Place", new { placeId = placeId });
+
+                //return RedirectToAction("GetPlaceById", "Place", new { placeId = placeId });
+                return RedirectToAction("PlaceAdministration");
 
             }
             else

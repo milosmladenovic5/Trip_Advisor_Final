@@ -104,68 +104,79 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchPlacesByTags(string tags)
+        public ActionResult SearchPlacesByTags(int cityId, string tags)
         {
-            List<Place> foundPlaces = GetPlacesByTags(tags);
-            //ViewBag.CurrentlyAt = true;
-            return View("~/Views/Place/ListOfPlaces.cshtml", DataMapper.CreateListOfPlacesModel(foundPlaces));
+            List<Place> foundPlaces = GetPlacesByTags(cityId, tags);
+
+            if (foundPlaces != null)
+                return View("~/Views/Place/ListOfPlaces.cshtml", DataMapper.CreateListOfPlacesModel(foundPlaces));
+            else
+                return View("~/Views/Place/ListOfPlaces.cshtml", new ListOfPlacesModel());
         }
 
-        public static List<Place> GetPlacesByTags(string tagNames)
+        public static List<Place> GetPlacesByTags(int cityId, string tagNames)
         {
-            List<PlaceModel> returnPlaces = new List<PlaceModel>();
-            List<Place> fPlaces = new List<Place>();
-
-            string primljeniTagovi = tagNames;
-
-            char[] separatingChar = { '#', ' ' };
-            string[] nizTagova = primljeniTagovi.Split(separatingChar, System.StringSplitOptions.RemoveEmptyEntries);
-
-            List<Place> foundPlaces = DataProviderGet.GetPlacesWithTag(nizTagova[0]);
-
-            string[] tagsPlaces = new string[foundPlaces.Count];
-
-            for (int k = 0; k < tagsPlaces.Length; k++)
+            try
             {
-                tagsPlaces[k] = "";
-            }
+                List<PlaceModel> returnPlaces = new List<PlaceModel>();
+                List<Place> fPlaces = new List<Place>();
 
+                string tagsN = tagNames;
+                if (tagsN == "") return null;
 
-            int i = 0;
-            foreach (var place in foundPlaces)
-            {
-                List<InterestTag> tags = DataProviderGet.GetInterestTagsOfPlace(place.PlaceId);
-                foreach (var tag in tags)
+                char[] separatingChar = { '#', ' ' };
+                string[] tagArr = tagsN.Split(separatingChar, StringSplitOptions.RemoveEmptyEntries);
+
+                List<Place> foundPlaces = DataProviderGet.GetPlacesWithTag(cityId, tagArr[0]);
+
+                if (foundPlaces == null || foundPlaces.Count == 0) return null;
+
+                string[] tagsPlaces = new string[foundPlaces.Count];
+
+                for (int k = 0; k < tagsPlaces.Length; k++)
                 {
-                    tagsPlaces[i] = "" + tagsPlaces[i] + tag.Name + " ";
-
+                    tagsPlaces[k] = "";
                 }
-                i++;
-            }
 
-            //treba da konvertujemo listu pitanja u niz pitanja
 
-            Place[] placesArray = foundPlaces.ToArray();
-
-            int j = 0;
-            for (int petlja = 0; petlja < placesArray.Length; petlja++)
-            {
-                int brojac = 0;
-                foreach (var tag in nizTagova)
+                int i = 0;
+                foreach (var place in foundPlaces)
                 {
-                    if (tagsPlaces[j].Contains(tag))
+                    List<InterestTag> tags = DataProviderGet.GetInterestTagsOfPlace(place.PlaceId);
+                    foreach (var tag in tags)
                     {
-                        brojac++;
-                        if (brojac == nizTagova.Length)
+                        tagsPlaces[i] = "" + tagsPlaces[i] + tag.Name + " ";
+
+                    }
+                    i++;
+                }
+
+                Place[] placesArray = foundPlaces.ToArray();
+
+                int j = 0;
+                for (int loop = 0; loop < placesArray.Length; loop++)
+                {
+                    int counter = 0;
+                    foreach (var tag in tagArr)
+                    {
+                        if (tagsPlaces[j].Contains(tag))
                         {
-                            fPlaces.Add(placesArray[j]);
+                            counter++;
+                            if (counter == tagArr.Length)
+                            {
+                                fPlaces.Add(placesArray[j]);
+                            }
                         }
                     }
+                    j++;
                 }
-                j++;
-            }
 
-            return fPlaces;
+                return fPlaces;
+            }
+            catch 
+            {
+                return null;
+            }
         }
 
     }

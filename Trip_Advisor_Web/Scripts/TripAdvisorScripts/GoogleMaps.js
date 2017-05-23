@@ -6,13 +6,16 @@
         var long = Math.floor($('#centLong').val());
         var lati = Math.floor($('#centLat').val());
 
-        var uluru = { lat: lati, lng: long };
+        //var long = $('#centLong').val();
+        //var lati = $('#centLat').val();
+
+        var place = { lat: lati, lng: long };
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 8,
-            center: uluru
+            center: place
         });
         var marker = new google.maps.Marker({
-            position: uluru,
+            position: place,
             map: map
         });
     }

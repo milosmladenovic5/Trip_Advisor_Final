@@ -46,14 +46,15 @@ namespace Trip_Advisor_Neo4j.DataAccess
            
         }
 
-        public static List<Place> GetPlacesWithTag(string tagName)
+        public static List<Place> GetPlacesWithTag(int cityId, string tagName)
         {
             try
             {
                 Dictionary<string, object> queryDict = new Dictionary<string, object>();
                 queryDict.Add("tagName", tagName);
+                queryDict.Add("cityId", cityId);
 
-                var query = new CypherQuery("match (place), (place) - [:HASINTERESTTAG] -> (tag:InterestTag {Name: {tagName} }) return place", queryDict, CypherResultMode.Set);
+                var query = new CypherQuery("match (city:City{CityId: {cityId} }) - [:HASPLACE] -> (place) - [:HASINTERESTTAG] -> (tag:InterestTag {Name: {tagName} }) return place", queryDict, CypherResultMode.Set);
 
 
                 return ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<Place>(query).ToList();

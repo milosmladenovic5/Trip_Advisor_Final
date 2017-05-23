@@ -239,7 +239,7 @@
     @if (Model.UserId == (int)Session["Id"])
     {
     <div class="container col-lg-3 col-md-3 currentlyList">
-        <h4>Friends at the same city currently:</h4>
+        <h4>Nearby friends:</h4>
             @foreach (var user in Model.UsersCurrentlyAtTheSamePlace)
             {
                 @Html.ActionLink(user.Username, "ReturnUserPanel", "User", new { userId = user.UserId }, null);

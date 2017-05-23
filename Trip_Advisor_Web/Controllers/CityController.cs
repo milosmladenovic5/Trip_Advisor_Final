@@ -23,19 +23,6 @@ namespace Trip_Advisor_Web.Controllers
         }
 
         
-        [AllowAnonymous]
-        public ActionResult UserCurrentlyAt(int userId, int cityId)
-        {
-            if (!DataProviderGet.HasRelationshipWithaPlace(userId, cityId, "CURRENTLYAT"))
-            {
-                DataProviderDelete.DeleteCurrentLocation(userId);
-                DataRelationships.CurrentlyAt(userId, cityId);
-            }
-
-            // ovde mesta koja ga bi mogla da ga zanimaju u tom gradu
-            // i prijatelje  koji su tu
-            return View("City", DataMapper.CreateCityModel(cityId));
-        }
 
     }
 }

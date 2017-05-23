@@ -392,6 +392,8 @@ namespace Trip_Advisor_Neo4j
 
             DataRelationships.CurrentlyAt(mitar, pantheonRome);
             DataRelationships.CurrentlyAt(pujo, pantheonRome);
+            DataRelationships.CurrentlyAt(stojan, medijana);
+            DataRelationships.CurrentlyAt(voja, medijana);
 
             DataRelationships.HasPlace(nis, medijana);
             DataRelationships.HasPlace(nis, cele_kula);

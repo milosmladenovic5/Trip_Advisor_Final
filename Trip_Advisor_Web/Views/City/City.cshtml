@@ -22,6 +22,7 @@
     <div class="tagSearch">
         <label>Search by tags: </label>
         <form action="@Url.Action("SearchPlacesByTags","Search")" method="post">
+            <input type="hidden" value=@Model.CityId name="cityId" />
             <input list="tagList" type="text" size="18" name="tags" class="form-control" placeholder="Tag search" id="tagSearch" onkeyup="searchByTags()" />
             <datalist id="tagList">
 
