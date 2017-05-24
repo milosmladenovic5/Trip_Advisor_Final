@@ -66,6 +66,31 @@ namespace Trip_Advisor_Neo4j.DataAccess
             }
         }
 
+        public static bool CheckUsersDontExist(string username, string email)
+        {
+            try
+            {
+                Dictionary<string, object> queryDict = new Dictionary<string, object>();
+                queryDict.Add("username", username);
+                queryDict.Add("email", email);
+
+                var queryUsername = new CypherQuery("match (u:User{Username: {username} }) return u", queryDict, CypherResultMode.Set);
+                var queryEmail = new CypherQuery("match (u:User{Email: {email} }) return u", queryDict, CypherResultMode.Set);
+
+
+                User uU =  ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(queryUsername).FirstOrDefault();
+                User uE = ((IRawGraphClient)DataLayer.Client).ExecuteGetCypherResults<User>(queryEmail).FirstOrDefault();
+
+                return ((uU == null) && (uE == null));
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                return false;
+            }
+        }
+
         public static List<Place> GetSimilarPlaces(int userId, int placeId)
         {
             try
