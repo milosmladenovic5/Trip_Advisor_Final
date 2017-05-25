@@ -72,7 +72,7 @@
     {    <form method="post" action="@Url.Action("ChangeData", "Home")" enctype="multipart/form-data">
          <div id="user" class="col-lg-6 col-md-7 col-sm-4 col-xs-4">
                <label  class="usrLbl">Username: &nbsp; </label>@Html.TextBoxFor(m => m.Username, new { @class = "form-control", @name = "Username" }) <br />
-               @*<label class="usrLbl">E-mail:&nbsp; </label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @name = "E-mail" })<br />*@
+               <label class="usrLbl">Password:&nbsp; </label>@Html.PasswordFor(m => m.Password, new { @class = "form-control", @name = "Password", @value = Model.Password })<br />
                <label class="usrLbl">About me: &nbsp;</label>@Html.TextAreaFor(m=>m.Description, new { @class = "form-control", @name = "Description" })<br/>
 
                <label class="usrLbl">Add profile picture: &nbsp;</label>@Html.TextBoxFor(m => m.PictureFile, new { @type = "file", @name = "PictureFile", @class = "form-control" })

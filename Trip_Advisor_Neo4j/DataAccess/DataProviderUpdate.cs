@@ -22,9 +22,9 @@ namespace Trip_Advisor_Neo4j.DataAccess
                 queryDict.Add("Email", user.Email);
                 queryDict.Add("ProfilePicture", user.ProfilePicture);
                 queryDict.Add("Description", user.Description);
-                queryDict.Add("UserStatusFLAG", user.UserStatusFLAG);
+                //queryDict.Add("UserStatusFLAG", user.UserStatusFLAG);
 
-                var query = new CypherQuery("match (n:User {UserId: {UserId} }) set n.Username = {Username}, n.Password = {Password}, n.Email = {Email}, n.ProfilePicture = {ProfilePicture}, n.UserStatusFLAG = {UserStatusFLAG}, n.Description = {Description}",
+                var query = new CypherQuery("match (n:User {UserId: {UserId} }) set n.Username = {Username}, n.Password = {Password}, n.Email = {Email}, n.ProfilePicture = {ProfilePicture}, n.Description = {Description}",
                     queryDict, CypherResultMode.Set);
 
                 ((IRawGraphClient)DataLayer.Client).ExecuteCypher(query);

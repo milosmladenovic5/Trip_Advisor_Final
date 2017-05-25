@@ -94,10 +94,13 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public ActionResult ChangeData(UserModel user)
         {
-            User userForChange = new Trip_Advisor_Neo4j.DomainModel.User();
+            User checker = DataProviderGet.GetUser(user.Username);
+
+            User userForChange = new User();
             userForChange.UserId = (int)Session["Id"];
-            userForChange.Username = user.Username;
-            userForChange.Password = (string)Session["Password"];
+            userForChange.Username = checker == null ? user.Username : (string)Session["Username"];
+            //userForChange.Password = (string)Session["Password"];
+            userForChange.Password = !string.IsNullOrEmpty(user.Password) ? user.Password : (string)Session["Password"];
             userForChange.Email = user.Email;
             userForChange.Description = user.Description;
 
@@ -124,8 +127,8 @@ namespace Trip_Advisor_Web.Controllers
             }
 
 
-            DataProviderUpdate.UpdateUser(userForChange);
-
+            bool result = DataProviderUpdate.UpdateUser(userForChange);
+            if (result) Session["Username"] = userForChange.Username;
 
             return View("UserPanel", DataMapper.CreateUserModel((int)Session["Id"]));
         }
@@ -133,11 +136,6 @@ namespace Trip_Advisor_Web.Controllers
         [HttpPost]
         public ActionResult ChangeDataRequest(UserModel user)
         {
-            //User userForChange = new Trip_Advisor_Neo4j.DomainModel.User();
-            //userForChange.UserId = (int)Session["Id"];
-            //userForChange.Username = (string)Session["Username"];
-            //userForChange.Password = (string)Session["Password"];
-            //userForChange.Email = (string)Session["Email"];
             ViewBag.Change = true;
 
             return View("UserPanel", DataMapper.CreateUserModel((int)Session["Id"]));
